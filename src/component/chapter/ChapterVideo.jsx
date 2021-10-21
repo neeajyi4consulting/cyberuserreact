@@ -20,6 +20,7 @@ function ChapterVideo() {
   const [listofChapter, setListofChapter] = useState([]);
   const [isVideoPaused, setIsVideoPaused] = useState(true);
   const [courseName, setCourseName] = useState("");
+  const [chapterId, setChapterId] = useState();
   const [videoDetails, setVideoDetails] = useState({
     completedVideoLength: "",
     totalVideoLength: "",
@@ -44,10 +45,17 @@ function ChapterVideo() {
     });
   };
 
+  const handleVideoPlay = (response) =>{
+    console.log("play video response",response);
+  }
+
+  const handleVideoPause = (response) =>{
+    console.log("pause Video Response",response);
+  }
+
   const saveVideoDetails = () => {
-    setIsVideoPaused(false);
     setInterval(() => {
-      if (isVideoPaused) {
+     
         const completedVideoLength = localStorage.getItem(
           "completedVideoLength"
         );
@@ -61,9 +69,7 @@ function ChapterVideo() {
         data.append("completedVideoLenght", completedVideoLength);
         data.append("totalVideoLength", totalVideoLength);
         dispatch(ChapterStatus(data));
-      } else {
-        console.log("heee");
-      }
+      
     }, 10000);
   };
 
@@ -74,24 +80,8 @@ function ChapterVideo() {
     setIsVideoPaused(true);
   };
 
-  const fetchChapterStatus = async () => {
-    console.log(
-      "User id is:",
-      currentUser.user_id,
-      "chapter Id is:",
-      detailsOfChapter.id
-    );
-    const data = new FormData();
-    data.append("user_id", currentUser.user_id);
-    data.append("chapter_id", detailsOfChapter.id);
-    await getChapterStatus(data).then((response) => {
-      setVideoDetails({
-        completedVideoLength: response.data?.data?.completedVideoLenght,
-        totalVideoLength: response.data?.data?.totalVideoLength,
-        videoProgress: response.data?.data?.chapter_status,
-      });
-      // console.log(response.data?.data?.completedVideoLenght);
-    });
+  const handleClick = () => {
+    console.log(chapterId);
   };
 
   useEffect(() => {
@@ -115,33 +105,35 @@ function ChapterVideo() {
             <div>
               <Vimeo
                 video={detailsOfChapter.link}
-                start={startTime}
+                // start={startTime}
                 // controls={false}
                 height="600px"
                 width="900px"
                 responsive
-                onPlay={saveVideoDetails}
-                onPause={handlePause}
-                onTimeUpdate={(res) => {
-                  setVideoDetails({
-                    completedVideoLength: res.seconds,
-                    totalVideoLength: res.duration,
-                    videoProgress: res.percent,
-                  });
-                  localStorage.setItem(
-                    "completedVideoLength",
-                    videoDetails.completedVideoLength
-                  );
-                  localStorage.setItem(
-                    "videoProgress",
-                    videoDetails.videoProgress
-                  );
-                  localStorage.setItem(
-                    "totalVideoLength",
-                    videoDetails.totalVideoLength
-                  );
+                onPlay={handleVideoPlay}
+                onPause={handleVideoPause}
+                // onPlay={saveVideoDetails}
+                // onPause={handlePause}
+                // onTimeUpdate={(res) => {
+                //   setVideoDetails({
+                //     completedVideoLength: res.seconds,
+                //     totalVideoLength: res.duration,
+                //     videoProgress: res.percent,
+                //   });
+                //   localStorage.setItem(
+                //     "completedVideoLength",
+                //     videoDetails.completedVideoLength
+                //   );
+                //   localStorage.setItem(
+                //     "videoProgress",
+                //     videoDetails.videoProgress
+                //   );
+                //   localStorage.setItem(
+                //     "totalVideoLength",
+                //     videoDetails.totalVideoLength
+                //   );
                   // console.log(videoDetails.totalVideoLength);
-                }}
+                // }}
               />
             </div>
             <div className="h-auto flex items-center border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
@@ -213,18 +205,8 @@ function ChapterVideo() {
                             ? "bg-red-200"
                             : "bg-white"
                         } cursor-pointer`}
-                        onClick={async () => {
-                          await getChapterDetails(val.id)
-                            .then((response) => {
-                              console.log(response.data?.data);
-                              setDetailsOfChapter({
-                                link: response.data?.data.link,
-                                about: response.data?.data.about,
-                                chapterName: response.data?.data.chapter_name,
-                                id: response.data?.data.id,
-                              });
-                            })
-                            .finally( await fetchChapterStatus());
+                        onClick={async () =>{
+                          const
                         }}
                       >
                         <img
@@ -236,6 +218,7 @@ function ChapterVideo() {
                           &nbsp; {val.chapter_name}
                         </p>
                         <p className="text-sm text-gray-600 pl-7">Video</p>
+                        <button onClick={handleClick}>click me</button>
                       </div>
                     </div>
 
