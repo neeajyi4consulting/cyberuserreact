@@ -206,7 +206,7 @@ function ChapterVideo() {
                             : "bg-white"
                         } cursor-pointer`}
                         onClick={async () =>{
-                          const
+                          
                         }}
                       >
                         <img
