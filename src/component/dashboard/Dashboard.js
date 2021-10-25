@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCourse } from "../../redux/actions/courseAction";
 import { getPackage } from "../../redux/actions/packageAction";
 import { fetchPackageDetails, getAllotedPackage } from "../../api";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -53,9 +54,11 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div>
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
+              <Link to="/courses">
               <div className="m-3 text-2xl text-gray-700 font-bold">
                 My Courses
               </div>
+              </Link>
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 overflow-auto">
                 {allotedPackage.map((val) => {
                   return (

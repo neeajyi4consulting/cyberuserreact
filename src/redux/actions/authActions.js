@@ -7,7 +7,7 @@ export const loginAction = (data) => async (dispatch) => {
   const response = await loginUser(data);
 
   if (response.data?.status === true) {
-    console.log(response.data?.data)
+    // console.log(response.data?.data)
     await setJWT(response?.data?.data?.token);
     toast.success("Login Successfull");
   } else {

@@ -13,8 +13,6 @@ export const chapterReducer = (state= initialState, {type, payload})=>{
             return { ...state, chapterDetails:payload}
         case ActionTypes.CHAPTER_ID_STORED:
             return{...state, chapterId:payload}
-        case ActionTypes.GET_CHAPTER_STATUS:
-            return{...state, chapterstatus:payload}
         case ActionTypes.GET_CHAPTER_INFO:
             return{...state, chapterInfo:payload}
     

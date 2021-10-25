@@ -55,15 +55,6 @@ export async function getUserDetails(userID) {
     },
   });
 }
-
-// export async function getClientPackage(ID) {
-//   return http.get(API_PATH.apiGetUser + userID, {
-//     headers: {
-//       Authorization: apiToken,
-//     },
-//   });
-// }
-
 export async function getCourseList() {
   return http.get(API_PATH.apiCourseList, {
     headers: {

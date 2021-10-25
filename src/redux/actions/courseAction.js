@@ -29,29 +29,15 @@ export const fetchUserDetails = (id) => async (dispatch) =>{
     }
 }
 
-// export const chapterDetails= (id) => async (dispatch) =>{
-//     try {
-//         const response = await getCourseDetails(id)
-//         // console.log("this is from action", response.data.chapters)
-//         dispatch({
-//             type:ActionTypes.GET_CHAPTER_DETAILS,
-//             payload:response.data?.chapters,
-//         })
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
-export const fetchChapterList= (id) => async (dispatch) =>{
+export const fetchCourseDetails = (courseId) => async (dispatch) =>{
     try {
-        const response = await getCourseDetails(id)
-        // console.log("this is from action", response.data.chapters)
+        const response = await getCourseDetails(courseId)
+        // console.log(response)
         dispatch({
-            type:ActionTypes.GET_CHAPTER_LIST,
-            payload:response.data?.chapters,
+            type:ActionTypes.GET_COURSE_DETAILS,
+            payload:response.data?.data?.chapters
         })
     } catch (error) {
         console.log(error)
     }
 }
-

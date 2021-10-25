@@ -20,6 +20,9 @@ export const ActionTypes = {
     //chapterList
     GET_CHAPTER_LIST:"GET_CHAPTER_LIST",
 
+    //course Details
+    GET_COURSE_DETAILS:"GET_COURSE_DETAILS",
+
     //chapterDetails
     GET_CHAPTER_DETAILS:"GET_CHAPTER_DETAILS",
 

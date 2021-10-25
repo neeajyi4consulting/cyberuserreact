@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { checkAnswer, fetchquiz } from "../../../api";
 import checkIcon from "../../../assets/img/check-mark.svg";
 import Sidebar from "../../sidebar/Sidebar";
 // import Sidebar from "../../sidebar/Sidebar";
 
 function ChapterQuiz() {
-  const dispatch = useDispatch()
   const { id:jandeyrr } = useParams();
   console.log("hehehe this is chpater idfor you", jandeyrr);
 
