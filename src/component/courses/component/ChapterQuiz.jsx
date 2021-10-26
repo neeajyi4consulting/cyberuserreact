@@ -72,11 +72,11 @@ function ChapterQuiz() {
     <Sidebar/>
       <div className="bg-gray-200 pt-28 z-50">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
-          <span className="font-bold text-2xl mx-8">Chapter Quiz</span>
+          <span className="font-bold text-2xl mx-8">Course Quiz</span>
           <span className="text-blue-500 text-sm">
             Number of Questions {totalQuestions}
           </span>
-          <span className="float-right ">Home / Dashboard / ChapterQuiz</span>
+          <span className="float-right ">Home / Dashboard / Course Quiz</span>
         </div>
         <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
           <p className="text-blue-800">Completed {arrId} of {totalQuestions}</p>

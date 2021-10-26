@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RectangleImg from "../../../assets/img/Rectangle124.jpg";
 import riskManagement from '../../../assets/img/Risk-Management.jpg'
 import digitalHygeine from '../../../assets/img/Digital-Hygeine.jpg'
 import topicName from '../../../assets/img/Topic-Name.jpg'
 
 const Upcomingtraining = () => {
+  const fetchEventDetails = async() =>{
+    // const response= await 
+  }
+  useEffect(() => {
+    fetchEventDetails()
+  }, [])
     return (
         <>
             <div className="m-3 text-2xl text-gray-700 font-bold">

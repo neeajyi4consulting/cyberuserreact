@@ -81,7 +81,7 @@ function Sidebar(props) {
               <img
                 src={CyberFratLogo}
                 alt="...."
-                className="md:inline bg-white hidden "
+                className="md:inline hidden "
                 style={{ width: "220px", padding: "" }}
               />
             </div>

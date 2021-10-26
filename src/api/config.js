@@ -16,5 +16,6 @@ const API_PATH = {
   apiGetChapterStatus:"/api/get_chapter_status/",
   apiQuizList:"/api/quiz/list/",
   apiAnswerCheck:"/api/answer_check/",
+  apiCategoryList:"/api/category/list",
 };
 export default API_PATH;

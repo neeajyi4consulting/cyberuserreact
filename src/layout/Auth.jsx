@@ -48,7 +48,7 @@ const LoginScreen = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="relative inline-block">
           <img src={AccountLoginImg} alt="...." />
-          <div className="absolute left-0 top-2/4 w-full grid justify-items-center inline-block bg-white">
+          <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
             <img src={CyberFratLogo} alt="...." />
           </div>
         </div>
@@ -79,7 +79,7 @@ const LoginScreen = () => {
               width: "351px",
             }}
           >
-            <p
+            {/* <p
               className="lg:text-lg py-5"
               style={{
                 fontFamily: "Roboto",
@@ -105,7 +105,7 @@ const LoginScreen = () => {
                 {" "}
                 Create one here
               </Link>
-            </p>
+            </p> */}
             <div className="my-5" style={{ width: "500px" }}>
               <input
                 type="text"

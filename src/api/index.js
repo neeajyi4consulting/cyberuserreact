@@ -143,6 +143,14 @@ export async function fetchquiz(chapterId) {
   })
 }
 
+export async function fetchCategoryList() {
+  return http.get(API_PATH.apiCategoryList, {
+    headers:{
+      Authorization: apiToken,
+    }
+  })
+}
+
 
 // export async function addUser(data) {
 //   return await http.post(API_PATH.apiAddUser, data, {

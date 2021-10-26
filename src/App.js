@@ -11,12 +11,11 @@ import Courses from "./component/courses/Courses";
 import AboutCourse from "./component/courses/component/AboutCourse";
 import ChapterVideo from "./component/chapter/ChapterVideo";
 import Dashboard from "./component/dashboard/Dashboard";
-import TabsRender from "./component/chapter/TrialComp";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserAction } from "./redux/actions/authActions";
 import Certificate from "./component/certificate/export-pdf.component";
 import ChapterQuiz from "./component/courses/component/ChapterQuiz";
-import Trialcomp from "./component/chapter/TrialComp";
+import Landingpage from "./layout/LandingPage";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -29,7 +28,8 @@ function App() {
     <>
       {!currentUser ? (
         <Switch>
-          <Route exact path="/" component={Auth} />
+          <Route exact path="/" component={Landingpage} />
+          <Route exact path="/login" component={Auth} />
           <Route exact path="/signup" component={SignupScreen} />
           <Route exact path="/forgetpassword" component={ForgetPassword} />
         </Switch>

@@ -9,13 +9,13 @@ function Navbar() {
       <div
         className=" flex items-center z-10 h-auto py-6 w-full"
         style={{
-          width: "100vw",
+          width: "99vw",
           background:
-            "linear-gradient(90deg, #0079E2 0.06%, #4F4096 48.99%, #990B4F 100%)",
+            "linear-gradient(90deg, #000000 0.06%, #2f1e1e 48.99%, #990B4F 100%)",
         }}
       >
         <p className="md:inline ml-80 lg:w-48 text-white hidden font-thin">
-          <Link to="/dashoard">Home</Link> /{" "}
+          <Link to="/dashboard">Home</Link> /{" "}
           <Link to="/dashboard">Dashboard</Link>
         </p>
         <div className="text-white text-right w-full">

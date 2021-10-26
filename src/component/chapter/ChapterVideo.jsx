@@ -89,7 +89,7 @@ function ChapterVideo() {
                 }}
               />
             </div>
-            <div className="h-auto flex items-center border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
+            <div className="h-auto border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
               <Link
                 to="/"
                 className="text-blue-400 mx-3 py-4 px-8 border-b-2 border-blue-400"
@@ -97,7 +97,7 @@ function ChapterVideo() {
                 About
               </Link>
               <Link
-                to={`/courses/chapterquiz/${chapterId}`}
+                to={`/courses/chapterquiz/${id}`}
                 className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip ${
                   false ? "cursor-not-allowed" : ""
                 }`}
@@ -125,8 +125,8 @@ function ChapterVideo() {
           <div>
             <div className="bg-white">
               <div className="p-5">
-                <p className="text-lg font-bold">Chapter List</p>
-                <div className="relative pt-1 ">
+                <p className="text-lg font-bold">Chapters In This Course</p>
+                {/* <div className="relative pt-1 ">
                   <div className="overflow-hidden h-1 w-auto mr-12 mb-4 text-xs flex rounded bg-gray-200 ">
                     <div
                       style={{ width: `30%` }}
@@ -134,14 +134,14 @@ function ChapterVideo() {
                     ></div>
                   </div>
                   <p className="float-right -mt-8 ">30%</p>
-                </div>
-                <div className="text-sm bg-pink-900 text-white p-2 h-16 md:h-auto">
+                </div> */}
+                {/* <div className="text-sm bg-pink-900 text-white p-2 h-16 md:h-auto">
                   Target: 1 Aug 2021 To 10 Sept 2021{" "}
                   <span className="border-r-1 border-red-500 float-right">
                     40 Days &nbsp; <Link to="/">Edit</Link>
                   </span>
-                </div>
-                <br />
+                </div> */}
+                {/* <br /> */}
               </div>
               <div>
                 {chapterList.map((val) => {
@@ -173,7 +173,7 @@ function ChapterVideo() {
                           alt="...."
                           className="inline-block"
                         />
-                        <p className="inline-block">
+                        <p className="inline-block overflow-hidden">
                           &nbsp; {val.chapter_name}
                         </p>
                         <p className="text-sm text-gray-600 pl-7">Video</p>
