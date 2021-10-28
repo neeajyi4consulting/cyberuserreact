@@ -63,7 +63,7 @@ function Admin() {
           <span className="float-right ">
             <Link to="/admin">Home</Link> /{" "}
             <Link to="/dashboard">Dashboard</Link> /{" "}
-            <Link to="/chapterquiz">Chapter Quiz</Link>
+            <Link to="/admin">Profile</Link>
           </span>
         </div>
         <div
@@ -158,38 +158,12 @@ function Admin() {
         </div>
         <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
           <img src={profileImg} alt="...." className="w-16 inline-block" />
-          <button className="md:ml-5 text-xl">Mahesh Kumar</button>
+          <span className="md:ml-5 text-xl">{userName}</span>
           <span className="float-right text-red-500">
             <Link to="/" onClick={handleLogOut}>
               Sign Out
             </Link>
           </span>
-          <div>
-            <Link
-              to="/admin"
-              className="md:mr-10 md:mx-10 md:pt-10 pt-5 md:inline-block block border-b-2 border-blue-500 text-blue-500"
-            >
-              General
-            </Link>
-            <Link
-              to="/profile/preferance"
-              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
-            >
-              Preferance
-            </Link>
-            <Link
-              to="/profile/invoice"
-              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
-            >
-              Invoice
-            </Link>
-            <Link
-              to="/profile/myaddress"
-              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
-            >
-              My Address
-            </Link>
-          </div>
           <div className="border-2 p-5 mt-10">
             <div>
               <p className="text-gray-500 text-sm pt-10">Account Name</p>

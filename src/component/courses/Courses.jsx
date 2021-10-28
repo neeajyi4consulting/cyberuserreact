@@ -1,25 +1,8 @@
 import React from "react";
 import EnrolledCourses from "./component/EnrolledCourses";
 import Sidebar from "../sidebar/Sidebar";
-import { useSelector, useDispatch } from "react-redux";
 
 function Courses() {
-  const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
-  // const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  // // }
-  // const [allotedPackage, setAllotedPackage] = useState([])
-
-  // const fetchAllotedPackage = async (userId) =>{
-  //   await getAllotedPackage(userId)
-  //   .then((response)=>{
-  //     setAllotedPackage(response.data?.data)
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   fetchAllotedPackage(currentUser.user_id)
-  // }, []);
   return (
     <>
       <Sidebar />

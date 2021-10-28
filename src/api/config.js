@@ -17,5 +17,9 @@ const API_PATH = {
   apiQuizList:"/api/quiz/list/",
   apiAnswerCheck:"/api/answer_check/",
   apiCategoryList:"/api/category/list",
+  apiServiceList:"/api/service_list_client/",
+  apiEventList:"/api/event_list_client/",
+  apiBannerList:"/api/banner_list_client/",
+  apiChapterClientList:"/api/chapter_client_list/",
 };
 export default API_PATH;

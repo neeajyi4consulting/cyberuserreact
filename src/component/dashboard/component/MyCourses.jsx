@@ -17,7 +17,7 @@ function MyCourses(props) {
             </div>
           </div> */}
           <p className="mb-4 text-xs">
-            Total Lessons in This Course {props.totalLesson} 
+            Total Hours for This Course: {props.totalTime} 
           </p>
         </div>
       </div>

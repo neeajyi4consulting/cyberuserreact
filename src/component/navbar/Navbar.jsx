@@ -1,7 +1,5 @@
 import React from "react";
 import profileImg from "../../assets/img/Profile-img.jpg";
-import BellIcon from "../../assets/img/Beal-icon.svg";
-import SearchIcon from "../../assets/img/Search-icon.svg";
 import { Link } from "react-router-dom";
 function Navbar() {
   return (
@@ -28,7 +26,7 @@ function Navbar() {
               />              
             </div>
           </div>
-          <img
+          {/* <img
             src={SearchIcon}
             alt="...."
             className="h-5 w-5 inline mx-2 lg:mr-4 lg:ml-5"
@@ -37,7 +35,7 @@ function Navbar() {
             src={BellIcon}
             alt="...."
             className="h-6 w-6 inline mx-2 lg:mr-4 lg:ml-5"
-          />
+          /> */}
           <Link to="/admin">
           <img
             src={profileImg}

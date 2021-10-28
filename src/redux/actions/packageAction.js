@@ -11,9 +11,9 @@ export const getPackage = ()=> async (dispatch) =>{
     })
   }
 
-  export const fetchAllotedPackage = () => async (dispatch) =>{
+  export const fetchAllotedPackage = (userId) => async (dispatch) =>{
     try {
-        const response = await getAllotedPackage()
+        const response = await getAllotedPackage(userId)
         dispatch({
             type:ActionTypes.GET_ALLOTED_PACKAGE,
             payload:response.data?.data,

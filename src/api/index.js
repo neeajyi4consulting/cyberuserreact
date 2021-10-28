@@ -63,6 +63,30 @@ export async function getCourseList() {
   });
 }
 
+export async function getServiceList() {
+  return http.get(API_PATH.apiServiceList, {
+    headers: {
+      Authorization: apiToken,
+    },
+  });
+}
+
+export async function getEventList() {
+  return http.get(API_PATH.apiEventList, {
+    headers: {
+      Authorization: apiToken,
+    },
+  });
+}
+
+export async function getBannerList() {
+  return http.get(API_PATH.apiBannerList, {
+    headers: {
+      Authorization: apiToken,
+    },
+  });
+}
+
 export async function getAllotedPackage(userId) {
   return http.get(API_PATH.apiShowClientPackage +  userId, {
     headers: {
@@ -150,6 +174,18 @@ export async function fetchCategoryList() {
     }
   })
 }
+
+export async function fetchChapterClientList(data) {
+  return http.post(API_PATH.apiChapterClientList, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  });
+}
+
+
 
 
 // export async function addUser(data) {

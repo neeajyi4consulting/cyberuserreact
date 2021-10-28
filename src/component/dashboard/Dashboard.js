@@ -1,42 +1,81 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../sidebar/Sidebar";
-import banner from "../../assets/img/Banner.jpg";
 import MyCourses from "./component/MyCourses";
 import Upcomingtraining from "./component/UpcomingTraining";
 import Boxfooter from "./component/BoxFooter";
-import Coursesinfo from "./component/CoursesInfo";
+import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getPackage } from "../../redux/actions/packageAction";
-import { fetchPackageDetails, getAllotedPackage } from "../../api";
+import {
+  fetchPackageDetails,
+  getBannerList,
+  getEventList,
+  getServiceList,
+} from "../../api";
 import { Link } from "react-router-dom";
+import { allotedPackageDetails } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const loading = useSelector((state)=> state.course?.loading)
+  const currentUser = useSelector((state) => state.user?.currentUser);
+  const courseInfo = useSelector(
+    (state) => state.course?.allotedPackageDetails
+  );
+  console.log("courseInfo", currentUser?.user_id);
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const [togglePopup, setTogglePopup] = useState("hidden");
   const [packageInfo, setPackageInfo] = useState([]);
-  const [allotedPackage, setAllotedPackage] = useState([]);
+  const [event, setEvent] = useState([]);
+  const [services, setServices] = useState([]);
+  const [bannerDetails, setBannerDetails] = useState([]);
+
+  const fetchEventDetails = async () => {
+    const response = await getEventList();
+    setEvent(response.data?.data);
+  };
+
+  const fetchServiceList = async () => {
+    const response = await getServiceList();
+    setServices(response.data?.data);
+  };
+
+  const fetchBannerList = async () => {
+    const response = await getBannerList();
+    setBannerDetails(response.data?.data);
+  };
+
   const getPackageInfo = async () => {
     await fetchPackageDetails().then((response) => {
       setPackageInfo(response.data?.data);
     });
   };
 
-  const fetchAllotedPackage = async (userId) => {
-    await getAllotedPackage(userId).then((response) => {
-      setAllotedPackage(response.data?.data);
-    });
-  };
-
   useEffect(() => {
-    fetchAllotedPackage(currentUser.user_id);
+    
     dispatch(getPackage());
     getPackageInfo();
+    fetchEventDetails();
+    fetchServiceList();
+    fetchBannerList();
+   
+   
   }, []);
+
+  useEffect(()=> {
+    dispatch(allotedPackageDetails(currentUser?.user_id));
+  },[packageInfo])
+if (loading) {
+  return ( <div class="flex h-screen w-screen justify-center items-center">
+  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+  <div>&nbsp;&nbsp;&nbsp;please wait</div>
+</div>)
+} 
+
   return (
     <>
       <Sidebar selectedValue="dashboard" />
+     
       <div
         className={`${togglePopup} bg-gray-600 bg-opacity-50 z-50 -mt-10 h-screen w-full flex content-center`}
       >
@@ -153,14 +192,25 @@ const Dashboard = () => {
       <div className="p-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full">
-          <div className="absolute top-20 text-4xl text-white left-24 hidden lg:block">
-            Lorem ipsum dolor sit amet,
-            <br /> consectetur adipiscing elit,
-          </div>
-          <img src={banner} alt="...." className="w-full" />
+          <Carousel autoPlay interval="1000" infiniteLoop stopOnHover>
+            {bannerDetails.map((val) => {
+              return (
+                <div key={val.id}>
+                  <a href={val.link} target="_blank">
+                    <img
+                      src={baseURL + val.image}
+                      alt="...."
+                      className="w-full h-96 cursor-pointer"
+                    />
+                    <p className="legend">{val.title}</p>
+                  </a>
+                </div>
+              );
+            })}
+          </Carousel>
         </div>
-        <Coursesinfo />
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+        {/* <Coursesinfo /> */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5">
           <div>
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
               <Link to="/courses">
@@ -168,18 +218,14 @@ const Dashboard = () => {
                   My Courses
                 </div>
               </Link>
-              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 overflow-scroll">
-                {allotedPackage.map((val) => {
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+                {courseInfo?.map((val) => {
                   return (
                     <MyCourses
                       key={val.id}
                       imgsrc={baseURL + val.course_name.course_file}
                       courseName={val.course_name.course_title}
-                      progress="70%"
-                      totalDays="10"
-                      completedLesson="7"
                       totalTime={val.course_name.total_hours}
-                      level="beginner"
                       id={val.course_name.id}
                     />
                   );
@@ -199,7 +245,7 @@ const Dashboard = () => {
                     >
                       <div className="inline-block ml-3">
                         <p className="text-lg">{val.name}</p>
-                        <p>${val.price} per Month</p>
+                        <p>Price: ${val.price}</p>
                       </div>
                       <button
                         onClick={() => setTogglePopup("fixed top-5")}
@@ -207,7 +253,7 @@ const Dashboard = () => {
                       >
                         Buy Now
                       </button>
-                    </div>  
+                    </div>
                     // <Membership
 
                     //   name={}
@@ -220,10 +266,36 @@ const Dashboard = () => {
             {/* <Membership /> */}
           </div>
           <div className="bg-white shadow-lg rounded-lg lg:ml-5 p-4 mt-5 lg:mt-0">
-            <Upcomingtraining />
+            <div className="m-3 text-2xl text-gray-700 font-bold">
+              Upcoming Training
+            </div>
+            {event.map((val) => {
+              return (
+                <>
+                  <Upcomingtraining
+                    key={val.id}
+                    title={val.title}
+                    link={val.link}
+                    about={val.about}
+                    img={baseURL + val.image}
+                  />
+                </>
+              );
+            })}
           </div>
         </div>
-        <Boxfooter />
+        <div className="bg-white rounded-lg shadow-lg mt-8 mb-12 p-5 grid grid-cols-2 lg:grid-cols-6">
+          {services.map((val) => {
+            return (
+              <Boxfooter
+                key={val.id}
+                title={val.title}
+                link={val.link}
+                img={baseURL + val.image}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

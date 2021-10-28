@@ -47,5 +47,15 @@ export const ActionTypes = {
     //getChapterStatus
     GET_CHAPTER_STATUS:"GET_CHAPTER_STATUS",
 
+    //getQuiz
+    GET_QUIZ:"GET_QUIZ",
 
+    //getQuizResult
+    GET_QUIZ_RESULT:"GET_QUIZ_RESULT",
+
+    //checkScore
+    CHECK_SCORE:"CHECK_SCORE",
+
+    //chapterClientList
+    CHAPTER_CLIENT_LIST:"CHAPTER_CLIENT_LIST",
   };

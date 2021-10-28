@@ -6,15 +6,14 @@ import Sidebar from "../sidebar/Sidebar";
 import { useParams } from "react-router";
 import {
   changeChapterStatus,
-  getAllotedPackage,
+  fetchChapterClientList,
   getChapterDetails,
   getChapterList,
-  getChapterStatus,
-  getCourseDetails,
 } from "../../api";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchCourseDetails } from "../../redux/actions/courseAction";
+import { fetchCourseDetails, getChapterClientList, getQuiz } from "../../redux/actions/courseAction";
+import { changeStatusOfChapter, chapterStatus } from "../../redux/actions/chapterAction";
 
 function ChapterVideo() {
   const { id } = useParams();
@@ -34,13 +33,16 @@ function ChapterVideo() {
   //   return number.id > 60
   // })
   // console.log(largerThanSixty);
-
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const loading = useSelector((state)=> state.course?.loading)
+  const currentUser = useSelector((state) => state.user?.currentUser);
+  const statusOfChapter = useSelector((state)=> state.chapter?.chapterStatus);
+  const chapterClientList = useSelector((state)=>state.course?.chapterClientList);
+  
 
   const fetchChapterList = async (id) => {
     const response = await getChapterList(id);
     setCourseName(response.data?.data[0]?.course.course_title);
-    setChapterList(response.data?.data);
+    // setChapterList(response.data?.data);
   };
 
   const handleVideoPlay = async () => {
@@ -50,17 +52,53 @@ function ChapterVideo() {
     data.append("status", status);
     data.append("completedVideoLenght", seconds);
     data.append("totalVideoLength", totalVideoLength);
-    // console.log(currentUser.user_id, chapterId, status, seconds, totalVideoLength);
-    const response = await changeChapterStatus(data);
-    console.log(response);
+    dispatch(changeStatusOfChapter(data))
   };
 
-  const courseDetails = useSelector((state)=>state.course.courseDetails)
+  const handleClick = async (val) => {
+    setChapterId(val.id);
+    const response = await getChapterDetails(val.id);
+    setChapterName(response.data?.data?.chapter_name);
+    setChapterLink(response.data?.data?.link);
+    setChapterAbout(response.data?.data?.about);
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("chapter_id", val.id);
+    dispatch(chapterStatus(data))
+    console.log(statusOfChapter?.is_completed);
+    
+  }
+
+  const getClientChapterList = async () =>{
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("course_id", id);
+    dispatch(getChapterClientList(data))
+  
+    // console.log(chapterClientList[0]?.name?.id);
+  }
+  
+ 
+
+  
 
   useEffect(() => {
+    getClientChapterList();
+   
     fetchChapterList(id);
     fetchCourseDetails(id);
+    
+    dispatch(getQuiz(id))
   }, []);
+
+ 
+if (loading) {
+  return ( <div class="flex h-screen w-screen justify-center items-center">
+  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+  <div>&nbsp;&nbsp;&nbsp;please wait</div>
+</div>)
+} 
+
   return (
     <>
       <Sidebar />
@@ -69,6 +107,7 @@ function ChapterVideo() {
           <span className="font-bold text-2xl mx-8">
             {" "}
             {chapterName ? chapterName : courseName}
+            
           </span>
           <span className="float-right ">Home / Dashboard</span>
         </div>
@@ -80,7 +119,7 @@ function ChapterVideo() {
                 height="600px"
                 width="900px"
                 responsive
-                start={+seconds}
+                // onEnd={}
                 onTimeUpdate={(response) => {
                   setStatus(response.percent);
                   setSeconds(response.seconds);
@@ -98,8 +137,9 @@ function ChapterVideo() {
               </Link>
               <Link
                 to={`/courses/chapterquiz/${id}`}
-                className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip ${
-                  false ? "cursor-not-allowed" : ""
+                
+                className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip  ${
+                  true ? "cursor-not-allowed" : ""
                 }`}
               >
                 {/* <span className="mt-8 tooltip rounded shadow-lg p-1 text-sm bg-gray-100 text-red-500 w-48 absolute top-12 -left-10 ">
@@ -107,14 +147,6 @@ function ChapterVideo() {
                   chapter at least completed."
                 </span> */}
                 Quiz
-              </Link>
-              <Link
-                to="/certificate"
-                className={`text-gray-700 mx-3 py-4 px-8 col-span-3 ${
-                  false ? "cursor-not-allowed" : ""
-                }`}
-              >
-                Certificates
               </Link>
             </div>
             <div className="bg-white">
@@ -144,37 +176,22 @@ function ChapterVideo() {
                 {/* <br /> */}
               </div>
               <div>
-                {chapterList.map((val) => {
+                {!chapterClientList? null : chapterClientList.map((val) => {
                   return (
-                    <div key={val.id}>
+                    <div key={val?.name?.id}>
                       <div
-                        className={`border-t-2 border-fuchsia-600 p-5 bg-red-200 cursor-pointer`}
-                        onClick={async () => {
-                          setChapterId(val.id);
-                          const response = await getChapterDetails(val.id);
-                          setChapterName(response.data?.data?.chapter_name);
-                          setChapterLink(response.data?.data?.link);
-                          setChapterAbout(response.data?.data?.about);
-                          const data = new FormData();
-                          data.append("user_id", currentUser.user_id);
-                          data.append("chapter_id", val.id);
-                          const res = await getChapterStatus(data);
-                          setStatus(+res.data?.data?.chapter_status);
-                          setSeconds(+res.data?.data?.completedVideoLenght);
-                          setTotalVideoLength(
-                            +res.data?.data?.totalVideoLength
-                          );
-                          console.log(status, seconds, totalVideoLength);
-                          console.log(courseDetails);
-                        }}
+                        className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${val?.is_completed?"bg-red-400":"bg-white"} `}
+                        onClick={()=>
+                         
+                          handleClick(val)}
                       >
-                        <img
+                        {/* <img
                           src={checkIcon}
                           alt="...."
                           className="inline-block"
-                        />
+                        /> */}
                         <p className="inline-block overflow-hidden">
-                          &nbsp; {val.chapter_name}
+                          &nbsp; {val?.name?.chapter_name}
                         </p>
                         <p className="text-sm text-gray-600 pl-7">Video</p>
                       </div>

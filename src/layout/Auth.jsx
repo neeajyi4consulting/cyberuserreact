@@ -8,11 +8,14 @@ import { cleanLocalStorage } from "../utils/storage";
 import { loginAction } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { allotedPackageDetails } from "../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();
-  const [id, setId] = useState("neeraj@gmail.com");
+  const [id, setId] = useState("neerajkumar@gmail.com");
   const [passcode, setPasscode] = useState("password");
+  const currentUser = useSelector((state)=>state.user?.currentUser)
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -21,6 +24,7 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
+    dispatch(allotedPackageDetails(currentUser?.user_id))
     // login(data)
     //   .then((response) => {
     //     toast.info(response.data.message);

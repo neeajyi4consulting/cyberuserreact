@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Admin from "./layout/Admin";
 import Auth from "./layout/Auth";
 import SignupScreen from "./layout/SignupScreen";
@@ -32,6 +32,7 @@ function App() {
           <Route exact path="/login" component={Auth} />
           <Route exact path="/signup" component={SignupScreen} />
           <Route exact path="/forgetpassword" component={ForgetPassword} />
+          {/* <Redirect from='*' to='/' /> */}
         </Switch>
       ) : (
         <>
@@ -49,7 +50,7 @@ function App() {
             />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/certificate" component={Certificate}/>
-            {/* <Redirect exact from="/" to="/dashboard"/> */}
+            <Redirect from="/" to="/dashboard"/>
            
           </Switch>
           <Footer />

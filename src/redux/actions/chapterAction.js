@@ -1,4 +1,4 @@
-import { getChapterDetails } from "../../api";
+import { changeChapterStatus, getChapterDetails, getChapterStatus } from "../../api";
 import { ActionTypes } from "../constants/actionTypes";
 
 export const fetchChapterDetails= (id) => async (dispatch) =>{
@@ -32,5 +32,22 @@ export const chapterDetails = (id) => async (dispatch) =>{
     dispatch({
         type:ActionTypes.GET_CHAPTER_INFO,
         payload:response.data?.data,
+    })
+}
+
+export const chapterStatus = (data) => async (dispatch) =>{
+    const response = await getChapterStatus(data);
+    dispatch({
+        type:ActionTypes.GET_CHAPTER_STATUS,
+        payload:response.data?.data,
+    })
+}
+
+export const changeStatusOfChapter = (data) => async (dispatch) =>{
+    const response = await changeChapterStatus(data);
+    console.log("status chapter change", response)
+    dispatch({
+        type:ActionTypes.CHANGE_CHAPTER_STATUS,
+        payload:response.data
     })
 }

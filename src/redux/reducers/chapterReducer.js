@@ -2,8 +2,10 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState ={
     chapterDetails:[],
-    chapterId:3,
-    chapterstatus:null,
+    chapterStatus:{
+    completedVideoLenght: 0,
+    is_completed:false,
+   },
     chapterInfo:null,
 }
 
@@ -15,6 +17,8 @@ export const chapterReducer = (state= initialState, {type, payload})=>{
             return{...state, chapterId:payload}
         case ActionTypes.GET_CHAPTER_INFO:
             return{...state, chapterInfo:payload}
+        case ActionTypes.GET_CHAPTER_STATUS:
+            return{...state, chapterStatus:payload}
     
         default:
             return{state}
