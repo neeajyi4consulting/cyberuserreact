@@ -1,4 +1,8 @@
-import { setJWT, cleanLocalStorage, getUserInfoFromJWT } from "../../utils/storage";
+import {
+  setJWT,
+  cleanLocalStorage,
+  getUserInfoFromJWT,
+} from "../../utils/storage";
 import { loginUser, editUserDetails } from "../../api";
 import { ActionTypes } from "../constants/actionTypes";
 import { toast } from "react-toastify";
@@ -22,12 +26,11 @@ export const loginAction = (data) => async (dispatch) => {
 };
 
 export const fetchUserAction = () => async (dispatch) => {
-  dispatch({ type: ActionTypes.FETCH_CURRENTUSER, payload: { loading: true } });
   const token = await getUserInfoFromJWT();
 
   dispatch({
     type: ActionTypes.FETCH_CURRENTUSER,
-    payload:token,
+    payload: token,
   });
 };
 
@@ -42,16 +45,13 @@ export const logout = () => async (dispatch) => {
   });
 };
 
-
 export const editDetails = (data) => async (dispatch) => {
   const response = await editUserDetails(data);
   toast.info(response.data.message);
-  
 
   if (response.data.status === true) {
-
     console.log("admin function clg done!");
-  }else{
+  } else {
     console.log(response);
   }
 
@@ -60,5 +60,3 @@ export const editDetails = (data) => async (dispatch) => {
     payload: response,
   });
 };
-
-

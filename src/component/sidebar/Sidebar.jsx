@@ -52,9 +52,7 @@ function Sidebar(props) {
     <>
       <nav className="-mt-24 z-10">
         <div className="">
-          <div
-            className={`flex flex-wrap w-72 lg:inline-block`}
-          >
+          <div className={`flex flex-wrap w-72 lg:inline-block`}>
             <div className="w-20 md:w-full h-auto py-6 ">
               <button
                 onClick={() => {
@@ -99,8 +97,8 @@ function Sidebar(props) {
                 </div>
               </Link>
 
-                <Link to="/courses">
-              <div className={`px-10 w-72 h-auto py-5 ${coursesClass}`}>
+              <Link to="/courses">
+                <div className={`px-10 w-72 h-auto py-5 ${coursesClass}`}>
                   <img
                     src={CoursesIcon}
                     alt="...."
@@ -121,18 +119,18 @@ function Sidebar(props) {
                     d="M9 5l7 7-7 7"
                   />
                 </svg> */}
-              </div>
-                </Link>
-                <Link to="/admin">
-              <div className={`px-10 w-72 py-5 h-auto ${profileClass} `}>
+                </div>
+              </Link>
+              <Link to="/admin">
+                <div className={`px-10 w-72 py-5 h-auto ${profileClass} `}>
                   <img
                     src={ProfileIcon}
                     alt="...."
                     className="inline w-6 h-6 mr-2"
                   />
                   My Profile
-              </div>
-                </Link>
+                </div>
+              </Link>
               <div
                 className="px-10 w-72 py-5 h-auto"
                 style={{ backgroundColor: "white", color: "#868686" }}

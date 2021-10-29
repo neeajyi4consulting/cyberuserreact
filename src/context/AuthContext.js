@@ -8,7 +8,13 @@ import {
 } from "../utils/storage";
 // import { Redirect, useHistory } from "react-router";
 import { toast } from "react-toastify";
-import { loginUser, forgetPass, getCourseList, editUserDetails, getChapterDetails } from "../api/index";
+import {
+  loginUser,
+  forgetPass,
+  getCourseList,
+  editUserDetails,
+  getChapterDetails,
+} from "../api/index";
 
 export const AuthContext = createContext();
 
@@ -36,7 +42,7 @@ export function AuthProvider({ children }) {
         if (response.data?.status === true) {
           await setJWT(response?.data?.data?.token);
           setCurrentUser(getUserInfoFromJWT(response.data?.data?.token));
-          setIsSidebarOpen(false)
+          setIsSidebarOpen(false);
         } else {
           console.log("INVALID Login Details ");
         }
@@ -51,7 +57,7 @@ export function AuthProvider({ children }) {
         if (response.data?.status === true) {
           // await setJWT(response?.data?.data?.token);
           // setCurrentUser(getUserInfoFromJWT(response.data?.data?.token));
-          toast.info("success edited")
+          toast.info("success edited");
         } else {
           console.log("INVALID Login Details ");
         }
@@ -109,7 +115,7 @@ export function AuthProvider({ children }) {
     (async () => {
       setCurrentUser(await getUserInfoFromJWT()());
       setLoading(false);
-      setIsSidebarOpen(true)
+      setIsSidebarOpen(true);
     })();
   }, []);
 

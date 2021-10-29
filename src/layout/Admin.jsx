@@ -46,8 +46,7 @@ function Admin() {
     data.append("email", editUserEmail);
     data.append("phone", editUserNumber);
     data.append("user_id", currentUser.user_id);
-    dispatch(editDetails(data))
-      
+    dispatch(editDetails(data));
   };
 
   useEffect(() => {

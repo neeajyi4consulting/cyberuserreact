@@ -10,12 +10,12 @@ import { getPackage } from "../redux/actions/packageAction";
 import { useSelector } from "react-redux";
 
 const Landingpage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const packageList = useSelector((state)=> state.package?.packageDetails)
+  const packageList = useSelector((state) => state.package?.packageDetails);
   // console.log(packageList);
   useEffect(() => {
-    dispatch(getPackage())
+    dispatch(getPackage());
   }, []);
   return (
     <>
@@ -51,108 +51,110 @@ const Landingpage = () => {
       </div>
       <div className="md:mx-40">
         <div className="grid grid-cols-3 gap-5 -mt-28 ">
-           {packageList !== undefined ? packageList.map((val)=>{
-            return(
-              <div className="shadow-xl rounded-b-lg">
-            <div className="bg-green-500  rounded-t-lg p-8">
-              <div className=" text-white text-center p-4">
-                <div className="text-xl py-2">{val?.name}</div>
-                <div className=" text-5xl">${val?.price}</div>
-              </div>
-            </div>
-            <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
-              <div className="py-4 text-green-500">
-                Unlimited <span className="text-gray-700">Access</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-green-500 inline-block float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <div className="py-4 text-green-500">
-                Montly <span className="text-gray-700">Documents</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 inline-block text-red-500 float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </div>
-              <div className="py-4 text-green-500">
-                Unlimited <span className="text-gray-700">Domains</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-green-500 inline-block float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-              <div className="py-4 text-green-500">
-                Custom <span className="text-gray-700">Hoisting</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 inline-block text-red-500 float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </div>
-              <div className="py-4 text-green-500">
-                24/7 <span className="text-gray-700">support</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-green-500 inline-block float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-              <Link to="/">SUBSCRIBE TODAY</Link>
-            </div>
-          </div>
-            )
-          }) : null}
+          {packageList !== undefined
+            ? packageList.map((val) => {
+                return (
+                  <div className="shadow-xl rounded-b-lg">
+                    <div className="bg-green-500  rounded-t-lg p-8">
+                      <div className=" text-white text-center p-4">
+                        <div className="text-xl py-2">{val?.name}</div>
+                        <div className=" text-5xl">${val?.price}</div>
+                      </div>
+                    </div>
+                    <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
+                      <div className="py-4 text-green-500">
+                        Unlimited <span className="text-gray-700">Access</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-green-500 inline-block float-right"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <div className="py-4 text-green-500">
+                        Montly <span className="text-gray-700">Documents</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 inline-block text-red-500 float-right"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                      <div className="py-4 text-green-500">
+                        Unlimited <span className="text-gray-700">Domains</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-green-500 inline-block float-right"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                      <div className="py-4 text-green-500">
+                        Custom <span className="text-gray-700">Hoisting</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 inline-block text-red-500 float-right"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </div>
+                      <div className="py-4 text-green-500">
+                        24/7 <span className="text-gray-700">support</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-green-500 inline-block float-right"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
+                      <Link to="/">SUBSCRIBE TODAY</Link>
+                    </div>
+                  </div>
+                );
+              })
+            : null}
         </div>
         {/* {packageList.map((val) => {
           return (

@@ -1,36 +1,36 @@
 import React from "react";
-import AccountLoginImg from "../assets/img/Account-Login-img.jpg"
-import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png"
+import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
+import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
 import PhoneInput from "react-phone-number-input";
-import"react-phone-number-input/style.css"
+import "react-phone-number-input/style.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 
 function SignupScreen() {
-  const [userName, setUserName] = useState("")
-  const [userEmail, setUserEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [userName, setUserName] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { signup } = useAuth();
 
-const handleSubmit = () => {
-  const data = new FormData();
+  const handleSubmit = () => {
+    const data = new FormData();
     data.append("email", userEmail);
     data.append("password", password);
     data.append("first_name", userName);
     data.append("phone", value);
     signup(data)
-    .then((response)=>{
-      if (response.data.status===true) {
-        toast.success(response.data.message)
-        console.log(response);
-      }
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-}
+      .then((response) => {
+        if (response.data.status === true) {
+          toast.success(response.data.message);
+          console.log(response);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const [value, setValue] = useState();
   return (
@@ -92,33 +92,39 @@ const handleSubmit = () => {
                   color: "#ed3237",
                 }}
               >
-                &nbsp;
-                Click Here
+                &nbsp; Click Here
               </Link>
             </p>
-            <div  className="my-5" style={{ width: "500px" }}>
+            <div className="my-5" style={{ width: "500px" }}>
               <input
                 type="text"
                 className=" lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Name"
                 value={userName}
-                onChange={(e)=>{setUserName(e.target.value)}}
-              /><br/>
+                onChange={(e) => {
+                  setUserName(e.target.value);
+                }}
+              />
+              <br />
               <input
                 type="email"
                 className="lg:w-full p-2 border-b-2 my-5"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Email Address"
                 value={userEmail}
-                onChange={(e)=>{setUserEmail(e.target.value)}}
-              /><br/>
+                onChange={(e) => {
+                  setUserEmail(e.target.value);
+                }}
+              />
+              <br />
               <PhoneInput
                 placeholder="9876543210"
                 className="border-b-2 p-2 my-5 w-2/5 lg:w-full"
                 value={value}
                 onChange={setValue}
-              /><br/>
+              />
+              <br />
               <input
                 type="password"
                 name=""
@@ -126,10 +132,13 @@ const handleSubmit = () => {
                 className="border-b-2 lg:w-full p-2 my-5"
                 placeholder="Your Password"
                 value={password}
-                onChange={(e)=>{setPassword(e.target.value)}}
-              /><br/>
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <br />
               <button
-              onClick={handleSubmit}
+                onClick={handleSubmit}
                 className="py-2 px-5 w-24 rounded-md block my-8"
                 style={{
                   backgroundColor: "#ED3237",
@@ -147,6 +156,3 @@ const handleSubmit = () => {
 }
 
 export default SignupScreen;
-
-
-

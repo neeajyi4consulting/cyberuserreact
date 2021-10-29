@@ -12,10 +12,9 @@ export const authReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.LOGOUT:
       return { ...state, currentUser: payload };
     case ActionTypes.EDIT_DETAILS:
-      return{...state, currentUser:payload}
+      return { ...state, currentUser: payload };
 
     default:
       return state;
   }
 };
-

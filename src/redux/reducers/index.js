@@ -6,9 +6,9 @@ import { packageReducer } from "./packageReducer";
 
 const reducers = combineReducers({
   user: authReducer,
-  course:courseReducer,
-  package:packageReducer,
-  chapter:chapterReducer,
+  course: courseReducer,
+  package: packageReducer,
+  chapter: chapterReducer,
 });
 
 export default reducers;

@@ -1,61 +1,67 @@
 export const ActionTypes = {
-    //loadingAction
-    LOADING: "LOADING",
-  
-    //authActionTypes
-    LOGIN: "LOGIN",
-    FETCH_CURRENTUSER: "FETCH_CURRENTUSER",
-    LOGOUT: "LOGOUT",
-  
-    // profileActionTypes
-    // FETCH_PROFILE: "FETCH_PROFILE",
-    // EDIT_PROFILE: "EDIT_PROFILE",
+  //loadingAction
+  LOADING: "LOADING",
 
-    // userDetails
-    GET_USER_DETAILS:"GET_USER_DETAILS",
+  //authActionTypes
+  LOGIN: "LOGIN",
+  FETCH_CURRENTUSER: "FETCH_CURRENTUSER",
+  LOGOUT: "LOGOUT",
 
-    //courseDetails
-    GET_COURSE_LIST:"GET_COURSE_LIST",
+  // profileActionTypes
+  // FETCH_PROFILE: "FETCH_PROFILE",
+  // EDIT_PROFILE: "EDIT_PROFILE",
 
-    //chapterList
-    GET_CHAPTER_LIST:"GET_CHAPTER_LIST",
+  // userDetails
+  GET_USER_DETAILS: "GET_USER_DETAILS",
 
-    //course Details
-    GET_COURSE_DETAILS:"GET_COURSE_DETAILS",
+  //courseDetails
+  GET_COURSE_LIST: "GET_COURSE_LIST",
 
-    //chapterDetails
-    GET_CHAPTER_DETAILS:"GET_CHAPTER_DETAILS",
+  //chapterList
+  GET_CHAPTER_LIST: "GET_CHAPTER_LIST",
 
-    //chapterInfo
-    GET_CHAPTER_INFO:"GET_CHAPTER_INFO",
+  //course Details
+  GET_COURSE_DETAILS: "GET_COURSE_DETAILS",
 
-    //editDetails
-    EDIT_DETAILS:"EDIT_DETAILS",
+  //chapterDetails
+  GET_CHAPTER_DETAILS: "GET_CHAPTER_DETAILS",
 
-    //getPackage
-    GET_PACKAGE:"GET_PACKAGE",
-    
-    //allotedPackage
-    GET_ALLOTED_PACKAGE:"GET_ALLOTED_PACKAGE",
+  //courseDetails
+  COURSE_DETAILS: "COURSE_DETAILS",
 
-    //chapterIdStored
-    CHAPTER_ID_STORED:"CHAPTER_ID_STORED",
+  //chapterInfo
+  GET_CHAPTER_INFO: "GET_CHAPTER_INFO",
 
-    //changeChapterStatus
-    CHANGE_CHAPTER_STATUS:"CHANGE_CHAPTER_STATUS",
+  //editDetails
+  EDIT_DETAILS: "EDIT_DETAILS",
 
-    //getChapterStatus
-    GET_CHAPTER_STATUS:"GET_CHAPTER_STATUS",
+  //getPackage
+  GET_PACKAGE: "GET_PACKAGE",
 
-    //getQuiz
-    GET_QUIZ:"GET_QUIZ",
+  //allotedPackage
+  GET_ALLOTED_PACKAGE: "GET_ALLOTED_PACKAGE",
 
-    //getQuizResult
-    GET_QUIZ_RESULT:"GET_QUIZ_RESULT",
+  //chapterIdStored
+  CHAPTER_ID_STORED: "CHAPTER_ID_STORED",
 
-    //checkScore
-    CHECK_SCORE:"CHECK_SCORE",
+  //changeChapterStatus
+  CHANGE_CHAPTER_STATUS: "CHANGE_CHAPTER_STATUS",
 
-    //chapterClientList
-    CHAPTER_CLIENT_LIST:"CHAPTER_CLIENT_LIST",
-  };
+  //getChapterStatus
+  GET_CHAPTER_STATUS: "GET_CHAPTER_STATUS",
+
+  //getQuiz
+  GET_QUIZ: "GET_QUIZ",
+
+  //getQuizResult
+  GET_QUIZ_RESULT: "GET_QUIZ_RESULT",
+
+  //checkScore
+  CHECK_SCORE: "CHECK_SCORE",
+
+  //chapterClientList
+  CHAPTER_CLIENT_LIST: "CHAPTER_CLIENT_LIST",
+
+  //courseClientList
+  COURSE_CLIENT_LIST: "COURSE_CLIENT_LIST",
+};

@@ -15,7 +15,7 @@ const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neerajkumar@gmail.com");
   const [passcode, setPasscode] = useState("password");
-  const currentUser = useSelector((state)=>state.user?.currentUser)
+  const currentUser = useSelector((state) => state.user?.currentUser);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -24,7 +24,7 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
-    dispatch(allotedPackageDetails(currentUser?.user_id))
+    dispatch(allotedPackageDetails(currentUser?.user_id));
     // login(data)
     //   .then((response) => {
     //     toast.info(response.data.message);

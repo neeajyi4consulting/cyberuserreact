@@ -23,7 +23,7 @@ function Navbar() {
                 className="w-96 rounded p-2 text-black hidden"
                 type="text"
                 placeholder="Search..."
-              />              
+              />
             </div>
           </div>
           {/* <img
@@ -37,11 +37,12 @@ function Navbar() {
             className="h-6 w-6 inline mx-2 lg:mr-4 lg:ml-5"
           /> */}
           <Link to="/admin">
-          <img
-            src={profileImg}
-            alt="...."
-            className="inline rounded-full mx-2 lg:mr-16 lg:ml-5"
-          /></Link>
+            <img
+              src={profileImg}
+              alt="...."
+              className="inline rounded-full mx-2 lg:mr-16 lg:ml-5"
+            />
+          </Link>
         </div>
       </div>
     </>

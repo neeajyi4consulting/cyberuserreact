@@ -1,27 +1,25 @@
-import React, {useState} from "react";
-import AccountLoginImg from '../assets/img/Account-Login-img.jpg'
-import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png"
+import React, { useState } from "react";
+import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
+import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 function ForgetPassword() {
-  const [email, setEmail] = useState("test@gmail.com")
+  const [email, setEmail] = useState("test@gmail.com");
 
-  const {forgetPasscode} = useAuth()
+  const { forgetPasscode } = useAuth();
 
-  const handleForgetPassword= async() =>{
+  const handleForgetPassword = async () => {
     const data = new FormData();
     data.append("email", email);
-     forgetPasscode(data)
-    .then((response)=>{
-     console.log("response from forget password screen",response)
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-    
-
-  }
+    forgetPasscode(data)
+      .then((response) => {
+        console.log("response from forget password screen", response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -80,7 +78,8 @@ function ForgetPassword() {
                   lineHeight: "23px",
                   color: "#ed3237",
                 }}
-              >&nbsp; Click Here
+              >
+                &nbsp; Click Here
               </Link>
             </p>
             <div className="my-5" style={{ width: "500px" }}>
@@ -90,9 +89,12 @@ function ForgetPassword() {
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Email Address"
                 value={email}
-                onChange={(e)=>{setEmail(e.target.value)}}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
-              <button onClick={handleForgetPassword}
+              <button
+                onClick={handleForgetPassword}
                 className="py-2 px-5 w-24 rounded-md block my-8"
                 style={{
                   backgroundColor: "#ED3237",
@@ -112,4 +114,3 @@ function ForgetPassword() {
 }
 
 export default ForgetPassword;
-

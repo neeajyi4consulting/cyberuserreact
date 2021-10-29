@@ -1,5 +1,5 @@
 import React from "react";
-import profileImg from '../Assets/Profile-img.jpg'
+import profileImg from "../Assets/Profile-img.jpg";
 import { Link } from "react-router-dom";
 
 function Preferance() {
@@ -17,12 +17,30 @@ function Preferance() {
             <Link to="/">Sign Out</Link>
           </span>
           <div>
-          <Link to="/generalprofile" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">
+            <Link
+              to="/generalprofile"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
               General
             </Link>
-            <Link to="/profile/preferance" className="md:mr-10 md:mx-10 md:pt-10 pt-5 md:inline-block block border-b-2 border-blue-500 text-blue-500">Preferance</Link>
-            <Link to="/profile/invoice" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">Invoice</Link>
-            <Link to="/profile/myaddress" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">My Address</Link>
+            <Link
+              to="/profile/preferance"
+              className="md:mr-10 md:mx-10 md:pt-10 pt-5 md:inline-block block border-b-2 border-blue-500 text-blue-500"
+            >
+              Preferance
+            </Link>
+            <Link
+              to="/profile/invoice"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
+              Invoice
+            </Link>
+            <Link
+              to="/profile/myaddress"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
+              My Address
+            </Link>
           </div>
           <div className="border-2 p-5 mt-10">
             <div>

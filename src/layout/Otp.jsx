@@ -83,7 +83,8 @@ class Otp extends Component {
                   placeholder="0000"
                 />
 
-                <Link to="/"
+                <Link
+                  to="/"
                   className="py-2 px-6 w-24 rounded-md block my-8"
                   style={{
                     backgroundColor: "#ED3237",

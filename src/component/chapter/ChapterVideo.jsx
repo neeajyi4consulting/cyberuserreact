@@ -12,32 +12,44 @@ import {
 } from "../../api";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchCourseDetails, getChapterClientList, getQuiz } from "../../redux/actions/courseAction";
-import { changeStatusOfChapter, chapterStatus } from "../../redux/actions/chapterAction";
+import {
+  courseClientList,
+  fetchCourseDetails,
+  getChapterClientList,
+  getQuiz,
+} from "../../redux/actions/courseAction";
+import {
+  changeStatusOfChapter,
+  chapterStatus,
+} from "../../redux/actions/chapterAction";
 
 function ChapterVideo() {
   const { id } = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [chapterList, setChapterList] = useState([]);
   const [courseName, setCourseName] = useState("");
   const [chapterId, setChapterId] = useState();
+  const [showQuizButton, setShowQuizButton] = useState(false);
   const [chapterName, setChapterName] = useState("");
   const [chapterLink, setChapterLink] = useState("https://vimeo.com/603867023");
   const [chapterAbout, setChapterAbout] = useState("");
   const [status, setStatus] = useState();
   const [seconds, setSeconds] = useState(0);
   const [totalVideoLength, setTotalVideoLength] = useState();
+  const [isCompleted, setIsCompleted] = useState(false);
 
   // const array = [ {id:23}, {id:45}, {id:67}, {id:89}, {id:12} ]
-  // const largerThanSixty = array.filter( number => { 
+  // const largerThanSixty = array.filter( number => {
   //   return number.id > 60
   // })
   // console.log(largerThanSixty);
-  const loading = useSelector((state)=> state.course?.loading)
+  const loading = useSelector((state) => state.course?.loading);
   const currentUser = useSelector((state) => state.user?.currentUser);
-  const statusOfChapter = useSelector((state)=> state.chapter?.chapterStatus);
-  const chapterClientList = useSelector((state)=>state.course?.chapterClientList);
-  
+  const statusOfChapter = useSelector((state) => state.chapter?.chapterStatus);
+  const courseStatus = useSelector((state) => state.course?.courseClientList);
+  const chapterClientList = useSelector(
+    (state) => state.course?.chapterClientList
+  );
 
   const fetchChapterList = async (id) => {
     const response = await getChapterList(id);
@@ -47,57 +59,73 @@ function ChapterVideo() {
 
   const handleVideoPlay = async () => {
     const data = new FormData();
-    data.append("user_id", currentUser.user_id);
+    data.append("user_id", currentUser?.user_id);
     data.append("chapter_id", chapterId);
     data.append("status", status);
     data.append("completedVideoLenght", seconds);
     data.append("totalVideoLength", totalVideoLength);
-    dispatch(changeStatusOfChapter(data))
+    data.append("course_id", +id);
+    console.log(
+      currentUser?.user_id,
+      chapterId,
+      status,
+      seconds,
+      totalVideoLength,
+      +id
+    );
+    dispatch(changeStatusOfChapter(data));
   };
 
   const handleClick = async (val) => {
-    setChapterId(val.id);
-    const response = await getChapterDetails(val.id);
+    setChapterId(val?.name?.id);
+    const response = await getChapterDetails(chapterId);
     setChapterName(response.data?.data?.chapter_name);
     setChapterLink(response.data?.data?.link);
     setChapterAbout(response.data?.data?.about);
     const data = new FormData();
     data.append("user_id", currentUser?.user_id);
-    data.append("chapter_id", val.id);
-    dispatch(chapterStatus(data))
-    console.log(statusOfChapter?.is_completed);
-    
-  }
+    data.append("chapter_id", val?.name?.id);
+    dispatch(chapterStatus(data));
+  };
 
-  const getClientChapterList = async () =>{
+  const getClientChapterList = async () => {
     const data = new FormData();
     data.append("user_id", currentUser?.user_id);
     data.append("course_id", id);
-    dispatch(getChapterClientList(data))
-  
-    // console.log(chapterClientList[0]?.name?.id);
-  }
-  
- 
+    dispatch(getChapterClientList(data));
 
-  
+    // console.log(chapterClientList[0]?.name?.id);
+  };
+
+  const getClientCourseList = async () => {
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("course_id", id);
+    dispatch(courseClientList(data));
+    if (courseStatus?.course_status == "completed") {
+      setShowQuizButton(true);
+    } else {
+      setShowQuizButton(false);
+    }
+  };
 
   useEffect(() => {
     getClientChapterList();
-   
+    getClientCourseList();
     fetchChapterList(id);
     fetchCourseDetails(id);
-    
-    dispatch(getQuiz(id))
+
+    dispatch(getQuiz(id));
   }, []);
 
- 
-if (loading) {
-  return ( <div class="flex h-screen w-screen justify-center items-center">
-  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-  <div>&nbsp;&nbsp;&nbsp;please wait</div>
-</div>)
-} 
+  if (loading) {
+    return (
+      <div className="flex h-screen w-screen justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <div>&nbsp;&nbsp;&nbsp;please wait</div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -107,7 +135,6 @@ if (loading) {
           <span className="font-bold text-2xl mx-8">
             {" "}
             {chapterName ? chapterName : courseName}
-            
           </span>
           <span className="float-right ">Home / Dashboard</span>
         </div>
@@ -120,7 +147,7 @@ if (loading) {
                 width="900px"
                 responsive
                 // onEnd={}
-                onTimeUpdate={(response) => {
+                onEnd={(response) => {
                   setStatus(response.percent);
                   setSeconds(response.seconds);
                   setTotalVideoLength(response.duration);
@@ -137,9 +164,8 @@ if (loading) {
               </Link>
               <Link
                 to={`/courses/chapterquiz/${id}`}
-                
                 className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip  ${
-                  true ? "cursor-not-allowed" : ""
+                  showQuizButton ? "" : "hidden"
                 }`}
               >
                 {/* <span className="mt-8 tooltip rounded shadow-lg p-1 text-sm bg-gray-100 text-red-500 w-48 absolute top-12 -left-10 ">
@@ -176,28 +202,32 @@ if (loading) {
                 {/* <br /> */}
               </div>
               <div>
-                {!chapterClientList? null : chapterClientList.map((val) => {
-                  return (
-                    <div key={val?.name?.id}>
-                      <div
-                        className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${val?.is_completed?"bg-red-400":"bg-white"} `}
-                        onClick={()=>
-                         
-                          handleClick(val)}
-                      >
-                        {/* <img
+                {!chapterClientList
+                  ? null
+                  : chapterClientList.map((val) => {
+                      return (
+                        <div key={val?.name?.id}>
+                          <div
+                            className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
+                              val?.is_completed
+                                ? "bg-green-500 text-gray-100"
+                                : "bg-white"
+                            } `}
+                            onClick={() => handleClick(val)}
+                          >
+                            {/* <img
                           src={checkIcon}
                           alt="...."
                           className="inline-block"
                         /> */}
-                        <p className="inline-block overflow-hidden">
-                          &nbsp; {val?.name?.chapter_name}
-                        </p>
-                        <p className="text-sm text-gray-600 pl-7">Video</p>
-                      </div>
-                    </div>
-                  );
-                })}
+                            <p className="inline-block overflow-hidden">
+                              &nbsp; {val?.name?.chapter_name}
+                            </p>
+                            <p className="text-sm text-gray-600 pl-7">Video</p>
+                          </div>
+                        </div>
+                      );
+                    })}
               </div>
             </div>
           </div>

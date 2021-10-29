@@ -1,6 +1,6 @@
 import http from "./httpServices";
 import API_PATH from "./config";
-import { getJWT } from "../utils/storage"
+import { getJWT } from "../utils/storage";
 // import { getJWT } from "../utils/storage";
 
 export async function getAndSetJwt() {
@@ -88,7 +88,7 @@ export async function getBannerList() {
 }
 
 export async function getAllotedPackage(userId) {
-  return http.get(API_PATH.apiShowClientPackage +  userId, {
+  return http.get(API_PATH.apiShowClientPackage + userId, {
     headers: {
       Authorization: apiToken,
     },
@@ -129,7 +129,6 @@ export async function editUserDetails(data) {
   });
 }
 
-
 export async function changePassword(data) {
   return http.post(API_PATH.apiChangePassword, data, {
     headers: {
@@ -153,26 +152,26 @@ export async function forgetPass(data) {
 
 export async function fetchPackageDetails() {
   return http.get(API_PATH.showPackage, {
-    headers:{
+    headers: {
       Authorization: apiToken,
-    }
-  })
+    },
+  });
 }
 
 export async function fetchquiz(chapterId) {
   return http.get(API_PATH.apiQuizList + chapterId, {
-    headers:{
+    headers: {
       Authorization: apiToken,
-    }
-  })
+    },
+  });
 }
 
 export async function fetchCategoryList() {
   return http.get(API_PATH.apiCategoryList, {
-    headers:{
+    headers: {
       Authorization: apiToken,
-    }
-  })
+    },
+  });
 }
 
 export async function fetchChapterClientList(data) {
@@ -185,9 +184,6 @@ export async function fetchChapterClientList(data) {
   });
 }
 
-
-
-
 // export async function addUser(data) {
 //   return await http.post(API_PATH.apiAddUser, data, {
 //     headers: {
@@ -196,7 +192,6 @@ export async function fetchChapterClientList(data) {
 //     },
 //   });
 // }
-
 
 // export async function updateProfile(data) {
 //   await getAndSetJwt();

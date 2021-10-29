@@ -13,7 +13,8 @@ import ChapterVideo from "./component/chapter/ChapterVideo";
 import Dashboard from "./component/dashboard/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserAction } from "./redux/actions/authActions";
-import Certificate from "./component/certificate/export-pdf.component";
+import Certificate from "./component/certificate/export-pdf.component.jsx";
+// import Certificate from "./component/certificate/export-pdf.component";
 import ChapterQuiz from "./component/courses/component/ChapterQuiz";
 import Landingpage from "./layout/LandingPage";
 
@@ -32,7 +33,7 @@ function App() {
           <Route exact path="/login" component={Auth} />
           <Route exact path="/signup" component={SignupScreen} />
           <Route exact path="/forgetpassword" component={ForgetPassword} />
-          {/* <Redirect from='*' to='/' /> */}
+          <Redirect from="/dashboard" to="/" />
         </Switch>
       ) : (
         <>
@@ -42,16 +43,19 @@ function App() {
             <Route exact path="/profile/myaddress" component={MyAddress} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/courses/aboutcourse" component={AboutCourse} />
-            <Route exact path="/courses/chapterquiz/:id" component={ChapterQuiz}/>
+            <Route
+              exact
+              path="/courses/chapterquiz/:id"
+              component={ChapterQuiz}
+            />
             <Route
               exact
               path="/courses/chaptervideo/:id"
               component={ChapterVideo}
             />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/certificate" component={Certificate}/>
-            <Redirect from="/" to="/dashboard"/>
-           
+            <Route exact path="/certificate/:id" component={Certificate} />
+            <Redirect from="/" to="/dashboard" />
           </Switch>
           <Footer />
         </>

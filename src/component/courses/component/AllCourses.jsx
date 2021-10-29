@@ -4,11 +4,15 @@ import LessonIcon from "../../../assets/img/lessons-icon.svg";
 
 function AllCourses(props) {
   // const history = useHistory();
-  
+
   return (
     <>
       <div className="w-auto lg:mx-4 md:mx-2 shadow-lg bg-white rounded-md my-2">
-        <img src={props.imgsrc} alt="abcadfas" className="w-full h-60 rounded-t-md" />
+        <img
+          src={props.imgsrc}
+          alt="abcadfas"
+          className="w-full h-60 rounded-t-md"
+        />
         {/* <iframe
           width="560"
           height="315"
@@ -20,10 +24,11 @@ function AllCourses(props) {
         ></iframe> */}
         <div className="p-2">
           <p className="text-gray-500 text-sm">Course</p>
-          <a href={props.link}
+          <a
+            href={props.link}
             // to={props.link}
             // rel="noreferrer noopener"
-            
+
             className="font-bold text-gray-900 mb-2"
           >
             {props.courseName}

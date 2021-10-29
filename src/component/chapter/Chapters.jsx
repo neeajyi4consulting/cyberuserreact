@@ -1,21 +1,20 @@
 import checkIcon from "../../assets/img/check-mark.svg";
 import React from "react";
-import { chapterIdStored, chapterDetails } from "../../redux/actions/chapterAction";
+import {
+  chapterIdStored,
+  chapterDetails,
+} from "../../redux/actions/chapterAction";
 import { useDispatch } from "react-redux";
 
 import { getChapterDetails } from "../../api";
 
-
-
 const Chapters = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const handleClick = () =>{
-    dispatch(chapterIdStored(props.id))
-    dispatch(chapterDetails(props.id))
-  }
-
-
+  const handleClick = () => {
+    dispatch(chapterIdStored(props.id));
+    dispatch(chapterDetails(props.id));
+  };
 
   // const chapterDetails = async (courseId) => {
   //   await getChapterDetails(8).then((response) => {
@@ -28,11 +27,14 @@ const Chapters = (props) => {
   //     });
   //   });
   // };
-  
+
   return (
     <>
       <div>
-        <div className="border-t-2 border-fuchsia-600 p-5 bg-red-200" onClick={handleClick}>
+        <div
+          className="border-t-2 border-fuchsia-600 p-5 bg-red-200"
+          onClick={handleClick}
+        >
           <img src={checkIcon} alt="...." className="inline-block" />
           <p className="inline-block">&nbsp; {props.chapterName}</p>
           <p className="text-sm text-gray-600 pl-7">Video</p>

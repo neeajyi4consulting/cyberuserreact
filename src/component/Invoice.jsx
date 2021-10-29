@@ -1,5 +1,5 @@
 import React from "react";
-import profileImg from '../Assets/Profile-img.jpg'
+import profileImg from "../Assets/Profile-img.jpg";
 import { Link } from "react-router-dom";
 
 function Invoice() {
@@ -17,10 +17,16 @@ function Invoice() {
             <Link to="/">Sign Out</Link>
           </span>
           <div>
-            <Link to="/generalprofile" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">
+            <Link
+              to="/generalprofile"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
               General
             </Link>
-            <Link to="/profile/preferance" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">
+            <Link
+              to="/profile/preferance"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
               Preferance
             </Link>
             <Link
@@ -29,7 +35,10 @@ function Invoice() {
             >
               Invoice
             </Link>
-            <Link to="/profile/myaddress" className="md:mx-10 md:pt-10 pt-5 md:inline-block block">
+            <Link
+              to="/profile/myaddress"
+              className="md:mx-10 md:pt-10 pt-5 md:inline-block block"
+            >
               My Address
             </Link>
           </div>

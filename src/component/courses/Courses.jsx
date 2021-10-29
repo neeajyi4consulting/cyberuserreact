@@ -11,8 +11,7 @@ function Courses() {
           Enrolled Courses
         </div>
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
-        <EnrolledCourses
-              />
+          <EnrolledCourses />
         </div>
       </div>
     </>

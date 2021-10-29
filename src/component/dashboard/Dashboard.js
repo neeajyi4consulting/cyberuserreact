@@ -17,7 +17,7 @@ import { allotedPackageDetails } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state)=> state.course?.loading)
+  const loading = useSelector((state) => state.course?.loading);
   const currentUser = useSelector((state) => state.user?.currentUser);
   const courseInfo = useSelector(
     (state) => state.course?.allotedPackageDetails
@@ -52,30 +52,29 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    
     dispatch(getPackage());
     getPackageInfo();
     fetchEventDetails();
     fetchServiceList();
     fetchBannerList();
-   
-   
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(allotedPackageDetails(currentUser?.user_id));
-  },[packageInfo])
-if (loading) {
-  return ( <div class="flex h-screen w-screen justify-center items-center">
-  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-  <div>&nbsp;&nbsp;&nbsp;please wait</div>
-</div>)
-} 
+  }, [packageInfo]);
+  if (loading) {
+    return (
+      <div class="flex h-screen w-screen justify-center items-center">
+        <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <div>&nbsp;&nbsp;&nbsp;please wait</div>
+      </div>
+    );
+  }
 
   return (
     <>
       <Sidebar selectedValue="dashboard" />
-     
+
       <div
         className={`${togglePopup} bg-gray-600 bg-opacity-50 z-50 -mt-10 h-screen w-full flex content-center`}
       >
@@ -118,7 +117,7 @@ if (loading) {
           </div>
           <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
-              onClick={() => alert("TODO this btn is not working now")}
+              onClick={() => alert("this btn is not working now")}
               type="button"
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
             >
@@ -192,7 +191,7 @@ if (loading) {
       <div className="p-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full">
-          <Carousel autoPlay interval="1000" infiniteLoop stopOnHover>
+          <Carousel autoPlay interval="5000" infiniteLoop stopOnHover>
             {bannerDetails.map((val) => {
               return (
                 <div key={val.id}>
@@ -202,7 +201,7 @@ if (loading) {
                       alt="...."
                       className="w-full h-96 cursor-pointer"
                     />
-                    <p className="legend">{val.title}</p>
+                    {/* <p className="legend">{val.title}</p> */}
                   </a>
                 </div>
               );

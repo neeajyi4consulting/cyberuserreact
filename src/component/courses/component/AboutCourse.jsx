@@ -3,7 +3,7 @@ import React from "react";
 function AboutCourse() {
   return (
     <>
-      <div className="bg-gray-200 pt-24" style={{height:"155vh"}}>
+      <div className="bg-gray-200 pt-24" style={{ height: "155vh" }}>
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
           <span className="font-bold text-2xl mx-8">Course Details</span>
           <span className="float-right ">
@@ -57,7 +57,9 @@ function AboutCourse() {
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
-          <p className="text-lg font-bold text-blue-700 p-4">Course Description</p>
+          <p className="text-lg font-bold text-blue-700 p-4">
+            Course Description
+          </p>
           <p className="text-gray-500 px-5 py-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -72,7 +74,9 @@ function AboutCourse() {
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
             aliquip ex ea commodo consequat.
           </p>
-          <p className="text-lg font-bold text-blue-700 p-4">Who this course is for</p>
+          <p className="text-lg font-bold text-blue-700 p-4">
+            Who this course is for
+          </p>
           <p className="text-gray-500 px-5 py-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -96,7 +100,9 @@ function AboutCourse() {
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident,
           </p>
-          <button className="bg-red-500 rounded-md m-4 my-6 py-2 text-white px-4">Continue with Course</button>
+          <button className="bg-red-500 rounded-md m-4 my-6 py-2 text-white px-4">
+            Continue with Course
+          </button>
         </div>
       </div>
     </>
