@@ -11,9 +11,9 @@ const initialState = {
   allotedPackageDetails: [],
   loading: false,
   score: " ",
-  chapterClientList: [],
+  chapterClientList: {},
   courseClientList: "",
-  quizCompleted:false,
+  quizCompleted: false,
 };
 
 export const courseReducer = (state = initialState, { type, payload }) => {
@@ -43,7 +43,7 @@ export const courseReducer = (state = initialState, { type, payload }) => {
     case ActionTypes.COURSE_CLIENT_LIST:
       return { ...state, courseClientList: payload };
     case ActionTypes.QUIZCOMPLETED:
-      return{...state, quizCompleted:payload};
+      return { ...state, quizCompleted: payload };
 
     default:
       return state;

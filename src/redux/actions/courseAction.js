@@ -36,7 +36,7 @@ export const fetchUserDetails = (id) => async (dispatch) => {
 export const fetchCourseDetails = (courseId) => async (dispatch) => {
   try {
     const response = await getCourseDetails(courseId);
-    // console.log(response)
+    console.log(response.data);
     dispatch({
       type: ActionTypes.GET_COURSE_DETAILS,
       payload: response.data?.data?.chapters,
@@ -108,10 +108,10 @@ export const getChapterClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-    // console.log("response", response?.data?.data[0]?.name?.link);
+    // console.log("response", response?.data);
     dispatch({
       type: ActionTypes.CHAPTER_CLIENT_LIST,
-      payload: response.data?.data,
+      payload: response.data,
     });
     dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
@@ -123,7 +123,7 @@ export const courseClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-      // console.log("response from course Client list", response?.data?.course_status);
+    // console.log("response from course Client list", response?.data?.course_status);
     dispatch({
       type: ActionTypes.COURSE_CLIENT_LIST,
       payload: response?.data?.course_status,
