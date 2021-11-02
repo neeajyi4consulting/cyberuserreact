@@ -50,7 +50,7 @@ const Landingpage = () => {
         </Carousel> */}
       </div>
       <div className="md:mx-40">
-        <div className="grid grid-cols-3 gap-5 -mt-28 ">
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-5 -mt-28 ">
           {packageList !== undefined
             ? packageList.map((val) => {
                 return (
