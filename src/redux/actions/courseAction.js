@@ -75,12 +75,14 @@ export const allotedPackageDetails = (userId) => async (dispatch) => {
 
 export const getQuiz = (courseId) => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchquiz(courseId);
     console.log("get quiz from action", response)
     dispatch({
       type: ActionTypes.GET_QUIZ,
       payload: response.data?.data,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {}
 };
 
