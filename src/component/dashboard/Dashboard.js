@@ -218,7 +218,7 @@ const Dashboard = () => {
                   My Courses
                 </div>
               </Link>
-              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1">
+              <div className="grid md:grid-cols-3 grid-cols-1">
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
