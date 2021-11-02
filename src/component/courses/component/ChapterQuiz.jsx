@@ -10,6 +10,7 @@ import {
 } from "../../../redux/actions/courseAction";
 import Sidebar from "../../sidebar/Sidebar";
 import { Link } from "react-router-dom";
+import { fetchquiz } from "../../../api";
 
 export default function ChapterQuiz() {
   const { id } = useParams();
@@ -19,9 +20,11 @@ export default function ChapterQuiz() {
   const dispatch = useDispatch();
   const quizResult = useSelector((state) => state.course.quizResult);
 
+  const [testOption, setTestOption] = useState()
+  const [totalQuestion, setTotalQuestion] = useState()
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const quizData = useSelector((state) => state.course.courseQuiz);
-  const testOption = quizData[currentQuestion]?.options.split(",");
+  const quizData = useSelector((state) => state.course);
+  // const testOption = quizData[currentQuestion]?.options.split(",");
 
   const [showScore, setShowScore] = useState(false);
   const [isPassed, setIsPassed] = useState(false);
@@ -42,7 +45,7 @@ export default function ChapterQuiz() {
     setScore(score + quizResult?.score);
 
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < quizData.length) {
+    if (nextQuestion < totalQuestion) {
       setCurrentQuestion(nextQuestion);
     } else {
       setShowScore(true);
@@ -57,7 +60,6 @@ export default function ChapterQuiz() {
     data.append("course_id", id);
     data.append("answers", answers);
     dispatch(checkResult(data));
-    console.log(quizResult);
     if (quizResult?.data?.score == quizResult?.total_marks) {
       setIsPassed(true);
     } else {
@@ -66,8 +68,15 @@ export default function ChapterQuiz() {
     setFinalSubmit(false);
   };
 
+  const testFunction = async() =>{
+    const response = await fetchquiz(id)
+    setTotalQuestion(response.data?.data.length)
+    setTestOption(response.data?.data[currentQuestion]?.options.split(","));
+  }
+
   useEffect(() => {
     getQuiz(id);
+    testFunction()
   }, []);
 
   return (
@@ -107,10 +116,10 @@ export default function ChapterQuiz() {
         </div> */}
                 <div className="text-center mb-10 mt-40">
                   <Link
-                    to={isPassed ? `/certificate/${id}` : "/dashboard"}
+                    to={`/courses/chaptervideo/${id}`}
                     className="bg-red-600 p-3 rounded-lg text-white hover:bg-red-500"
                   >
-                    {isPassed ? "Download Certificate" : "Go To Home"}
+                    Go Back
                   </Link>
                 </div>
               </div>
@@ -138,7 +147,7 @@ export default function ChapterQuiz() {
             </div>
             <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
               <div className="question-count">
-                <span>Question {currentQuestion + 1}</span>/{quizData.length}
+                <span>Question {currentQuestion + 1}</span>/{totalQuestion}
               </div>
 
               <div className="md:text-2xl text-md font-bold py-5">
@@ -146,7 +155,11 @@ export default function ChapterQuiz() {
               </div>
               <div className="answer-section">
                 {!testOption ? (
-                  <Redirect to="/dashboard" />
+                  <div className="flex h-screen w-screen justify-center items-center">
+                  <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                  <div>&nbsp;&nbsp;&nbsp;please wait</div>
+                </div>
+                  // <Redirect to="/dashboard" />
                 ) : (
                   testOption.map((val) => (
                     <div

@@ -5,13 +5,13 @@ function MyCourses(props) {
   return (
     <>
       <div className="w-auto mx-4 shadow-lg bg-white rounded-md my-2">
-        {/* <div className="w-full h-40 rounded-t-md" style={{backgroundImage:`url${props.imgsrc}`, backgroundSize:"cover"}}></div> */}
-        <img
+        <div className="w-full h-40 rounded-t-md" style={{backgroundImage:`url(${props.imgsrc})`, backgroundSize:"cover"}}></div>
+        {/* <img
           src={props.imgsrc}
           alt="abcadfas"
           
           className="w-full h-40 rounded-t-md"
-        />
+        /> */}
         <div className="p-2">
           <p className="font-bold text-gray-900 mb-2 text-sm">
             <Link to={"/courses/chaptervideo/" + props.id}>

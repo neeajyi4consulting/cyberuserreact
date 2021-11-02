@@ -1,255 +1,253 @@
-// import React, { useEffect, useState } from "react";
-// import checkIcon from "../../assets/img/check-mark.svg";
-// import { Link } from "react-router-dom";
-// import Vimeo from "@u-wave/react-vimeo";
-// import Sidebar from "../sidebar/Sidebar";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useParams } from "react-router";
+
+
+
+
+
+{/**import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Vimeo from "@u-wave/react-vimeo";
+import Sidebar from "../sidebar/Sidebar";
+import { useHistory, useParams } from "react-router";
+// import { getChapterDetails, getChapterList } from "../../api";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import {
-//   getChapterDetails,
-//   getCourseDetails,
-//   getChapterStatus,
-// } from "../../api";
-// import { ChapterStatus } from "../../redux/actions/chapterAction";
+//   courseClientList,
+//   fetchCourseDetails,
+//   getChapterClientList,
+//   getQuiz,
+// } from "../../redux/actions/courseAction";
+// import {
+//   changeStatusOfChapter,
+//   chapterDetails,
+//   chapterStatus,
+//   fetchChapterDetails,
+// } from "../../redux/actions/chapterAction";
 
-// function ChapterVideo() {
-//   const dispatch = useDispatch();
+function ChapterVideo() {
+  const { id } = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-//   const { id } = useParams();
+  const allState = useSelector((state) => state)
+  const { course, user, chapter  } = allState
+  {/**const testVar = useSelector((state)=>state)
+  const { course } =testVar;
 
-//   const [listofChapter, setListofChapter] = useState([]);
-//   const [isVideoPaused, setIsVideoPaused] = useState(true);
-//   const [courseName, setCourseName] = useState("");
-//   const [videoDetails, setVideoDetails] = useState({
-//     completedVideoLength: "",
-//     totalVideoLength: "",
-//     videoProgress: "0",
-//   });
-//   const [detailsOfChapter, setDetailsOfChapter] = useState({
-//     about: "",
-//     link: "551694700",
-//     chapterName: "",
-//     id: "",
-//   });
-
-//   const startTime = videoDetails.completedVideoLength;
-
-//   const currentUser = useSelector((state) => state.user.currentUser);
-
-//   const fetchChapterList = async (id) => {
-//     await getCourseDetails(id).then((response) => {
-//       const chapterInfo = response.data?.chapters;
-//       setListofChapter(chapterInfo);
-//       setCourseName(response.data?.data.course_title);
-//     });
-//   };
-
-//   const saveVideoDetails = () => {
-//     setIsVideoPaused(false);
-//     setInterval(() => {
-//       if (isVideoPaused) {
-//         const completedVideoLength = localStorage.getItem(
-//           "completedVideoLength"
-//         );
-//         const videoProgress = localStorage.getItem("videoProgress");
-//         const status = videoProgress * 100;
-//         const totalVideoLength = localStorage.getItem("totalVideoLength");
-//         const data = new FormData();
-//         data.append("user_id", currentUser.user_id);
-//         data.append("chapter_id", detailsOfChapter.id);
-//         data.append("status", status);
-//         data.append("completedVideoLenght", completedVideoLength);
-//         data.append("totalVideoLength", totalVideoLength);
-//         dispatch(ChapterStatus(data));
-//       } else {
-//         console.log("heee");
-//       }
-//     }, 10000);
-//   };
-
-//   const handlePause = () => {
-//     // localStorage.removeItem("totalVideoLength");
-//     // localStorage.removeItem("totalVideoLength");
-//     // localStorage.removeItem("videoProgress");
-//     setIsVideoPaused(true);
-//   };
-
-//   const fetchChapterStatus = async (id) => {
   
-//     const data = new FormData();
-//     data.append("user_id", currentUser.user_id);
-//     data.append("chapter_id", id);
-//     await getChapterStatus(data).then((response) => {
-//       setVideoDetails({
-//         completedVideoLength: response.data?.data?.completedVideoLenght,
-//         totalVideoLength: response.data?.data?.totalVideoLength,
-//         videoProgress: response.data?.data?.chapter_status,
-//       });
-//       console.log(response.data?.data?.completedVideoLenght);
-//     });
-//   };
+  const currentUser = useSelector((state) => state.user?.currentUser);
+  const chapterInfo = useSelector((state) => state.chapter?.chapterInfo);
+  const courseStatus = useSelector((state) => state.course?.courseClientList);
+  const isQuizCompleted= useSelector((state)=>state.course?.quizCompleted);
+  const chapterClientList = useSelector(
+    (state) => state.course?.chapterClientList
+  );
 
-//   useEffect(() => {
-//     // chapterDetails(courseId);
-//     fetchChapterList(id);
-//   }, []);
-//   return (
-//     <>
-//       <Sidebar />
-//       <div className="bg-gray-200 pt-8">
-//         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
-//           <span className="font-bold text-2xl mx-8">
-//             {detailsOfChapter.chapterName
-//               ? detailsOfChapter.chapterName
-//               : courseName}
-//           </span>
-//           <span className="float-right ">Home / Dashboard</span>
-//         </div>
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:mx-16 mt-10">
-//           <div className="bg-white  relative col-span-2">
-//             <div>
-//               <Vimeo
-//                 video={detailsOfChapter.link}
-//                 start={startTime}
-//                 // controls={false}
-//                 height="600px"
-//                 width="900px"
-//                 responsive
-//                 onPlay={saveVideoDetails}
-//                 onPause={handlePause}
-//                 onTimeUpdate={(res) => {
-//                   setVideoDetails({
-//                     completedVideoLength: res.seconds,
-//                     totalVideoLength: res.duration,
-//                     videoProgress: res.percent,
-//                   });
-//                   localStorage.setItem(
-//                     "completedVideoLength",
-//                     videoDetails.completedVideoLength
-//                   );
-//                   localStorage.setItem(
-//                     "videoProgress",
-//                     videoDetails.videoProgress
-//                   );
-//                   localStorage.setItem(
-//                     "totalVideoLength",
-//                     videoDetails.totalVideoLength
-//                   );
-//                   // console.log(videoDetails.totalVideoLength);
-//                 }}
-//               />
-//             </div>
-//             <div className="h-auto flex items-center border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
-//               <Link
-//                 to="/"
-//                 className="text-blue-400 mx-3 py-4 px-8 border-b-2 border-blue-400"
-//               >
-//                 About
-//               </Link>
-//               <Link
-//                 to={`/courses/chapterquiz/${detailsOfChapter.id}`}
-//                 className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip ${
-//                   false ? "cursor-not-allowed" : ""
-//                 }`}
-//               >
-//                 {/* <span className="mt-8 tooltip rounded shadow-lg p-1 text-sm bg-gray-100 text-red-500 w-48 absolute top-12 -left-10 ">
-//                   "Sorry, Quiz is not available yet, You need to have 80% of the
-//                   chapter at least completed."
-//                 </span> */}
-//                 Quiz
-//               </Link>
-//               <Link
-//                 to="/certificate"
-//                 className={`text-gray-700 mx-3 py-4 px-8 col-span-3 ${
-//                   false ? "cursor-not-allowed" : ""
-//                 }`}
-//               >
-//                 Certificates
-//               </Link>
-//             </div>
-//             <div className="bg-white">
-//               <p className="p-5">About This Course</p>
-//               <p className="text-gray-500 px-5 py-2 h-auto">
-//                 {detailsOfChapter.about}
-//               </p>
-//             </div>
-//           </div>
-//           <div>
-//             <div className="bg-white">
-//               <div className="p-5">
-//                 <p className="text-lg font-bold">Chapter List</p>
-//                 <div className="relative pt-1 ">
-//                   <div className="overflow-hidden h-1 w-auto mr-12 mb-4 text-xs flex rounded bg-gray-200 ">
-//                     <div
-//                       style={{ width: `${videoDetails.videoProgress * 100}%` }}
-//                       className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-800"
-//                     ></div>
-//                   </div>
-//                   <p className="float-right -mt-8 ">
-//                     {videoDetails.videoProgress * 100}%
-//                   </p>
-//                 </div>
-//                 <div className="text-sm bg-pink-900 text-white p-2 h-16 md:h-auto">
-//                   Target: 1 Aug 2021 To 10 Sept 2021{" "}
-//                   <span className="border-r-1 border-red-500 float-right">
-//                     40 Days &nbsp; <Link to="/">Edit</Link>
-//                   </span>
-//                 </div>
-//                 <br />
-//               </div>
-//               <div>
-//                 {listofChapter.map((val) => {
-//                   return (
-//                     <div key={val.id} id={val.id}>
-//                       {/* {setSomeId(val.id)} */}
-//                       <div
-//                         className={`border-t-2 border-fuchsia-600 p-5 ${
-//                           videoDetails.videoProgress === 1
-//                             ? "bg-red-200"
-//                             : "bg-white"
-//                         } cursor-pointer`}
-//                         onClick={async () => {
-//                           await getChapterDetails(val.id)
-//                             .then((response) => {
-//                               console.log(response.data?.data);
-//                               setDetailsOfChapter({
-//                                 link: response.data?.data.link,
-//                                 about: response.data?.data.about,
-//                                 chapterName: response.data?.data.chapter_name,
-//                                 id: response.data?.data.id,
-//                               });
-//                               fetchChapterStatus(response.data?.data?.id)
-//                             })
-                            
-//                         }}
-//                       >
-//                         <img
-//                           src={checkIcon}
-//                           alt="...."
-//                           className="inline-block"
-//                         />
-//                         <p className="inline-block">
-//                           &nbsp; {val.chapter_name}
-//                         </p>
-//                         <p className="text-sm text-gray-600 pl-7">Video</p>
-//                       </div>
-//                     </div>
+  const [courseName, setCourseName] = useState("");
+  const [chapterId, setChapterId] = useState();
+  const [showQuizButton, setShowQuizButton] = useState(false);
+  const [chapterName, setChapterName] = useState("");
+  const [chapterLink, setChapterLink] = useState(
+    chapterClientList[0]?.name?.course?.link == undefined
+      ? "https://vimeo.com/636272173/ab7fc425e5"
+      : chapterClientList[0]?.name?.link
+  );
+  const [chapterAbout, setChapterAbout] = useState("");
+  const [status, setStatus] = useState();
+  const [seconds, setSeconds] = useState(0);
+  const [totalVideoLength, setTotalVideoLength] = useState();
 
-//                     // <Chapters
-//                     //   key={val.id}
-//                     //   chapterName={val.chapter_name}
-//                     //   id={val.id}
-//                     //   onClick={chapterDetails}
-//                     // />
-//                   );
-//                 })}
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
+  const fetchChapterList = async (id) => {
+    const response = await getChapterList(id);
+    setCourseName(response.data?.data[0]?.course.course_title);
+  };
 
-// export default ChapterVideo;
+  const handleVideoPlay = async () => {
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("chapter_id", chapterId);
+    data.append("status", status);
+    data.append("completedVideoLenght", seconds);
+    data.append("totalVideoLength", totalVideoLength);
+    data.append("course_id", +id);
+    console.log(
+      currentUser?.user_id,
+      chapterId,
+      status,
+      seconds,
+      totalVideoLength,
+      +id
+    );
+    dispatch(changeStatusOfChapter(data));
+    if (status == 1) {
+      window.location.reload(true);
+    }
+  };
+
+  const handleClick = async (val) => {
+    dispatch(chapterDetails(val?.name?.id));
+    // console.log("this is chapter details from video", chapterInfo?chapterInfo:"testhe" );
+    setChapterId(val?.name?.id);
+    const response = await getChapterDetails(chapterId);
+    setChapterName(response.data?.data?.chapter_name);
+    setChapterLink(response.data?.data?.link);
+    setChapterAbout(response.data?.data?.about);
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("chapter_id", val?.name?.id);
+    dispatch(chapterStatus(data));
+  };
+
+  const getClientChapterList = async () => {
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("course_id", id);
+    dispatch(getChapterClientList(data));
+  };
+
+  const getClientCourseList = async () => {
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("course_id", id);
+    dispatch(courseClientList(data));
+    console.log("isQUizCompletd", courseStatus === "completed" && !isQuizCompleted);
+    if (courseStatus === "completed" && !isQuizCompleted) {
+      setShowQuizButton(false);
+      console.log("test clg if true",showQuizButton);
+    } else {
+      setShowQuizButton(true);
+      console.log("test clg if falss",showQuizButton);
+    }
+  };
+
+  useEffect(() => {
+    getClientChapterList();
+    getClientCourseList();
+    fetchChapterList(id);
+    fetchCourseDetails(id);
+    // dispatch(fetchChapterDetails(chapterClientList[0]?.name?.id))
+    dispatch(getQuiz(id));
+    console.log("effect clg",isQuizCompleted, courseStatus);
+  }, []);
+ */}
+
+ 
+  if (course?.loading) {
+    return (
+      <div className="flex h-screen w-screen justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+        <div>&nbsp;&nbsp;&nbsp;please wait</div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <Sidebar />
+
+      <div className="bg-gray-200 pt-8">
+        <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
+          <span className="font-bold text-2xl mx-8">
+            test hello
+            {/* {" "}
+            {chapterName ? chapterName : courseName} */}
+          </span>
+          <span className="float-right ">Home / Dashboard</span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:mx-16 mt-10">
+          <div className="bg-white  relative col-span-2">
+            <div>
+              {/* {chapterClientList[0]?.name?.course?.link == undefined ? (
+                <div className="flex h-screen w-screen justify-center items-center">
+                  <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                  <div>&nbsp;&nbsp;&nbsp;please wait</div>
+                </div>
+              ) : ( */}
+                  <Vimeo
+                  video="https://vimeo.com/41675737"
+                  height="600px"
+                  width="900px"
+                  responsive
+                  // controls={false}
+                  // autoplay
+                  onEnd={()=>window.location.reload()}
+                  onProgress={(response) => {
+                    // setStatus(response.percent);
+                    // setSeconds(response.seconds);
+                    // setTotalVideoLength(response.duration);
+                    // handleVideoPlay();
+
+                  }}
+                />
+              {/* )} */}
+            </div>
+            <div className="h-auto border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
+              <Link
+                to="/"
+                className="text-blue-400 mx-3 py-4 px-8 border-b-2 border-blue-400"
+              >
+                About
+              </Link>
+              
+              {/* {!isQuizCompleted=="" ? 
+        <button>Quizz</button>
+      :  */}
+                    <button
+                    onClick={() => history.push(`/courses/chapterquiz/${id}`)}
+                    className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                  >
+                    Quiz
+                  </button>
+              {/* } */}
+              <button
+                // disabled={!isQuizCompleted}
+                onClick={() => history.push(`/certificate/${id}`)}
+                className={"text-gray-700 mx-3 py-4 px-8 relative"}
+              >
+                Certificate
+              </button>
+            </div>
+            <div className="bg-white">
+              <p className="p-5">About This Course</p>
+              <p className="text-gray-500 px-5 py-2 h-auto">test about</p>
+            </div>
+          </div>
+          <div>
+            <div className="bg-white">
+              <div className="p-5">
+                <p className="text-lg font-bold">Chapters In This Course</p>
+              </div>
+              <div>
+                {!course?.chapterClientList
+                  ? null
+                  : 
+                  course?.chapterClientList.map((val) => {
+                      return (
+                        <div key={val?.name?.id}>
+                          <div
+                            className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
+                              val?.is_completed
+                                ? "bg-green-500 text-gray-100"
+                                : "bg-white"
+                            } `}
+                            // onClick={() => handleClick(val)}
+                          >
+                            <p className="inline-block overflow-hidden">
+                              &nbsp; {val?.name?.chapter_name}
+                            </p>
+                            <p className="text-sm text-gray-600 pl-7">Video</p>
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default ChapterVideo;
+ */}

@@ -149,7 +149,8 @@ const Landingpage = () => {
                       </div>
                     </div>
                     <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-                      <Link to="/">SUBSCRIBE TODAY</Link>
+                      <a href={val?.payment_link}
+                      target="_blank">SUBSCRIBE TODAY</a>
                     </div>
                   </div>
                 );

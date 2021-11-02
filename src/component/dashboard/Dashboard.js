@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import Sidebar from "../sidebar/Sidebar";
 import MyCourses from "./component/MyCourses";
 import Upcomingtraining from "./component/UpcomingTraining";
@@ -17,6 +18,7 @@ import { allotedPackageDetails } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const loading = useSelector((state) => state.course?.loading);
   const currentUser = useSelector((state) => state.user?.currentUser);
   const courseInfo = useSelector(
@@ -245,12 +247,17 @@ const Dashboard = () => {
                         <p className="text-lg">{val.name}</p>
                         <p>Price: ${val.price}</p>
                       </div>
-                      <button
-                        onClick={() => setTogglePopup("fixed top-5")}
+                      <a
+                      href={val?.payment_link}
+                      target="_blank"
+                        // onClick={() => {setTogglePopup("fixed top-5")}
+                      
+                      // }
+
                         className="bg-white text-black p-2 rounded-full font-bold inline-block float-right"
                       >
                         Buy Now
-                      </button>
+                      </a>
                     </div>
                     // <Membership
 

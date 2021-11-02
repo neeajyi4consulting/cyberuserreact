@@ -18,7 +18,6 @@ function ChapterVideo() {
   const courseList = useSelector((state) => state.course?.chapterClientList);
   const [chapter, setChapter] = useState();
 
-  console.log(courseList);
 
   const handleFetchCourse = () => {
     const data = new FormData();
@@ -33,7 +32,6 @@ function ChapterVideo() {
   };
 
   const handleOnFinishVideo = (res) => {
-    console.log("end", res);
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
     data.append("chapter_id", chapter.name?.id);
@@ -97,15 +95,16 @@ function ChapterVideo() {
               </Link>
 
               {!courseList.Quiz_Completed ? (
-                <div>Quiz(completed this course first)</div>
-              ) : (
                 <button
-                  disabled={courseList.Quiz_Completed}
-                  onClick={() => history.push(`/courses/chapterquiz/${id}`)}
-                  className={"text-gray-700 mx-3 py-4 px-8 relative"}
-                >
-                  Quiz
-                </button>
+                disabled={courseList.Quiz_Completed}
+                onClick={() => history.push(`/courses/chapterquiz/${id}`)}
+                className={"text-gray-700 mx-3 py-4 px-8 relative"}
+              >
+                Quiz
+              </button>
+                
+              ) : (
+                <button className="text-gray-500">quizz</button>
               )}
               <button
                 disabled={!courseList.Quiz_Completed}
