@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import Sidebar from "../sidebar/Sidebar";
 import MyCourses from "./component/MyCourses";
 import Upcomingtraining from "./component/UpcomingTraining";
@@ -18,7 +17,6 @@ import { allotedPackageDetails } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const loading = useSelector((state) => state.course?.loading);
   const currentUser = useSelector((state) => state.user?.currentUser);
   const courseInfo = useSelector(

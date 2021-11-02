@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import checkIcon from "../../../assets/img/check-mark.svg";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Redirect, useParams } from "react-router";
+import { useParams } from "react-router";
 import {
   checkResult,
   checkScore,
@@ -57,7 +57,6 @@ export default function ChapterQuiz() {
     data.append("course_id", id);
     data.append("answers", answers);
     dispatch(checkResult(data));
-    console.log(quizResult);
     if (quizResult?.data?.score == quizResult?.total_marks) {
       setIsPassed(true);
     } else {

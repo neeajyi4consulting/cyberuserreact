@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -26,7 +26,6 @@ function EnrolledCourses(props) {
             key={val.id}
             id={val.course_name.id}
           >
-            {console.log(val)}
             <Link to={"/courses/chaptervideo/" + val.course_name.id}>
               <img
                 src={baseURL + val.course_name.course_file}
@@ -81,15 +80,3 @@ function EnrolledCourses(props) {
 }
 
 export default EnrolledCourses;
-
-{
-  /**key={val.id}
-                imgsrc={baseURL + val.course_name.course_file}
-                courseName={val.course_name.course_title}
-                progress="70%"
-                totalLesson={val.course_name.total_hours}
-                completedLesson="7"
-                totalTime={val.course_name.total_hours}
-                level={val.course_name.level}
-                id={val.course_name.id} */
-}

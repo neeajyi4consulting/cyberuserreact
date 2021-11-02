@@ -36,7 +36,7 @@ export const fetchUserDetails = (id) => async (dispatch) => {
 export const fetchCourseDetails = (courseId) => async (dispatch) => {
   try {
     const response = await getCourseDetails(courseId);
-    console.log(response.data);
+    // console.log(response.data);
     dispatch({
       type: ActionTypes.GET_COURSE_DETAILS,
       payload: response.data?.data?.chapters,
@@ -77,7 +77,7 @@ export const getQuiz = (courseId) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchquiz(courseId);
-    console.log("get quiz from action", response)
+    // console.log("get quiz from action", response)
     dispatch({
       type: ActionTypes.GET_QUIZ,
       payload: response.data?.data,

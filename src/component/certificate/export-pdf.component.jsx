@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import ReactToPrint from "react-to-print";
@@ -10,8 +10,7 @@ import TableComponent from "./table.component";
 
 function ExportPdfComponent() {
   const { id } = useParams();
-
-  let componentRef;
+  const componentRef = useRef();
   const courseName = "Andriod Studio";
 
   return (

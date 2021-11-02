@@ -13,7 +13,6 @@ const Landingpage = () => {
   const dispatch = useDispatch();
   // const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const packageList = useSelector((state) => state.package?.packageDetails);
-  // console.log(packageList);
   useEffect(() => {
     dispatch(getPackage());
   }, []);
