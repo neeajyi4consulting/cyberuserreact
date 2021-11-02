@@ -85,7 +85,7 @@ export const getQuiz = (courseId) => async (dispatch) => {
 
 export const checkResult = (data) => async (dispatch) => {
   const response = await checkAnswer(data);
-  console.log("action response from course", response?.data?.data?.score);
+  // console.log("action response from course", response?.data?.data?.score);
   dispatch({
     type: ActionTypes.GET_QUIZ_RESULT,
     payload: response.data,
@@ -93,7 +93,7 @@ export const checkResult = (data) => async (dispatch) => {
 };
 
 export const checkScore = (data) => async (dispatch) => {
-  console.log("action scores", data);
+  // console.log("action scores", data);
   try {
     dispatch({
       type: ActionTypes.CHECK_SCORE,
@@ -108,7 +108,7 @@ export const getChapterClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-    console.log("response", response);
+    // console.log("response", response?.data?.data[0]?.name?.link);
     dispatch({
       type: ActionTypes.CHAPTER_CLIENT_LIST,
       payload: response.data?.data,
@@ -123,10 +123,14 @@ export const courseClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-    //   console.log("response", response.data?);
+      // console.log("response from course Client list", response?.data?.course_status);
     dispatch({
       type: ActionTypes.COURSE_CLIENT_LIST,
-      payload: response.data,
+      payload: response?.data?.course_status,
+    });
+    dispatch({
+      type: ActionTypes.QUIZCOMPLETED,
+      payload: response?.data?.Quiz_Completed,
     });
     dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {

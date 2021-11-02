@@ -64,4 +64,7 @@ export const ActionTypes = {
 
   //courseClientList
   COURSE_CLIENT_LIST: "COURSE_CLIENT_LIST",
+
+  //quiz status is completed
+  QUIZCOMPLETED:"QUIZCOMPLETED",
 };

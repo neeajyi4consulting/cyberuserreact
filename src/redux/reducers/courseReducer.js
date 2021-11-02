@@ -12,7 +12,8 @@ const initialState = {
   loading: false,
   score: " ",
   chapterClientList: [],
-  courseClientList: null,
+  courseClientList: "",
+  quizCompleted:false,
 };
 
 export const courseReducer = (state = initialState, { type, payload }) => {
@@ -41,6 +42,8 @@ export const courseReducer = (state = initialState, { type, payload }) => {
       return { ...state, chapterClientList: payload };
     case ActionTypes.COURSE_CLIENT_LIST:
       return { ...state, courseClientList: payload };
+    case ActionTypes.QUIZCOMPLETED:
+      return{...state, quizCompleted:payload};
 
     default:
       return state;

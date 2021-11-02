@@ -1,12 +1,14 @@
 import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
-  chapterDetails: [],
+  chapterDetails: null,
   chapterStatus: {
     completedVideoLenght: 0,
     is_completed: false,
   },
-  chapterInfo: null,
+  chapterInfo: {
+    name:"testName",
+  },
 };
 
 export const chapterReducer = (state = initialState, { type, payload }) => {

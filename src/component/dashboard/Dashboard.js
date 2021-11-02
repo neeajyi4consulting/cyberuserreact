@@ -22,7 +22,6 @@ const Dashboard = () => {
   const courseInfo = useSelector(
     (state) => state.course?.allotedPackageDetails
   );
-  console.log("courseInfo", currentUser?.user_id);
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const [togglePopup, setTogglePopup] = useState("hidden");
   const [packageInfo, setPackageInfo] = useState([]);
@@ -64,8 +63,8 @@ const Dashboard = () => {
   }, [packageInfo]);
   if (loading) {
     return (
-      <div class="flex h-screen w-screen justify-center items-center">
-        <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+      <div className="flex h-screen w-screen justify-center items-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
         <div>&nbsp;&nbsp;&nbsp;please wait</div>
       </div>
     );
@@ -191,7 +190,7 @@ const Dashboard = () => {
       <div className="p-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full">
-          <Carousel autoPlay interval="5000" infiniteLoop stopOnHover>
+          <Carousel autoPlay interval="5000" infiniteLoop stopOnHover showThumbs={false}>
             {bannerDetails.map((val) => {
               return (
                 <div key={val.id}>
@@ -221,11 +220,11 @@ const Dashboard = () => {
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
-                      key={val.id}
-                      imgsrc={baseURL + val.course_name.course_file}
-                      courseName={val.course_name.course_title}
-                      totalTime={val.course_name.total_hours}
-                      id={val.course_name.id}
+                      key={val?.course_name?.id}
+                      imgsrc={baseURL + val?.course_name?.course_file}
+                      courseName={val?.course_name?.course_title}
+                      totalTime={val?.course_name?.total_hours}
+                      id={val?.course_name?.id}
                     />
                   );
                 })}

@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../../assets/img/check-mark.svg";
 import { Link } from "react-router-dom";
 import Vimeo from "@u-wave/react-vimeo";
 import Sidebar from "../sidebar/Sidebar";
-import { useParams } from "react-router";
-import {
-  changeChapterStatus,
-  fetchChapterClientList,
-  getChapterDetails,
-  getChapterList,
-} from "../../api";
+import { useHistory, useParams } from "react-router";
+import { getChapterDetails, getChapterList } from "../../api";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {
@@ -20,41 +14,46 @@ import {
 } from "../../redux/actions/courseAction";
 import {
   changeStatusOfChapter,
+  chapterDetails,
   chapterStatus,
+  fetchChapterDetails,
 } from "../../redux/actions/chapterAction";
+import ReactPlayer from "react-player";
 
 function ChapterVideo() {
   const { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
-  const [chapterList, setChapterList] = useState([]);
-  const [courseName, setCourseName] = useState("");
-  const [chapterId, setChapterId] = useState();
-  const [showQuizButton, setShowQuizButton] = useState(false);
-  const [chapterName, setChapterName] = useState("");
-  const [chapterLink, setChapterLink] = useState("https://vimeo.com/603867023");
-  const [chapterAbout, setChapterAbout] = useState("");
-  const [status, setStatus] = useState();
-  const [seconds, setSeconds] = useState(0);
-  const [totalVideoLength, setTotalVideoLength] = useState();
-  const [isCompleted, setIsCompleted] = useState(false);
+  const testVar = useSelector((state)=>state)
+  const { course } =testVar;
+  console.log("test course",course?.quizCompleted);
 
-  // const array = [ {id:23}, {id:45}, {id:67}, {id:89}, {id:12} ]
-  // const largerThanSixty = array.filter( number => {
-  //   return number.id > 60
-  // })
-  // console.log(largerThanSixty);
   const loading = useSelector((state) => state.course?.loading);
   const currentUser = useSelector((state) => state.user?.currentUser);
-  const statusOfChapter = useSelector((state) => state.chapter?.chapterStatus);
+  const chapterInfo = useSelector((state) => state.chapter?.chapterInfo);
   const courseStatus = useSelector((state) => state.course?.courseClientList);
+  const isQuizCompleted= useSelector((state)=>state.course?.quizCompleted);
   const chapterClientList = useSelector(
     (state) => state.course?.chapterClientList
   );
 
+  const [courseName, setCourseName] = useState("");
+  const [chapterId, setChapterId] = useState();
+  const [showQuizButton, setShowQuizButton] = useState(false);
+  const [chapterName, setChapterName] = useState("");
+  const [chapterLink, setChapterLink] = useState(
+    chapterClientList[0]?.name?.course?.link == undefined
+      ? "https://vimeo.com/636272173/ab7fc425e5"
+      : chapterClientList[0]?.name?.link
+  );
+  const [chapterAbout, setChapterAbout] = useState("");
+  const [status, setStatus] = useState();
+  const [seconds, setSeconds] = useState(0);
+  const [totalVideoLength, setTotalVideoLength] = useState();
+
   const fetchChapterList = async (id) => {
     const response = await getChapterList(id);
     setCourseName(response.data?.data[0]?.course.course_title);
-    // setChapterList(response.data?.data);
   };
 
   const handleVideoPlay = async () => {
@@ -74,9 +73,14 @@ function ChapterVideo() {
       +id
     );
     dispatch(changeStatusOfChapter(data));
+    if (status == 1) {
+      window.location.reload(true);
+    }
   };
 
   const handleClick = async (val) => {
+    dispatch(chapterDetails(val?.name?.id));
+    // console.log("this is chapter details from video", chapterInfo?chapterInfo:"testhe" );
     setChapterId(val?.name?.id);
     const response = await getChapterDetails(chapterId);
     setChapterName(response.data?.data?.chapter_name);
@@ -93,8 +97,6 @@ function ChapterVideo() {
     data.append("user_id", currentUser?.user_id);
     data.append("course_id", id);
     dispatch(getChapterClientList(data));
-
-    // console.log(chapterClientList[0]?.name?.id);
   };
 
   const getClientCourseList = async () => {
@@ -102,10 +104,13 @@ function ChapterVideo() {
     data.append("user_id", currentUser?.user_id);
     data.append("course_id", id);
     dispatch(courseClientList(data));
-    if (courseStatus?.course_status == "completed") {
-      setShowQuizButton(true);
-    } else {
+    console.log("isQUizCompletd", courseStatus === "completed" && !isQuizCompleted);
+    if (courseStatus === "completed" && !isQuizCompleted) {
       setShowQuizButton(false);
+      console.log("test clg if true",showQuizButton);
+    } else {
+      setShowQuizButton(true);
+      console.log("test clg if falss",showQuizButton);
     }
   };
 
@@ -114,8 +119,9 @@ function ChapterVideo() {
     getClientCourseList();
     fetchChapterList(id);
     fetchCourseDetails(id);
-
+    // dispatch(fetchChapterDetails(chapterClientList[0]?.name?.id))
     dispatch(getQuiz(id));
+    console.log("effect clg",isQuizCompleted, courseStatus);
   }, []);
 
   if (loading) {
@@ -130,6 +136,7 @@ function ChapterVideo() {
   return (
     <>
       <Sidebar />
+
       <div className="bg-gray-200 pt-8">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
           <span className="font-bold text-2xl mx-8">
@@ -141,19 +148,42 @@ function ChapterVideo() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:mx-16 mt-10">
           <div className="bg-white  relative col-span-2">
             <div>
-              <Vimeo
-                video={chapterLink}
-                height="600px"
-                width="900px"
-                responsive
-                // onEnd={}
-                onEnd={(response) => {
-                  setStatus(response.percent);
-                  setSeconds(response.seconds);
-                  setTotalVideoLength(response.duration);
-                  handleVideoPlay();
-                }}
-              />
+              {chapterClientList[0]?.name?.course?.link == undefined ? (
+                <div className="flex h-screen w-screen justify-center items-center">
+                  <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+                  <div>&nbsp;&nbsp;&nbsp;please wait</div>
+                </div>
+              ) : (
+                //           <ReactPlayer
+                // url="https://youtu.be/0riHps91AzE"
+                // controls={false}
+                // />
+                  <Vimeo
+                  video={chapterLink}
+                  height="600px"
+                  width="900px"
+                  responsive
+                  // controls={false}
+                  // autoplay
+                  onEnd={()=>window.location.reload()}
+                  onProgress={(response) => {
+                    setStatus(response.percent);
+                    setSeconds(response.seconds);
+                    setTotalVideoLength(response.duration);
+                    handleVideoPlay();
+
+                  }}
+                />
+                // <iframe
+                //   title="vimeo-player"
+                //   src="https://player.vimeo.com/video/636272173?h=ab7fc425e5"
+                //   width="640"
+                //   height="360"
+                //   frameborder="0"
+                //   allowfullscreen
+                  
+                // ></iframe>
+              )}
             </div>
             <div className="h-auto border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
               <Link
@@ -162,18 +192,25 @@ function ChapterVideo() {
               >
                 About
               </Link>
-              <Link
-                to={`/courses/chapterquiz/${id}`}
-                className={`text-gray-700 mx-3 py-4 px-8 relative has-tooltip  ${
-                  showQuizButton ? "" : "hidden"
-                }`}
+              
+              {!isQuizCompleted ? 
+        <div>Quiz(completed this course first)</div>
+      : 
+                    <button
+                    disabled={showQuizButton}
+                    onClick={() => history.push(`/courses/chapterquiz/${id}`)}
+                    className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                  >
+                    Quiz
+                  </button>
+              }
+              <button
+                disabled={!isQuizCompleted}
+                onClick={() => history.push(`/certificate/${id}`)}
+                className={"text-gray-700 mx-3 py-4 px-8 relative"}
               >
-                {/* <span className="mt-8 tooltip rounded shadow-lg p-1 text-sm bg-gray-100 text-red-500 w-48 absolute top-12 -left-10 ">
-                  "Sorry, Quiz is not available yet, You need to have 80% of the
-                  chapter at least completed."
-                </span> */}
-                Quiz
-              </Link>
+                Certificate
+              </button>
             </div>
             <div className="bg-white">
               <p className="p-5">About This Course</p>
