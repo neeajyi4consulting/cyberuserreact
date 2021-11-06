@@ -3,7 +3,7 @@ import {
   cleanLocalStorage,
   getUserInfoFromJWT,
 } from "../../utils/storage";
-import { loginUser, editUserDetails } from "../../api";
+import { loginUser, editUserDetails, getUserDetails } from "../../api";
 import { ActionTypes } from "../constants/actionTypes";
 import { toast } from "react-toastify";
 
@@ -37,7 +37,7 @@ export const fetchUserAction = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch({ type: ActionTypes.LOGOUT, payload: { loading: true } });
   cleanLocalStorage();
-  toast.success("Logout Successfull");
+  toast.success("Logout successful");
 
   dispatch({
     type: ActionTypes.LOGOUT,
@@ -50,7 +50,7 @@ export const editDetails = (data) => async (dispatch) => {
   toast.info(response.data.message);
 
   if (response.data.status === true) {
-    console.log("admin function clg done!");
+    // console.log("admin function clg done!");
   } else {
     console.log(response);
   }
@@ -60,3 +60,12 @@ export const editDetails = (data) => async (dispatch) => {
     payload: response,
   });
 };
+
+
+export const userDetails = userId => async (dispatch) => {
+  const response = await getUserDetails(userId);
+  dispatch({
+    type:ActionTypes.GET_USER_DETAILS,
+    payload:response.data?.data
+  })
+}

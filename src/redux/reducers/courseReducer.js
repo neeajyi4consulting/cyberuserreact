@@ -26,7 +26,7 @@ export const courseReducer = (state = initialState, { type, payload }) => {
       return { ...state, chapterList: payload };
     case ActionTypes.GET_COURSE_DETAILS:
       return { ...state, courseDetails: payload };
-    case ActionTypes.COURSE_DETAILS:
+    case ActionTypes.DETAILS_OF_COURSE:
       return { ...state, detailsOfCourse: payload };
     case ActionTypes.GET_QUIZ:
       return { ...state, courseQuiz: payload };

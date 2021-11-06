@@ -29,6 +29,9 @@ export const ActionTypes = {
   //courseDetails
   COURSE_DETAILS: "COURSE_DETAILS",
 
+  //DETIALSOFCOURSE
+  DETAILS_OF_COURSE:"DETAILS_OF_COURSE",
+
   //chapterInfo
   GET_CHAPTER_INFO: "GET_CHAPTER_INFO",
 

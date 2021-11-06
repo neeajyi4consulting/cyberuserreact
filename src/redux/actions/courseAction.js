@@ -49,9 +49,8 @@ export const fetchCourseDetails = (courseId) => async (dispatch) => {
 export const courseDetails = (courseId) => async (dispatch) => {
   try {
     const response = await getCourseDetails(courseId);
-    // console.log(response)
     dispatch({
-      type: ActionTypes.COURSE_DETAILS,
+      type: ActionTypes.DETAILS_OF_COURSE,
       payload: response.data?.data,
     });
   } catch (error) {
