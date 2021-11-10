@@ -8,12 +8,12 @@ import { useDispatch } from "react-redux";
 
 import { getChapterDetails } from "../../api";
 
-const Chapters = (props) => {
+const Chapters = ({id, chapterName}) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(chapterIdStored(props.id));
-    dispatch(chapterDetails(props.id));
+    dispatch(chapterIdStored(id));
+    dispatch(chapterDetails(id));
   };
 
   // const chapterDetails = async (courseId) => {
@@ -36,7 +36,7 @@ const Chapters = (props) => {
           onClick={handleClick}
         >
           <img src={checkIcon} alt="...." className="inline-block" />
-          <p className="inline-block">&nbsp; {props.chapterName}</p>
+          <p className="inline-block">&nbsp; {chapterName}</p>
           <p className="text-sm text-gray-600 pl-7">Video</p>
         </div>
       </div>

@@ -13,38 +13,25 @@ import {
   getServiceList,
 } from "../../api";
 import { Link } from "react-router-dom";
-import { allotedPackageDetails } from "../../redux/actions/courseAction";
+import { allotedPackageDetail } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.course?.loading);
-  const currentUser = useSelector((state) => state.user?.currentUser);
-  const courseInfo = useSelector(
-    (state) => state.course?.allotedPackageDetails
-  );
+  const storedData = useSelector((state) => state);
+  const { user, course } = storedData;
+  const loading = course?.loading;
+  const currentUser = user?.currentUser;
+  const courseInfo = course?.allotedPackageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const [togglePopup, setTogglePopup] = useState("hidden");
   const [packageInfo, setPackageInfo] = useState([]);
   const [event, setEvent] = useState([]);
   const [services, setServices] = useState([]);
   const [bannerDetails, setBannerDetails] = useState([]);
 
   const fetchEventDetails = async () => {
-    const response = await getEventList();
-    setEvent(response.data?.data);
-  };
-
-  const fetchServiceList = async () => {
-    const response = await getServiceList();
-    setServices(response.data?.data);
-  };
-
-  const fetchBannerList = async () => {
-    const response = await getBannerList();
-    setBannerDetails(response.data?.data);
-  };
-
-  const getPackageInfo = async () => {
+    setEvent(await (await getEventList()).data?.data);
+    setServices(await (await getServiceList()).data?.data);
+    setBannerDetails(await (await getBannerList()).data?.data);
     await fetchPackageDetails().then((response) => {
       setPackageInfo(response.data?.data);
     });
@@ -52,14 +39,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getPackage());
-    getPackageInfo();
     fetchEventDetails();
-    fetchServiceList();
-    fetchBannerList();
   }, []);
 
   useEffect(() => {
-    dispatch(allotedPackageDetails(currentUser?.user_id));
+    dispatch(allotedPackageDetail(currentUser?.user_id));
   }, [packageInfo]);
   if (loading) {
     return (
@@ -73,74 +57,10 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar selectedValue="dashboard" />
-
-      <div
-        className={`${togglePopup} bg-gray-600 bg-opacity-50 z-50 -mt-10 h-screen w-full flex content-center`}
-      >
-        <div className="inline-block  rounded-lg  overflow-hidden h-44 shadow-xl transform transition-all my-8 w-80  md:w-auto mx-auto ">
-          <div className="bg-gray-200 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="sm:flex sm:items-start">
-              <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                {/* <!-- Heroicon name: outline/exclamation --> */}
-                <svg
-                  className="h-6 w-6 text-red-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                  />
-                </svg>
-              </div>
-              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3
-                  className="text-lg leading-6 font-medium text-gray-900"
-                  id="modal-title"
-                >
-                  Enter Your Email
-                </h3>
-                <div className="mt-2">
-                  <input
-                    type="email"
-                    className="bg-white p-2 text-xl rounded-md"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <button
-              onClick={() => alert("this btn is not working now")}
-              type="button"
-              className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              Purchase Now
-            </button>
-            <button
-              onClick={() =>
-                togglePopup === "hidden"
-                  ? setTogglePopup("fixed top-0 left-0")
-                  : setTogglePopup("hidden")
-              }
-              type="button"
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
       <div className=" hidden  align-bottom bg-gray-200 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div className="sm:flex sm:items-start">
             <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-              {/* <!-- Heroicon name: outline/exclamation --> */}
               <svg
                 className="h-6 w-6 text-red-600"
                 xmlns="http://www.w3.org/2000/svg"
@@ -190,11 +110,17 @@ const Dashboard = () => {
       <div className="p-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full">
-          <Carousel autoPlay interval="5000" infiniteLoop stopOnHover showThumbs={false}>
+          <Carousel
+            autoPlay
+            interval="5000"
+            infiniteLoop
+            stopOnHover
+            showThumbs={false}
+          >
             {bannerDetails.map((val) => {
               return (
                 <div key={val.id}>
-                  <a href={val.link} target="_blank">
+                  <a href={val.link} target="_blank" rel="noopener noreferrer">
                     <img
                       src={baseURL + val.image}
                       alt="...."
@@ -207,7 +133,6 @@ const Dashboard = () => {
             })}
           </Carousel>
         </div>
-        {/* <Coursesinfo /> */}
         <div className="grid grid-cols-1 lg:grid-cols-2 mt-5">
           <div>
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
@@ -231,47 +156,36 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-8">
-              <div className="m-3 text-2xl text-gray-700 font-bold">
-                Upgrade Membership
+              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+                Packages
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {packageInfo.map((val) => {
                   return (
                     <div
                       key={val.name}
-                      className="bg-blue-500 text-white h-20 text-sm rounded-lg my-5 p-3 inline-block w-full"
+                      className="bg-blue-400 text-white text-sm rounded-lg shadow-lg p-3 w-full grid  grid-cols-3"
                     >
-                      <div className="inline-block ml-3">
+                      <div className="inline-block col-span-2">
                         <p className="text-lg">{val.name}</p>
                         <p>Price: ${val.price}</p>
                       </div>
                       <a
-                      href={val?.payment_link}
-                      target="_blank"
-                        // onClick={() => {setTogglePopup("fixed top-5")}
-                      
-                      // }
-
-                        className="bg-white text-black p-2 rounded-full font-bold inline-block float-right"
+                        href={val?.payment_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-white text-black p-2 h-10 rounded-full font-bold inline-block text-center float-right"
                       >
                         Buy Now
                       </a>
                     </div>
-                    // <Membership
-
-                    //   name={}
-                    //   price={}
-                    // />
                   );
                 })}
               </div>
             </div>
-            {/* <Membership /> */}
           </div>
           <div className="bg-white shadow-lg rounded-lg lg:ml-5 p-4 mt-5 lg:mt-0">
-            <div className="m-3 text-2xl text-gray-700 font-bold">
-              Upcoming Training
-            </div>
+            <div className="m-3 text-2xl text-gray-700 font-bold">Services</div>
             {event.map((val) => {
               return (
                 <>
@@ -287,7 +201,7 @@ const Dashboard = () => {
             })}
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg mt-8 mb-12 p-5 grid grid-cols-2 lg:grid-cols-6">
+        <div className="bg-white rounded-lg shadow-lg mt-8 mb-12 p-5 grid grid-cols-2 gap-2 lg:grid-cols-6">
           {services.map((val) => {
             return (
               <Boxfooter

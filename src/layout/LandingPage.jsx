@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../component/header/Header";
 import backgroundImg from "../assets/img/background.png";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-// import { Carousel } from "react-responsive-carousel";
 import Landingfooter from "../component/footer/LandingFooter";
 import { useDispatch } from "react-redux";
 import { getPackage } from "../redux/actions/packageAction";
@@ -37,16 +35,6 @@ const Landingpage = () => {
             </Link>
           </div>
         </div>
-        {/* <Carousel autoPlay interval="10000" infiniteLoop stopOnHover swipeable>
-          <div>
-            <img src={bannerImg1} alt="...." />
-            <p className="legend">Legend 1</p>
-          </div>
-          <div>
-            <img src={bannerImg2} alt="...." />
-            <p className="legend">Legend 2</p>
-          </div>
-        </Carousel> */}
       </div>
       <div className="md:mx-40">
         <div className="grid md:grid-cols-3 grid-cols-1 gap-5 -mt-28 ">
@@ -149,63 +137,14 @@ const Landingpage = () => {
                     </div>
                     <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
                       <a href={val?.payment_link}
-                      target="_blank">SUBSCRIBE TODAY</a>
+                      target="_blank" rel="noopener noreferrer">SUBSCRIBE TODAY</a>
                     </div>
                   </div>
                 );
               })
             : null}
         </div>
-        {/* {packageList.map((val) => {
-          return (
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 p-5 bg-gray-500"
-              key={val.id}
-            >
-              <div className="md:w-96 w-64">
-                <img
-                  src={baseURL + val.image}
-                  alt="...."
-                  className="w-full md:w-56 h-64"
-                />
-              </div>
-              <div className="col-span-3 mx-3 md:py-2 md:px-5 text-gray-500 ">
-                <div className="text-4xl text-black">{val.name}</div>
-                <div className="my-5">{val.about}</div>
-                <Link
-                  to="/"
-                  className="bg-blue-200 text-black py-3 px-4 rounded-lg"
-                  onClick={() => toast.warn("Please Login to Purchase")}
-                >
-                  Buy Now
-                </Link>
-              </div>
-            </div>
-          );
-        })} */}
         <div>
-          {/* <div className="text-3xl text-gray-700 my-5 bg-gray-200 p-4 rounded-lg">
-            Top Categories
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-            {categoryList.map((val) => {
-              return (
-                <div key={val.id} className="">
-                  <Link>
-                    <div>
-                      <img
-                        src={baseURL + val.category_image}
-                        alt="...."
-                        className="w-full h-full"
-                      />
-                    </div>
-                    <div className="text-xl">{val.title}</div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div> */}
-
           <div className="max-w-screen-xl mt-24 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
             <div className="flex flex-col ">
               <div>

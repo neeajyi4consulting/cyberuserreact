@@ -84,7 +84,7 @@ function Sidebar(props) {
               />
             </div>
             <div
-              className={`${toggleSidebar} bg-white h-screen absolute top-24 left-0 z-10 transition duration-500 ease-in-out transform `}
+              className={`${toggleSidebar} bg-white h-screen absolute  left-0 z-10 transition duration-500 ease-in-out transform `}
             >
               <Link to="/dashboard">
                 <div className={`w-full px-10 h-auto py-5 ${dashboardClass}`}>

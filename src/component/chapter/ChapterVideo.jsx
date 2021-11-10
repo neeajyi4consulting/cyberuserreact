@@ -7,24 +7,24 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getChapterClientList } from "../../redux/actions/courseAction";
 import { changeStatusOfChapter } from "../../redux/actions/chapterAction";
-import { data } from "autoprefixer";
 
 function ChapterVideo() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.course?.loading);
-  const currentUser = useSelector((state) => state.user?.currentUser);
-  const courseList = useSelector((state) => state.course?.chapterClientList);
+  const storedData = useSelector((state) => state);
+  const { user, course } = storedData;
+  const loading = course?.loading;
+  const currentUser = user?.currentUser;
+  const courseList = course?.chapterClientList;
+  console.log("this is course list", courseList?.course_status, "and ", courseList.Quiz_Completed);
   const [chapter, setChapter] = useState();
-
 
   const handleFetchCourse = () => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
     data.append("course_id", id);
     dispatch(getChapterClientList(data));
-    // setChapter(courseList.data[0]);
   };
 
   const handleOnChangeVideo = (val) => {
@@ -62,18 +62,12 @@ function ChapterVideo() {
 
       <div className="bg-gray-200 pt-8">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
-          <span className="font-bold text-2xl mx-8">
-            {" "}
-            {/* {chapterName ? chapterName : courseName} */}
-          </span>
+          <span className="font-bold text-2xl mx-8">Chapter Video</span>
           <span className="float-right ">Home / Dashboard</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:mx-16 mt-10">
           <div className="bg-white  relative col-span-2">
             <div>
-              {/* {chapterClientList[0]?.name?.course?.link == undefined ? (
-               null
-              ) : ( */}
               <Vimeo
                 video={
                   !chapter
@@ -96,23 +90,26 @@ function ChapterVideo() {
 
               {!courseList.Quiz_Completed ? (
                 <button
-                disabled={courseList.Quiz_Completed}
-                onClick={() => history.push(`/courses/chapterquiz/${id}`)}
-                className={"text-gray-700 mx-3 py-4 px-8 relative"}
-              >
-                Quiz
-              </button>
-                
+                  disabled={courseList.Quiz_Completed}
+                  onClick={() => history.push(`/courses/chapterquiz/${id}`)}
+                  className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                >
+                  Quiz
+                </button>
               ) : (
-                <button className="text-gray-500">quizz</button>
+                <button className="text-gray-400">quiz</button>
               )}
-              <button
-                disabled={!courseList.Quiz_Completed}
-                onClick={() => history.push(`/certificate/${id}`)}
-                className={"text-gray-700 mx-3 py-4 px-8 relative"}
-              >
-                Certificate
-              </button>
+              {courseList.Quiz_Completed && courseList?.course_status==="completed" ? (
+                <button
+                  disabled={!courseList.Quiz_Completed}
+                  onClick={() => history.push(`/certificate/${id}`)}
+                  className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                >
+                  Certificate
+                </button>
+                ) : (
+                <button className="text-gray-400">Certificate</button>
+              )}
             </div>
             <div className="bg-white">
               <p className="p-5">About This Course</p>

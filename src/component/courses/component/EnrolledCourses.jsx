@@ -2,20 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { getAllotedPackage } from "../../../api";
-// import Clockicon from "../../../assets/img/clock-icon.svg"
-// import LessonIcon from "../../../assets/img/lessons-icon.svg"
-import { allotedPackageDetails } from "../../../redux/actions/courseAction";
+import { allotedPackageDetail } from "../../../redux/actions/courseAction";
 function EnrolledCourses(props) {
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.user?.currentUser);
-  const courseInfo = useSelector(
-    (state) => state.course?.allotedPackageDetails
-  );
+  const storedData = useSelector((state)=>state)
+  const { user, course } = storedData;
+  const currentUser = user?.currentUser
+  const courseInfo = course?.allotedPackageDetails
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
 
   useEffect(() => {
-    dispatch(allotedPackageDetails(currentUser?.user_id));
+    dispatch(allotedPackageDetail(currentUser?.user_id));
   }, []);
   return (
     <>
@@ -43,28 +40,6 @@ function EnrolledCourses(props) {
                 </Link>
               </p>
               <span className="text-gray-400 my-5 text-sm">Purchased</span>
-              {/* <span className="float-right text-red-500 text-sm">
-            Target Completion Date {val.course_name.total_hours} Days
-          </span>
-          <div className="relative bg-gray-200 mt-4">
-            <div className="overflow-hidden h-1 w-80  text-xs flex rounded bg-gray-200">
-              <div
-                style={{ width: `"70%"` }}
-                className=" flex flex-col text-center z-0 text-white bg-blue-500"
-              ></div>
-            </div>
-          </div>
-          <p className="mb-4">
-          7 OF {val.course_name.total_hours} Lessons Completed
-          </p> */}
-              {/* <span className="float-left">
-            <img src={LessonIcon} alt="...." className="inline w-5 h-5 mx-2" />
-            {val.course_name.about} 
-          </span> */}
-              {/* <span className="text-center">
-            <img src={Clockicon} alt="...." className="inline w-5 h-5 ml-3 mr-2" />
-            {val.course_name.total_hours}
-          </span> */}
               <span className="float-right">
                 by&nbsp;
                 <span className="text-lg text-blue-500">

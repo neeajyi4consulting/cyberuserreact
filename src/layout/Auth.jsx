@@ -9,7 +9,7 @@ import { loginAction } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { allotedPackageDetails } from "../redux/actions/courseAction";
+import { allotedPackageDetail } from "../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();
@@ -24,7 +24,7 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
-    dispatch(allotedPackageDetails(currentUser?.user_id));
+    dispatch(allotedPackageDetail(currentUser?.user_id));
     // login(data)
     //   .then((response) => {
     //     toast.info(response.data.message);

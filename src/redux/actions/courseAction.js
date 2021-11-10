@@ -58,18 +58,18 @@ export const courseDetails = (courseId) => async (dispatch) => {
   }
 };
 
-export const allotedPackageDetails = (userId) => async (dispatch) => {
+export const allotedPackageDetail = (userId) => async (dispatch) => {
+  dispatch({ type: ActionTypes.LOADING, payload: true });
   try {
-    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getAllotedPackage(userId);
     dispatch({
       type: ActionTypes.GET_ALLOTED_PACKAGE,
       payload: response.data?.data,
     });
-    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
-    console.log(error);
+    console.log("this is test eerrror",error);
   }
+  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 export const getQuiz = (courseId) => async (dispatch) => {

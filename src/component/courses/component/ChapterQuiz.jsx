@@ -13,18 +13,20 @@ import { Link } from "react-router-dom";
 
 export default function ChapterQuiz() {
   const { id } = useParams();
-  const scores = useSelector((state) => state.course?.score);
+  const storedData = useSelector((state)=>state)
+  const { course, user } = storedData;
+  const scores = course?.score
   const [score, setScore] = useState(0);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = user.currentUser
   const dispatch = useDispatch();
-  const quizResult = useSelector((state) => state.course.quizResult);
+  const quizResult = course.quizResult
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const quizData = useSelector((state) => state.course.courseQuiz);
+  const quizData = course.courseQuiz
   const testOption = quizData[currentQuestion]?.options.split(",");
 
   const [showScore, setShowScore] = useState(false);
-  const [isPassed, setIsPassed] = useState(false);
+  // const [isPassed, setIsPassed] = useState(false);
   const [finalSubmit, setFinalSubmit] = useState(true);
 
   const handleAnswerOptionClick = async (val) => {
@@ -36,8 +38,6 @@ export default function ChapterQuiz() {
     data.append("course_id", courseId);
     data.append("answers", answers);
     dispatch(checkResult(data));
-    // var number = Number(quizResult?.score);
-    // const finalNumber = +quizResult?.score + scores;
     dispatch(checkScore(scores + [questionId] + ":" + val + ","));
     setScore(score + quizResult?.score);
 
@@ -57,11 +57,11 @@ export default function ChapterQuiz() {
     data.append("course_id", id);
     data.append("answers", answers);
     dispatch(checkResult(data));
-    if (quizResult?.data?.score == quizResult?.total_marks) {
-      setIsPassed(true);
-    } else {
-      setIsPassed(false);
-    }
+    // if (quizResult?.data?.score === quizResult?.total_marks) {
+    //   setIsPassed(true);
+    // } else {
+    //   setIsPassed(false);
+    // }
     setFinalSubmit(false);
   };
 
@@ -101,9 +101,6 @@ export default function ChapterQuiz() {
                     {quizResult?.total_marks}
                   </span>
                 </div>
-                {/* <div className="text-4xl text-center my-12">
-          Your Result is <span className="text-blue-500"> {resultPercent}</span> out of <span className="text-green-600">100</span>
-        </div> */}
                 <div className="text-center mb-10 mt-40">
                   <Link
                     to={`/courses/chaptervideo/${id}`}
@@ -114,16 +111,6 @@ export default function ChapterQuiz() {
                 </div>
               </div>
             )}
-
-            {/* <div className="text-4xl text-center my-12">
-          You scored <span className="text-blue-500"> {score}</span> out of <span className="text-green-600">{quizData.length}</span>
-        </div>
-        <div className="text-4xl text-center my-12">
-          Your Result is <span className="text-blue-500"> {resultPercent}</span> out of <span className="text-green-600">100</span>
-        </div>
-        <div className="text-center mb-10 mt-40">
-          <Link to={true?"/certificate":"/dashboard"} className="bg-red-600 p-3 rounded-lg text-white hover:bg-red-500">{true?"Download Certificate":"Go To Home"}</Link>
-        </div> */}
           </div>
         </div>
       ) : (
@@ -166,18 +153,9 @@ export default function ChapterQuiz() {
               </div>
             </div>
           </div>
-
-          {/* <div className="question-section">
-            <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
-             
-            </div>
-          </div> */}
         </>
       )}
     </div>
   );
 }
 
-{
-  /**onClick={() => handleAnswerOptionClick(answerOption.isCorrect)} */
-}
