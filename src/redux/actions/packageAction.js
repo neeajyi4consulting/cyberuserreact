@@ -12,6 +12,7 @@ export const getPackage = () => async (dispatch) => {
 };
 
 export const fetchAllotedPackage = (userId) => async (dispatch) => {
+  dispatch({ type: ActionTypes.LOADING, payload: true });
   try {
     const response = await getAllotedPackage(userId);
     dispatch({
@@ -21,6 +22,7 @@ export const fetchAllotedPackage = (userId) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 // export const getPackageDetails = ()=> async (dispatch) =>{

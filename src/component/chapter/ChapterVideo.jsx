@@ -17,7 +17,7 @@ function ChapterVideo() {
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const courseList = course?.chapterClientList;
-  console.log("this is course list", courseList?.course_status, "and ", courseList.Quiz_Completed);
+  const courseAbout = course?.chapterClientList?.data;
   const [chapter, setChapter] = useState();
 
   const handleFetchCourse = () => {
@@ -49,9 +49,19 @@ function ChapterVideo() {
 
   if (loading) {
     return (
-      <div className="flex h-screen w-screen justify-center items-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
-        <div>&nbsp;&nbsp;&nbsp;please wait</div>
+      <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
+        <div className="my-auto mx-auto h-32 w-32 mt-64">
+          <div className="h-28 w-28 border-blue-400 rounded-full animate-spin border-t-2 p-4">
+            <div className="h-24 w-24 border-blue-400 rounded-full animate-spin border-t-2 p-4">
+              <div className="h-20 w-20 border-blue-400 rounded-full animate-spin border-t-2">
+                <div className="h-16 w-16 border-blue-400 rounded-full animate-spin border-t-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
+          &nbsp;&nbsp;&nbsp;please wait <br/> this may take a few seconds
+        </div>
       </div>
     );
   }
@@ -61,12 +71,12 @@ function ChapterVideo() {
       <Sidebar />
 
       <div className="bg-gray-200 pt-8">
-        <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
+        <div className="bg-white px-5 py-3 mx-16 rounded-lg shadow-lg hidden md:block">
           <span className="font-bold text-2xl mx-8">Chapter Video</span>
           <span className="float-right ">Home / Dashboard</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:mx-16 mt-10">
-          <div className="bg-white  relative col-span-2">
+          <div className="bg-white  relative col-span-2 shadow-lg">
             <div>
               <Vimeo
                 video={
@@ -80,46 +90,46 @@ function ChapterVideo() {
                 onEnd={(res) => handleOnFinishVideo(res)}
               />
             </div>
-            <div className="h-auto border-b-1 border-gray-700 shadow-md bg-white grid grid-cols-1 md:grid-cols-5">
+            <div className="h-auto border-b-1 border-gray-700 shadow-lg bg-white grid grid-cols-1 md:grid-cols-5">
               <Link
                 to="/"
-                className="text-blue-400 mx-3 py-4 px-8 border-b-2 border-blue-400"
+                className="text-blue-400 mx-3 py-4 px-8 border-b-2 text-center border-blue-400"
               >
                 About
               </Link>
 
               {!courseList.Quiz_Completed ? (
                 <button
-                  disabled={courseList.Quiz_Completed}
                   onClick={() => history.push(`/courses/chapterquiz/${id}`)}
-                  className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                  className={"text-gray-700 mx-3 py-4 px-8 text-center relative"}
                 >
                   Quiz
                 </button>
               ) : (
-                <button className="text-gray-400">quiz</button>
+                <button className="text-gray-400 text-center cursor-not-allowed">Quiz</button>
               )}
               {courseList.Quiz_Completed && courseList?.course_status==="completed" ? (
                 <button
                   disabled={!courseList.Quiz_Completed}
                   onClick={() => history.push(`/certificate/${id}`)}
-                  className={"text-gray-700 mx-3 py-4 px-8 relative"}
+                  className={"text-gray-700 mx-3 py-4 px-8 text-center relative"}
                 >
                   Certificate
                 </button>
                 ) : (
-                <button className="text-gray-400">Certificate</button>
+                <button className="text-gray-400 text-center cursor-not-allowed">Certificate</button>
               )}
             </div>
-            <div className="bg-white">
-              <p className="p-5">About This Course</p>
-              <p className="text-gray-500 px-5 py-2 h-auto">
+            <div className="bg-white pt-5">
+              {/* <p className="p-5">About This Course</p> */}
+              <p className="text-gray-500 px-5 py-2 h-auto ">
+                {!courseAbout ? "About this Course" :courseAbout[0]?.name?.course?.about}
                 {!chapter ? "" : chapter.name?.about}
               </p>
             </div>
           </div>
           <div>
-            <div className="bg-white">
+            <div className="bg-white shadow-xl">
               <div className="p-5">
                 <p className="text-lg font-bold">Chapters In This Course</p>
               </div>
@@ -132,7 +142,7 @@ function ChapterVideo() {
                           <div
                             className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
                               val.is_completed
-                                ? "bg-green-500 text-gray-100"
+                                ? "bg-green-200 text-gray-700 shadow-lg"
                                 : "bg-white"
                             } `}
                             onClick={() => handleOnChangeVideo(val)}

@@ -1,34 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function MyCourses(props) {
+function MyCourses({imgsrc, id, courseName, author}) {
   return (
     <>
       <div className="w-auto mx-4 shadow-lg bg-white rounded-md my-2">
-        <div className="w-full h-40 rounded-t-md" style={{backgroundImage:`url(${props.imgsrc})`, backgroundSize:"cover"}}></div>
-        {/* <img
-          src={props.imgsrc}
-          alt="abcadfas"
-          
-          className="w-full h-40 rounded-t-md"
-        /> */}
+        <div className="w-full h-40 rounded-t-md" style={{backgroundImage:`url(${imgsrc})`, backgroundSize:"cover", backgroundPosition:"center center"}}></div>
         <div className="p-2">
           <p className="font-bold text-gray-900 mb-2 text-sm">
-            <Link to={"/courses/chaptervideo/" + props.id}>
+            <Link to={"/courses/chaptervideo/" + id}>
               {" "}
-              {props.courseName}
+              {courseName}
             </Link>
           </p>
-          {/* <div className="relative bg-gray-200 mt-4">
-            <div className="overflow-hidden h-1 w-28  text-xs flex rounded bg-gray-200">
-              <div
-                style={{ width: `${props.progress}` }}
-                className=" flex flex-col text-center z-0 text-white bg-blue-500"
-              ></div>
-            </div>
-          </div> */}
-          <p className="mb-4 text-xs">
-            Total Hours for This Course: {props.totalTime}
+          <p className="mb-0 text-xs">
+            by {author}
           </p>
         </div>
       </div>

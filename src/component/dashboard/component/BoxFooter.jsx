@@ -1,15 +1,24 @@
 import React from "react";
 
-const Boxfooter = (props) => {
+const Boxfooter = ({id, img, link, title}) => {
   return (
-    <div>
-      <div className="w-40 h-44 pb-2">
-        <img src={props.img} alt="...." className="w-full h-40 p-2" />
+    <div key={id}>
+      <div className="w-full h-auto">
+      <div
+              style={{
+                backgroundImage: `url(${
+                  img
+                })`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              className=" w-full h-40 rounded-lg"
+            ></div>
         <div
-          className="cursor-pointer text-gray-500 text-center text-xl"
-          onClick={() => window.open(props.link, "_blank")}
+          className="cursor-pointer text-gray-500 text-center text-xl my-1"
+          onClick={() => window.open(link, "_blank")}
         >
-          {props.title}
+          {title}
         </div>
       </div>
     </div>

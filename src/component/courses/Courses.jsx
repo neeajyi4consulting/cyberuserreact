@@ -10,7 +10,7 @@ function Courses() {
         <div className="py-5 text-xl font-bold text-gray-700">
           Enrolled Courses
         </div>
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1">
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
           <EnrolledCourses />
         </div>
       </div>

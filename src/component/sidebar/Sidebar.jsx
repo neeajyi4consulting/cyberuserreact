@@ -9,7 +9,7 @@ import LogoutIcon from "../../assets/img/Logout-icon.svg";
 import { logout } from "../../redux/actions/authActions";
 import { useHistory } from "react-router-dom";
 
-function Sidebar(props) {
+function Sidebar({selectedValue}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [dashboardClass, setDashboardClass] = useState("");
@@ -18,7 +18,7 @@ function Sidebar(props) {
   const [toggleSidebar, setToggleSidebar] = useState("hidden");
 
   const selectedClass = () => {
-    switch (props.selectedValue) {
+    switch (selectedValue) {
       case "dashboard":
         setCoursesClass("text-gray-500");
         setDashboardClass("text-gray-700 bg-gray-300");
@@ -84,7 +84,7 @@ function Sidebar(props) {
               />
             </div>
             <div
-              className={`${toggleSidebar} bg-white h-screen absolute  left-0 z-10 transition duration-500 ease-in-out transform `}
+              className={`${toggleSidebar} bg-white h-screen absolute lg:top-24 md:top-24 md:mt-1 sm:mt-1 mt-3 top-20 left-0 z-10`}
             >
               <Link to="/dashboard">
                 <div className={`w-full px-10 h-auto py-5 ${dashboardClass}`}>

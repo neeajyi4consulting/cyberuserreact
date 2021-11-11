@@ -10,10 +10,31 @@ import { useSelector } from "react-redux";
 const Landingpage = () => {
   const dispatch = useDispatch();
   // const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const packageList = useSelector((state) => state.package?.packageDetails);
+  const { course } = useSelector((state)=>state);
+  const packageList =useSelector((state=>state.package?.packageDetails)) 
+  const loading = course?.loading;
+  console.log("this is package list",packageList);
   useEffect(() => {
     dispatch(getPackage());
   }, []);
+  if (loading) {
+    return (
+      <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
+        <div className="my-auto mx-auto h-32 w-32 mt-64">
+          <div className="h-28 w-28 border-blue-400 rounded-full animate-spin border-t-2 p-4">
+            <div className="h-24 w-24 border-blue-400 rounded-full animate-spin border-t-2 p-4">
+              <div className="h-20 w-20 border-blue-400 rounded-full animate-spin border-t-2">
+                <div className="h-16 w-16 border-blue-400 rounded-full animate-spin border-t-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
+          &nbsp;&nbsp;&nbsp;please wait <br/> this may take a few seconds
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <Header />
@@ -41,7 +62,7 @@ const Landingpage = () => {
           {packageList !== undefined
             ? packageList.map((val) => {
                 return (
-                  <div className="shadow-xl rounded-b-lg">
+                  <div className="shadow-xl rounded-b-lg" key={val.id}>
                     <div className="bg-green-500  rounded-t-lg p-8">
                       <div className=" text-white text-center p-4">
                         <div className="text-xl py-2">{val?.name}</div>
@@ -135,10 +156,12 @@ const Landingpage = () => {
                         </svg>
                       </div>
                     </div>
+                    <a href={val?.payment_link}
+                      target="_blank" rel="noopener noreferrer">
                     <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-                      <a href={val?.payment_link}
-                      target="_blank" rel="noopener noreferrer">SUBSCRIBE TODAY</a>
+                     SUBSCRIBE TODAY
                     </div>
+                    </a>
                   </div>
                 );
               })

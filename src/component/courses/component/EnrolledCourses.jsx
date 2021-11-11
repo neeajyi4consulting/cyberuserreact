@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { allotedPackageDetail } from "../../../redux/actions/courseAction";
 function EnrolledCourses(props) {
   const dispatch = useDispatch();
-  const storedData = useSelector((state)=>state)
+  const storedData = useSelector((state) => state);
   const { user, course } = storedData;
-  const currentUser = user?.currentUser
-  const courseInfo = course?.allotedPackageDetails
+  const currentUser = user?.currentUser;
+  const courseInfo = course?.allotedPackageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
 
   useEffect(() => {
@@ -19,30 +19,39 @@ function EnrolledCourses(props) {
       {courseInfo.map((val) => {
         return (
           <div
-            className="w-auto lg:mx-4 md:mx-2 shadow-lg bg-white rounded-md my-2"
+            className="w-auto lg:mx-2 md:mx-2 sm:mx-2 shadow-lg bg-white rounded-md my-2 relative"
             key={val.id}
             id={val.course_name.id}
           >
-            <Link to={"/courses/chaptervideo/" + val.course_name.id}>
+            <div
+              style={{
+                backgroundImage: `url(${
+                  baseURL + val.course_name.course_file
+                })`,
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+              }}
+              className=" w-full h-40 rounded-t-md"
+            ></div>
+            {/* <Link to={"/courses/chaptervideo/" + val.course_name.id}>
               <img
                 src={baseURL + val.course_name.course_file}
                 alt="abcadfas"
                 className="w-full h-60 rounded-t-md"
               />
-            </Link>
+            </Link> */}
 
-            <div className="p-2">
+            <div className="p-2 ">
               <p className="text-gray-500 text-sm">Course</p>
-              <p className="font-bold text-gray-900 mb-2 text-xl">
+              <p className=" text-gray-800 mb-5 text-xl">
                 <Link to={"/courses/chaptervideo/" + val.course_name.id}>
                   {" "}
                   {val.course_name.course_title}
                 </Link>
               </p>
-              <span className="text-gray-400 my-5 text-sm">Purchased</span>
-              <span className="float-right">
+              <span className="absolute bottom-2 right-2">
                 by&nbsp;
-                <span className="text-lg text-blue-500">
+                <span className="text-md text-blue-500">
                   {val.course_name.author}
                 </span>
               </span>

@@ -65,6 +65,7 @@ export default function ChapterQuiz() {
     setFinalSubmit(false);
   };
 
+
   useEffect(() => {
     dispatch(getQuiz(id))
   }, []);
@@ -119,7 +120,7 @@ export default function ChapterQuiz() {
             <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
               <span className="font-bold text-2xl mx-8">Course Quiz</span>
               <span className="text-red-500 font-bold text-sm">
-                DO NOT REFRESH THIS PAGE
+                DO NOT REFRESH THIS PAGE OR GO BACK
               </span>
             </div>
             <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
