@@ -12,8 +12,7 @@ export const loginAction = (data) => async (dispatch) => {
   const response = await loginUser(data);
 
   if (response.data?.status === true) {
-    // console.log(response.data?.data)
-    await setJWT(response?.data?.data?.token);
+    setJWT(response?.data?.data?.token);
     toast.success("Login Successfull");
   } else {
     toast.error("Invalid Email or Password");
@@ -68,13 +67,12 @@ export const editDetails = (data) => async (dispatch) => {
   dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
-
-export const userDetails = userId => async (dispatch) => {
+export const userDetails = (userId) => async (dispatch) => {
   dispatch({ type: ActionTypes.LOADING, payload: true });
   const response = await getUserDetails(userId);
   dispatch({
-    type:ActionTypes.GET_USER_DETAILS,
-    payload:response.data?.data
-  })
+    type: ActionTypes.GET_USER_DETAILS,
+    payload: response.data?.data,
+  });
   dispatch({ type: ActionTypes.LOADING, payload: false });
-}
+};

@@ -10,7 +10,7 @@ const Landingfooter = () => {
         href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
       />
       <footer className="text-white bg-black body-font ">
-        <div className="container  py-24 flex px-40 md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div className="container py-24 flex md:px-20 lg:px-40 md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <Link
               to=""

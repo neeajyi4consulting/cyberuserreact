@@ -1,20 +1,21 @@
-import React, { useEffect, useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
+import React, { useEffect, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
-import { ComponentToPrint }  from './certificate.component';
-import { userDetails } from '../../redux/actions/authActions';
-import { courseDetails } from '../../redux/actions/courseAction';
+import { ComponentToPrint } from "./certificate.component";
+import { userDetails } from "../../redux/actions/authActions";
+import { courseDetails } from "../../redux/actions/courseAction";
 
 const Example = () => {
   const { id } = useParams();
-  const dispatch = useDispatch()
-  const storedData = useSelector((state)=>state);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const storedData = useSelector((state) => state);
   const { user, course } = storedData;
-  const currentUser = user?.currentUser
-  const userDetail = user?.userDetails
-  const courseDetail = course?.detailsOfCourse
+  const currentUser = user?.currentUser;
+  const userDetail = user?.userDetails;
+  const courseDetail = course?.detailsOfCourse;
   const loading = course?.loading;
 
   const componentRef = useRef();
@@ -23,9 +24,14 @@ const Example = () => {
   });
 
   useEffect(() => {
-    dispatch(userDetails(currentUser?.user_id))
-    dispatch(courseDetails(id))
-  }, [])
+    dispatch(userDetails(currentUser?.user_id));
+    dispatch(courseDetails(id));
+    // history.push("/dashboard")
+  }, []);
+
+  useEffect(() => {
+    handlePrint()
+  }, [courseDetail, userDetail]);
 
   if (loading) {
     return (
@@ -40,7 +46,7 @@ const Example = () => {
           </div>
         </div>
         <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
-          &nbsp;&nbsp;&nbsp;please wait <br/> this may take a few seconds
+          &nbsp;&nbsp;&nbsp;please wait <br /> this may take a few seconds
         </div>
       </div>
     );
@@ -48,8 +54,12 @@ const Example = () => {
 
   return (
     <div>
-      <ComponentToPrint currentUser = {userDetail?.first_name+userDetail?.last_name} courseTitle = {courseDetail?courseDetail.course_title:null} ref={componentRef} />
-      <button onClick={handlePrint}>Print this out!</button>
+      <ComponentToPrint
+        onAfterPrint={onafterprint}
+        currentUser={userDetail?.first_name + userDetail?.last_name}
+        courseTitle={courseDetail ? courseDetail.course_title : null}
+        ref={componentRef}
+      />
     </div>
   );
 };

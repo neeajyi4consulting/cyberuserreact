@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { allotedPackageDetail } from "../../../redux/actions/courseAction";
+import { allotedPackageDetaile } from "../../../redux/actions/courseAction";
 function EnrolledCourses(props) {
   const dispatch = useDispatch();
   const storedData = useSelector((state) => state);
@@ -12,7 +12,7 @@ function EnrolledCourses(props) {
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
 
   useEffect(() => {
-    dispatch(allotedPackageDetail(currentUser?.user_id));
+    dispatch(allotedPackageDetaile(currentUser?.user_id));
   }, []);
   return (
     <>
@@ -23,6 +23,7 @@ function EnrolledCourses(props) {
             key={val.id}
             id={val.course_name.id}
           >
+            <Link to={"/courses/chaptervideo/" + val.course_name.id}>
             <div
               style={{
                 backgroundImage: `url(${
@@ -56,6 +57,7 @@ function EnrolledCourses(props) {
                 </span>
               </span>
             </div>
+            </Link>
           </div>
         );
       })}

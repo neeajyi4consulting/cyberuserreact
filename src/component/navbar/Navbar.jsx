@@ -17,11 +17,19 @@ function Navbar() {
         </p>
         <div className="text-white text-right w-full">
           <Link to="/admin">
-            <img
-              src={profileImg}
-              alt="...."
-              className="inline rounded-full mx-2 mr-16"
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-9 w-9 inline rounded-full mx-2 mr-16 my-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                clipRule="evenodd"
+              />
+            </svg>
+            
           </Link>
         </div>
       </div>

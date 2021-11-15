@@ -41,6 +41,7 @@ function ChapterVideo() {
     data.append("totalVideoLength", res.duration);
     dispatch(changeStatusOfChapter(data));
     handleFetchCourse();
+    window.location.reload();
   };
 
   useEffect(() => {

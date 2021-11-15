@@ -11,11 +11,13 @@ import {
 
 export const getCourse = () => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getCourseList();
     dispatch({
       type: ActionTypes.GET_COURSE_LIST,
       payload: response.data?.data,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
     console.log(error);
   }
@@ -23,11 +25,13 @@ export const getCourse = () => async (dispatch) => {
 
 export const fetchUserDetails = (id) => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getUserDetails(id);
     dispatch({
       type: ActionTypes.GET_USER_DETAILS,
-      payload: response.data?.data.alloted_courses,
+      payload: response.data?.data?.alloted_courses,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
     console.log(error);
   }
@@ -35,12 +39,14 @@ export const fetchUserDetails = (id) => async (dispatch) => {
 
 export const fetchCourseDetails = (courseId) => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getCourseDetails(courseId);
     // console.log(response.data);
     dispatch({
       type: ActionTypes.GET_COURSE_DETAILS,
       payload: response.data?.data?.chapters,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
     console.log(error);
   }
@@ -48,28 +54,30 @@ export const fetchCourseDetails = (courseId) => async (dispatch) => {
 
 export const courseDetails = (courseId) => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getCourseDetails(courseId);
     dispatch({
       type: ActionTypes.DETAILS_OF_COURSE,
       payload: response.data?.data,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const allotedPackageDetail = (userId) => async (dispatch) => {
-  dispatch({ type: ActionTypes.LOADING, payload: true });
+export const allotedPackageDetaile = (userId) => async (dispatch) => {
   try {
+    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getAllotedPackage(userId);
     dispatch({
       type: ActionTypes.GET_ALLOTED_PACKAGE,
       payload: response.data?.data,
     });
+    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
-    console.log("this is test eerrror",error);
+    console.log("this is test eerrror", error);
   }
-  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 export const getQuiz = (courseId) => async (dispatch) => {

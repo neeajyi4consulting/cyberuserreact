@@ -3,19 +3,19 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
 import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
-// import { AuthContext } from "../context/AuthContext";
 import { cleanLocalStorage } from "../utils/storage";
 import { loginAction } from "../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { allotedPackageDetail } from "../redux/actions/courseAction";
+import { allotedPackageDetaile } from "../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neerajkumar@gmail.com");
   const [passcode, setPasscode] = useState("password");
-  const currentUser = useSelector((state) => state.user?.currentUser);
+  const storedData = useSelector((state) => state);
+  const { user } =storedData;
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -24,18 +24,8 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
-    dispatch(allotedPackageDetail(currentUser?.user_id));
-    // login(data)
-    //   .then((response) => {
-    //     toast.info(response.data.message);
-    //     if (response.data.status === true) {
-    //       history.push("/dashboard");
-    //       window.location.reload()
-    //     }
-    //   })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+    console.log(user?.currentUser);
+    dispatch(allotedPackageDetaile(user?.currentUser?.user_id));
   };
 
   const clearLocalStorageOnLoad = () => {
@@ -56,7 +46,7 @@ const LoginScreen = () => {
             <img src={CyberFratLogo} alt="...." />
           </div>
         </div>
-        <div className="p-5 lg:p-24">
+        <div className="pt-5 mb-10 pl-10 md:py-16 lg:p-24">
           <div
             className="inline-block mr-4 largeScreen"
             style={{
@@ -83,33 +73,6 @@ const LoginScreen = () => {
               width: "351px",
             }}
           >
-            {/* <p
-              className="lg:text-lg py-5"
-              style={{
-                fontFamily: "Roboto",
-                fontStyle: "normal",
-                fontWeight: "normal",
-
-                lineHeight: "23px",
-                color: "#464646",
-              }}
-            >
-              &nbsp;Don’t have an account?{" "}
-              <Link
-                to="/signup"
-                style={{
-                  position: "absolute",
-                  width: "351px",
-                  height: "23px",
-
-                  lineHeight: "23px",
-                  color: "#ed3237",
-                }}
-              >
-                {" "}
-                Create one here
-              </Link>
-            </p> */}
             <div className="my-5" style={{ width: "500px" }}>
               <input
                 type="text"
@@ -168,10 +131,6 @@ const LoginScreen = () => {
                   fontWeight: "500",
                 }}
                 onClick={handleClick}
-
-                // onClick={() => {
-                //   <Redirect to="/courses" />;
-                // }}
               >
                 Login
               </button>

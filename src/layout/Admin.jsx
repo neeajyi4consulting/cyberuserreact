@@ -57,7 +57,7 @@ function Admin() {
     <>
       <Sidebar selectedValue="profile" />
       <div className="bg-gray-200 pt-5 ">
-        <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
+        <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block shadow-lg">
           <span className="font-bold text-2xl mx-8">Profile</span>
           <span className="float-right ">
             <Link to="/admin">Home</Link> /{" "}
@@ -155,8 +155,10 @@ function Admin() {
             </div>
           </div>
         </div>
-        <div className="mt-5 md:mx-16 rounded-md bg-white p-10 pb-20">
-          <img src={profileImg} alt="...." className="w-16 inline-block" />
+        <div className="mt-5 md:mx-16 rounded-lg bg-white p-10 pb-20 shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+</svg>
           <span className="md:ml-5 text-xl">{userName}</span>
           <span className="float-right text-red-500">
             <Link to="/" onClick={handleLogOut}>

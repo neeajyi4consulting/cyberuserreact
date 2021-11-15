@@ -16,7 +16,7 @@ class Otp extends Component {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="relative inline-block">
             <img src={AccountLoginImg} alt="...." />
-            <div className="absolute left-0 top-2/4 w-full grid justify-items-center inline-block bg-white">
+            <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
               <img src={CyberFratLogo} alt="...." />
             </div>
           </div>

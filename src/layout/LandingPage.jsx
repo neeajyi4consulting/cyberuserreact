@@ -13,7 +13,6 @@ const Landingpage = () => {
   const { course } = useSelector((state)=>state);
   const packageList =useSelector((state=>state.package?.packageDetails)) 
   const loading = course?.loading;
-  console.log("this is package list",packageList);
   useEffect(() => {
     dispatch(getPackage());
   }, []);
@@ -57,13 +56,13 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
-      <div className="md:mx-40">
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-5 -mt-28 ">
+      <div className="md:mx-20 lg:40 ">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-5 -mt-28 ">
           {packageList !== undefined
             ? packageList.map((val) => {
                 return (
-                  <div className="shadow-xl rounded-b-lg" key={val.id}>
-                    <div className="bg-green-500  rounded-t-lg p-8">
+                  <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
+                    <div className="bg-green-500  rounded-t-lg p-8 h-56">
                       <div className=" text-white text-center p-4">
                         <div className="text-xl py-2">{val?.name}</div>
                         <div className=" text-5xl">${val?.price}</div>

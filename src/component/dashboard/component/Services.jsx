@@ -1,10 +1,10 @@
 import React from "react";
 
-const Services = ({id, img, link, title, about}) => {
+const Boxfooter = ({id, img, link, title}) => {
   return (
-    <>
-      <div className="grid lg:grid-cols-4 sm:grid-cols-4 sm:gap-4 my-2">
-        <div
+    <div key={id}>
+      <div className="w-full h-auto">
+      <div
               style={{
                 backgroundImage: `url(${
                   img
@@ -12,22 +12,17 @@ const Services = ({id, img, link, title, about}) => {
                 backgroundSize: "cover",
                 backgroundPosition: "center center",
               }}
-              className="lg:ml-2 w-full md:h-32 sm:h-40 h-64 rounded-lg col-span-4 sm:col-span-1"
+              className=" w-full h-40 rounded-lg"
             ></div>
-        <div className="col-span-3">
-          <div className="text-gray-500 my-2 font-bold">
-            <div
-              className="cursor-pointer"
-              onClick={() => window.open(link, "_blank")}
-            >
-              {title}
-            </div>
-          </div>
-          <div className="text-gray-500">{about}</div>
+        <div
+          className="cursor-pointer text-gray-500 text-center text-xl my-1"
+          onClick={() => window.open(link, "_blank")}
+        >
+          {title}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Services;
+export default Boxfooter;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../sidebar/Sidebar";
 import MyCourses from "./component/MyCourses";
+import Events from "./component/Events";
 import Services from "./component/Services";
-import Boxfooter from "./component/BoxFooter";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ import {
   getServiceList,
 } from "../../api";
 import { Link } from "react-router-dom";
-import { allotedPackageDetail } from "../../redux/actions/courseAction";
+import { allotedPackageDetaile } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(allotedPackageDetail(currentUser?.user_id));
+    dispatch(allotedPackageDetaile(currentUser?.user_id));
   }, [packageInfo]);
   if (loading) {
     return (
@@ -76,6 +76,7 @@ const Dashboard = () => {
             interval="5000"
             infiniteLoop
             stopOnHover
+            showStatus={false}
             showThumbs={false}
           >
             {bannerDetails.map((val) => {
@@ -85,7 +86,7 @@ const Dashboard = () => {
                     <img
                       src={baseURL + val.image}
                       alt="...."
-                      className="w-full h-96 cursor-pointer"
+                      className="w-full h-96 cursor-pointer rounded-lg"
                     />
                   </a>
                 </div>
@@ -101,7 +102,7 @@ const Dashboard = () => {
                   My Courses
                 </div>
               </Link>
-              <div className="grid md:grid-cols-3 grid-cols-1">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1">
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
@@ -115,11 +116,11 @@ const Dashboard = () => {
                 })}
               </div>
             </div>
-            <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-8">
-              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+            <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-8 h-auto">
+              <div className="mx-3 my-3 text-2xl text-gray-700 font-bold">
                 Packages
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2">
                 {packageInfo.map((val) => {
                   return (
                     <div
@@ -134,7 +135,7 @@ const Dashboard = () => {
                         href={val?.payment_link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-white my-auto text-black p-2 h-10 rounded-full font-bold inline-block text-center float-right"
+                        className="bg-white my-auto text-black p-2 h-auto rounded-full font-bold inline-block text-center float-right"
                       >
                         Buy Now
                       </a>
@@ -145,10 +146,10 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="bg-white shadow-lg rounded-lg lg:ml-5 p-4 mt-5 lg:mt-0">
-            <div className="m-3 text-2xl text-gray-700 font-bold">Services</div>
+            <div className="m-3 text-2xl text-gray-700 font-bold">Events</div>
             {event.map((val) => {
               return (
-                <Services
+                <Events
                   key={val?.id}
                   id={val?.id}
                   title={val.title}
@@ -160,10 +161,10 @@ const Dashboard = () => {
             })}
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg mt-8 mb-12 p-5 grid grid-cols-2 gap-4 lg:grid-cols-6">
+        <div className="bg-white rounded-lg shadow-lg mt-8 mb-0 p-5 grid grid-cols-2 gap-4 lg:grid-cols-6">
           {services.map((val) => {
             return (
-              <Boxfooter
+              <Services
                 key={val.title}
                 id={val.title}
                 title={val.title}
