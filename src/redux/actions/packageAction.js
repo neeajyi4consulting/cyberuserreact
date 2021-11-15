@@ -25,6 +25,7 @@ export const fetchAllotedPackage = (userId) => async (dispatch) => {
   dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
+
 // export const getPackageDetails = ()=> async (dispatch) =>{
 //   const response = await fetchPackageDetails()
 //   const res = response.data?.data;

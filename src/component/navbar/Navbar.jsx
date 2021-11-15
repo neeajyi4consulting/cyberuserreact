@@ -19,7 +19,7 @@ function Navbar() {
           <Link to="/admin">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9 inline rounded-full mx-2 mr-16 my-2"
+              className="h-9 w-9 inline rounded-full mx-2 mr-20 my-2"
               viewBox="0 0 20 20"
               fill="currentColor"
             >

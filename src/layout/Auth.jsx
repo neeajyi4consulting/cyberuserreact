@@ -12,7 +12,7 @@ import { allotedPackageDetaile } from "../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();
-  const [id, setId] = useState("neerajkumar@gmail.com");
+  const [id, setId] = useState("neeraj@gmail.com");
   const [passcode, setPasscode] = useState("password");
   const storedData = useSelector((state) => state);
   const { user } =storedData;
@@ -24,7 +24,6 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
-    console.log(user?.currentUser);
     dispatch(allotedPackageDetaile(user?.currentUser?.user_id));
   };
 

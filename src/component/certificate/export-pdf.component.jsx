@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 
 import { ComponentToPrint } from "./certificate.component";
 import { userDetails } from "../../redux/actions/authActions";
@@ -10,7 +10,6 @@ import { courseDetails } from "../../redux/actions/courseAction";
 const Example = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
   const storedData = useSelector((state) => state);
   const { user, course } = storedData;
   const currentUser = user?.currentUser;
@@ -26,12 +25,11 @@ const Example = () => {
   useEffect(() => {
     dispatch(userDetails(currentUser?.user_id));
     dispatch(courseDetails(id));
-    // history.push("/dashboard")
   }, []);
 
-  useEffect(() => {
-    handlePrint()
-  }, [courseDetail, userDetail]);
+  // useEffect(() => {
+  //   handlePrint()
+  // }, [courseDetail]);
 
   if (loading) {
     return (
@@ -53,14 +51,12 @@ const Example = () => {
   }
 
   return (
-    <div>
       <ComponentToPrint
-        onAfterPrint={onafterprint}
+      handlePrint={handlePrint}
         currentUser={userDetail?.first_name + userDetail?.last_name}
         courseTitle={courseDetail ? courseDetail.course_title : null}
         ref={componentRef}
       />
-    </div>
   );
 };
 

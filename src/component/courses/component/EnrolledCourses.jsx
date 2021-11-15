@@ -34,21 +34,12 @@ function EnrolledCourses(props) {
               }}
               className=" w-full h-40 rounded-t-md"
             ></div>
-            {/* <Link to={"/courses/chaptervideo/" + val.course_name.id}>
-              <img
-                src={baseURL + val.course_name.course_file}
-                alt="abcadfas"
-                className="w-full h-60 rounded-t-md"
-              />
-            </Link> */}
 
             <div className="p-2 ">
               <p className="text-gray-500 text-sm">Course</p>
               <p className=" text-gray-800 mb-5 text-xl">
-                <Link to={"/courses/chaptervideo/" + val.course_name.id}>
-                  {" "}
+                
                   {val.course_name.course_title}
-                </Link>
               </p>
               <span className="absolute bottom-2 right-2">
                 by&nbsp;

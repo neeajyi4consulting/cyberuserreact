@@ -7,10 +7,6 @@ export const ActionTypes = {
   FETCH_CURRENTUSER: "FETCH_CURRENTUSER",
   LOGOUT: "LOGOUT",
 
-  // profileActionTypes
-  // FETCH_PROFILE: "FETCH_PROFILE",
-  // EDIT_PROFILE: "EDIT_PROFILE",
-
   // userDetails
   GET_USER_DETAILS: "GET_USER_DETAILS",
 

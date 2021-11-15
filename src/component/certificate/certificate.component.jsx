@@ -17,12 +17,12 @@ render() {
     return (
       <div>
            <div className="relative">
-            <img src={certificateImg} alt="...." className=" z-50"  style={{width:"1500px", height:"790px"}}/>
+            <img src={certificateImg} onLoad={this.props.handlePrint} alt="...." className=" z-50"  style={{width:"1500px", height:"790px"}}/>
             <p className="" style={{position:"absolute", top:"30px", left:"155px", fontSize:"20px", fontWeight:"bold"}}>{this.state.date}</p>
-            <p className="" style={{position:"absolute", top:"350px", left:"80px", fontSize:"25px", fontWeight:"bold"}}>{this.props.currentUser ? this.props.currentUser : "Test User Name"}</p>
-            <p className="" style={{position:"absolute", top:"415px", left:"80px", fontSize:"25px",}}>For successfully completing training on</p>
-            <p className="" style={{position:"absolute", top:"460px", left:"80px", fontSize:"25px",}}> <span className="font-bold">{this.props.courseTitle}</span> </p>
-            <p className="" style={{position:"absolute", top:"505px", left:"80px", fontSize:"25px",}}> conducted online on <span className="font-bold">{this.state.date}</span></p>
+            <p className="" style={{position:"absolute", top:"350px", left:"85px", fontSize:"25px", fontWeight:"bold"}}>{this.props.currentUser ? this.props.currentUser : "Test User Name"}</p>
+            <p className="" style={{position:"absolute", top:"415px", left:"85px", fontSize:"25px",}}>For successfully completing training on</p>
+            <p className="" style={{position:"absolute", top:"460px", left:"85px", fontSize:"25px",}}> <span className="font-bold">{this.props.courseTitle}</span> </p>
+            <p className="" style={{position:"absolute", top:"505px", left:"85px", fontSize:"25px",}}> conducted online on <span className="font-bold">{this.state.date}</span></p>
             </div>
         </div>
     );

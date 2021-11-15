@@ -50,7 +50,7 @@ function Sidebar({selectedValue}) {
 
   return (
     <>
-      <nav className="-mt-24 z-10">
+      <nav className="-mt-24 z-10 shadow-lg">
         <div className="">
           <div className={`flex flex-wrap w-72 lg:inline-block`}>
             <div className="w-20 md:w-full h-auto py-6 ">
@@ -84,7 +84,7 @@ function Sidebar({selectedValue}) {
               />
             </div>
             <div
-              className={`${toggleSidebar} bg-white h-screen absolute lg:top-24 md:top-24 md:mt-1 sm:mt-1 mt-3 top-20 left-0 z-10`}
+              className={`${toggleSidebar} bg-white h-screen shadow-lg absolute lg:top-24 md:top-24 md:mt-1 sm:mt-1 mt-3 top-20 left-0 z-10`}
             >
               <Link to="/dashboard">
                 <div className={`w-full px-10 h-auto py-5 ${dashboardClass}`}>
@@ -105,20 +105,6 @@ function Sidebar({selectedValue}) {
                     className="inline w-6 h-6 mr-2"
                   />
                   Courses
-                  {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 inline float-right"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg> */}
                 </div>
               </Link>
               <Link to="/admin">

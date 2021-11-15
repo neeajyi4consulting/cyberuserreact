@@ -6,7 +6,7 @@ import Services from "./component/Services";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { getPackage } from "../../redux/actions/packageAction";
+import { getPackage, startLoadingAction, stopLoadingAction } from "../../redux/actions/packageAction";
 import {
   fetchPackageDetails,
   getBannerList,
@@ -68,7 +68,7 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar selectedValue="dashboard" />
-      <div className="p-5 bg-gray-200">
+      <div className="px-5 pt-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full hidden md:block">
           <Carousel
@@ -94,15 +94,15 @@ const Dashboard = () => {
             })}
           </Carousel>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 mt-5">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 mt-6">
+          <div className="lg:mr-3">
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
               <Link to="/courses">
-                <div className="m-3 text-2xl text-gray-700 font-bold">
+                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
                   My Courses
                 </div>
               </Link>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 grid-cols-1 gap-4">
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
@@ -116,8 +116,8 @@ const Dashboard = () => {
                 })}
               </div>
             </div>
-            <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-8 h-auto">
-              <div className="mx-3 my-3 text-2xl text-gray-700 font-bold">
+            <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
+              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
                 Packages
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-2">
@@ -145,8 +145,8 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white shadow-lg rounded-lg lg:ml-5 p-4 mt-5 lg:mt-0">
-            <div className="m-3 text-2xl text-gray-700 font-bold">Events</div>
+          <div className="bg-white shadow-lg rounded-lg lg:ml-3 p-4 mt-5 lg:mt-0">
+            <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">Events</div>
             {event.map((val) => {
               return (
                 <Events
@@ -161,7 +161,7 @@ const Dashboard = () => {
             })}
           </div>
         </div>
-        <div className="bg-white rounded-lg shadow-lg mt-8 mb-0 p-5 grid grid-cols-2 gap-4 lg:grid-cols-6">
+        <div className="bg-white rounded-lg shadow-lg mt-6 mb-0 p-5 grid grid-cols-2 gap-4 lg:grid-cols-6">
           {services.map((val) => {
             return (
               <Services
