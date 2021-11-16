@@ -66,4 +66,7 @@ export const ActionTypes = {
 
   //quiz status is completed
   QUIZCOMPLETED:"QUIZCOMPLETED",
+
+  //add Certificate
+  ADDCERTIFICATE:"ADDCERTIFICATE",
 };

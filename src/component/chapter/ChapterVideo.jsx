@@ -3,7 +3,7 @@ import Vimeo from "@u-wave/react-vimeo";
 import Sidebar from "../sidebar/Sidebar";
 import { useHistory, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { getChapterClientList } from "../../redux/actions/courseAction";
+import { getChapterClientList, setCertificate } from "../../redux/actions/courseAction";
 import { changeStatusOfChapter } from "../../redux/actions/chapterAction";
 import { toast } from "react-toastify";
 
@@ -26,10 +26,8 @@ function ChapterVideo() {
     dispatch(getChapterClientList(data));
   };
 
-  const handleOnChangeVideo = (val, index) => {
+  const handleOnChangeVideo = (val) => {
     setChapter(val);
-    // console.log("this is test val for chpater name",val);
-    // console.log("this is index of", index);
   };
 
   const handleOnFinishVideo = (res) => {
@@ -75,7 +73,6 @@ function ChapterVideo() {
         <div className="bg-gray-100 sm:px-5 sm:py-3 sm:mx-16 sm:p-6 rounded-lg shadow-lg">
           <div className="mb-3 p-1">
           <span className="font-bold text-2xl">Chapter Video</span>
-          <span className="float-right my-2">Home / Dashboard</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 w-full my-3">
             <div className="bg-white relative col-span-2 shadow-lg">
@@ -121,8 +118,13 @@ function ChapterVideo() {
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
                   <button
-                    disabled={!statuses.Quiz_Completed}
-                    onClick={() => history.push(`/certificate/${id}`)}
+                    onClick={() => {
+                      history.push(`/certificate/${id}`) ;
+                    const data = new FormData();
+                    data.append("user_id", currentUser?.user_id)
+                    data.append("course_id", id)
+                    dispatch(setCertificate(data))}
+                  }
                     className={
                       "text-gray-700 mx-3 py-4 px-8 text-center relative"
                     }
@@ -137,10 +139,10 @@ function ChapterVideo() {
               </div>
               <div className="bg-white pt-5">
                 <p className="text-gray-500 px-5 py-2 h-auto ">
-                  {/* {!courseAbout */}
+                  {!statuses?.chapter_data
                     ? "About this Course"
-                    {/* : courseAbout[0]?.name?.course?.about} */}
-                  {/* {!chapter ? "" : chapter.name?.about} */}
+                     : statuses?.chapter_data[0]?.course?.about} 
+                   {/* {!chapter ? "" : chapter.name?.about}  */}
                 </p>
               </div>
             </div>
@@ -152,7 +154,7 @@ function ChapterVideo() {
                 <div>
                   {!courseList || courseList === undefined
                     ? null
-                    : courseList.map((val, index) => {
+                    : courseList.map((val) => {
                         return (
                           <div key={val?.id}>
                             <div
@@ -161,7 +163,7 @@ function ChapterVideo() {
                                   ? "bg-green-200 text-gray-700 shadow-lg"
                                   : "bg-white"
                               } `}
-                              onClick={() => handleOnChangeVideo(val, index)}
+                              onClick={() => handleOnChangeVideo(val)}
                             >
                               <p className="inline-block overflow-hidden">
                                 &nbsp; {val?.chapter_name}

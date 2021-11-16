@@ -184,6 +184,16 @@ export async function fetchChapterClientList(data) {
   });
 }
 
+export async function addCertificate(data) {
+  return http.post(API_PATH.apiAddCertificate, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  });
+}
+
 // export async function addUser(data) {
 //   return await http.post(API_PATH.apiAddUser, data, {
 //     headers: {

@@ -14,6 +14,7 @@ const initialState = {
   chapterClientList: {},
   courseClientList: "",
   quizCompleted: false,
+  addCertificate: null,
 };
 
 export const courseReducer = (state = initialState, { type, payload }) => {
@@ -44,6 +45,8 @@ export const courseReducer = (state = initialState, { type, payload }) => {
       return { ...state, courseClientList: payload };
     case ActionTypes.QUIZCOMPLETED:
       return { ...state, quizCompleted: payload };
+    case ActionTypes.ADDCERTIFICATE:
+      return { ...state, addCertificate: payload };
 
     default:
       return state;

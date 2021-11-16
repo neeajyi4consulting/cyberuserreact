@@ -7,6 +7,7 @@ import {
   getCourseDetails,
   getCourseList,
   getUserDetails,
+  addCertificate
 } from "../../api";
 
 export const getCourse = () => async (dispatch) => {
@@ -147,3 +148,13 @@ export const courseClientList = (data) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const setCertificate = (data) => async (dispatch) =>{
+  try {
+    const response = await addCertificate(data);
+    console.log("this is test alert for certificate", response)
+    dispatch({type:ActionTypes.ADDCERTIFICATE, payload:response})
+  } catch (error) {
+    console.log(error)
+  }
+}

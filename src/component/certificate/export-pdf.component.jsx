@@ -27,9 +27,9 @@ const Example = () => {
     dispatch(courseDetails(id));
   }, []);
 
-  // useEffect(() => {
-  //   handlePrint()
-  // }, [courseDetail]);
+  useEffect(() => {
+    handlePrint()
+  }, [courseDetail]);
 
   if (loading) {
     return (
@@ -52,8 +52,8 @@ const Example = () => {
 
   return (
       <ComponentToPrint
-      handlePrint={handlePrint}
-        currentUser={userDetail?.first_name + userDetail?.last_name}
+      // handlePrint={handlePrint}
+        currentUser={userDetail?.first_name + " "+ userDetail?.last_name}
         courseTitle={courseDetail ? courseDetail.course_title : null}
         ref={componentRef}
       />
