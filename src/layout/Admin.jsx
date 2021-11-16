@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import profileImg from "../assets/img/Profile-img.jpg";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserDetails } from "../api";

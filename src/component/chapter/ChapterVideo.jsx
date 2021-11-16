@@ -15,8 +15,8 @@ function ChapterVideo() {
   const { user, course } = storedData;
   const loading = course?.loading;
   const currentUser = user?.currentUser;
-  const courseList = course?.chapterClientList;
-  const courseAbout = course?.chapterClientList?.data;
+  const statuses = course?.chapterClientList;
+  const courseList = course?.chapterClientList?.chapter_data;
   const [chapter, setChapter] = useState();
 
   const handleFetchCourse = () => {
@@ -28,13 +28,14 @@ function ChapterVideo() {
 
   const handleOnChangeVideo = (val, index) => {
     setChapter(val);
+    // console.log("this is test val for chpater name",val);
     // console.log("this is index of", index);
   };
 
   const handleOnFinishVideo = (res) => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
-    data.append("chapter_id", chapter.name?.id);
+    data.append("chapter_id", chapter?.id);
     data.append("course_id", id);
     data.append("status", res.percent);
     data.append("completedVideoLenght", res.seconds);
@@ -83,7 +84,7 @@ function ChapterVideo() {
                   video={
                     !chapter
                       ? "https://vimeo.com/636273863/eb39c99700"
-                      : chapter.name?.link
+                      : chapter?.link
                   }
                   // height="600px"
                   // width="900px"
@@ -102,8 +103,8 @@ function ChapterVideo() {
                 >
                   About
                 </div>
-                {!courseList.Quiz_Completed &&
-                courseList?.course_status === "completed" ? (
+                {!statuses.Quiz_Completed &&
+                statuses?.course_status === "completed" ? (
                   <button
                     onClick={() => history.push(`/courses/chapterquiz/${id}`)}
                     className={
@@ -117,10 +118,10 @@ function ChapterVideo() {
                     Quiz
                   </button>
                 )}
-                {courseList.Quiz_Completed &&
-                courseList?.course_status === "completed" ? (
+                {statuses.Quiz_Completed &&
+                statuses?.course_status === "completed" ? (
                   <button
-                    disabled={!courseList.Quiz_Completed}
+                    disabled={!statuses.Quiz_Completed}
                     onClick={() => history.push(`/certificate/${id}`)}
                     className={
                       "text-gray-700 mx-3 py-4 px-8 text-center relative"
@@ -136,10 +137,10 @@ function ChapterVideo() {
               </div>
               <div className="bg-white pt-5">
                 <p className="text-gray-500 px-5 py-2 h-auto ">
-                  {!courseAbout
+                  {/* {!courseAbout */}
                     ? "About this Course"
-                    : courseAbout[0]?.name?.course?.about}
-                  {!chapter ? "" : chapter.name?.about}
+                    {/* : courseAbout[0]?.name?.course?.about} */}
+                  {/* {!chapter ? "" : chapter.name?.about} */}
                 </p>
               </div>
             </div>
@@ -149,30 +150,31 @@ function ChapterVideo() {
                   <p className="text-lg font-bold">Chapters In This Course</p>
                 </div>
                 <div>
-                  {!courseList?.data || courseList === undefined
+                  {!courseList || courseList === undefined
                     ? null
-                    : courseList?.data.map((val, index) => {
-                        // console.log("this is test of index of val", index);
+                    : courseList.map((val, index) => {
                         return (
-                          <div key={val?.name?.id}>
+                          <div key={val?.id}>
                             <div
                               className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
-                                val.is_completed
+                                val?.chapter_status?.is_completed
                                   ? "bg-green-200 text-gray-700 shadow-lg"
                                   : "bg-white"
                               } `}
                               onClick={() => handleOnChangeVideo(val, index)}
                             >
                               <p className="inline-block overflow-hidden">
-                                &nbsp; {val?.name?.chapter_name}
+                                &nbsp; {val?.chapter_name}
                               </p>
                               <p className="text-sm text-gray-600 pl-7">
                                 Video
+                                
                               </p>
                             </div>
                           </div>
                         );
-                      })}
+                      })
+                    }
                 </div>
               </div>
             </div>

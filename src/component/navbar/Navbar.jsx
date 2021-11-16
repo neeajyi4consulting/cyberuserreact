@@ -1,5 +1,4 @@
 import React from "react";
-import profileImg from "../../assets/img/Profile-img.jpg";
 import { Link } from "react-router-dom";
 function Navbar() {
   return (

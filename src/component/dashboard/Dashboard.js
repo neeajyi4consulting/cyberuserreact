@@ -6,7 +6,7 @@ import Services from "./component/Services";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { getPackage, startLoadingAction, stopLoadingAction } from "../../redux/actions/packageAction";
+import { getPackage } from "../../redux/actions/packageAction";
 import {
   fetchPackageDetails,
   getBannerList,
