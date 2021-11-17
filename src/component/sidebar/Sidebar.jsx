@@ -3,13 +3,14 @@ import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DashboardIcon from "../../assets/img/Dashboard-icon.svg";
+import lessonIcon from '../../assets/img/lessons-icon.svg';
 import CoursesIcon from "../../assets/img/Courses-icon.svg";
 import ProfileIcon from "../../assets/img/My-Profile-icon.svg";
 import LogoutIcon from "../../assets/img/Logout-icon.svg";
 import { logout } from "../../redux/actions/authActions";
 import { useHistory } from "react-router-dom";
 
-function Sidebar({selectedValue}) {
+function Sidebar({ selectedValue }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const [dashboardClass, setDashboardClass] = useState("");
@@ -87,7 +88,7 @@ function Sidebar({selectedValue}) {
               className={`${toggleSidebar} bg-white h-screen shadow-lg absolute lg:top-24 md:top-24 md:mt-1 sm:mt-1 mt-3 top-20 left-0 z-10`}
             >
               <Link to="/dashboard">
-                <div className={`w-full px-10 h-auto py-5 ${dashboardClass}`}>
+                <div className={`px-10 w-72 py-5 h-auto ${dashboardClass}`}>
                   <img
                     src={DashboardIcon}
                     alt="...."
@@ -96,15 +97,14 @@ function Sidebar({selectedValue}) {
                   Dashboard
                 </div>
               </Link>
-
               <Link to="/courses">
-                <div className={`px-10 w-72 h-auto py-5 ${coursesClass}`}>
+                <div className={`px-10 w-72 py-5 h-auto ${coursesClass}`}>
                   <img
                     src={CoursesIcon}
                     alt="...."
                     className="inline w-6 h-6 mr-2"
                   />
-                  Courses
+                  My Courses
                 </div>
               </Link>
               <Link to="/admin">

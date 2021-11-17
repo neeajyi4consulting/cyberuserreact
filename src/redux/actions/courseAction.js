@@ -42,7 +42,6 @@ export const fetchCourseDetails = (courseId) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getCourseDetails(courseId);
-    // console.log(response.data);
     dispatch({
       type: ActionTypes.GET_COURSE_DETAILS,
       payload: response.data?.data?.chapters,
@@ -77,7 +76,7 @@ export const allotedPackageDetaile = (userId) => async (dispatch) => {
     });
     dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
-    console.log("this is test eerrror", error);
+    console.log(error);
   }
 };
 
@@ -85,7 +84,6 @@ export const getQuiz = (courseId) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchquiz(courseId);
-    // console.log("get quiz from action", response)
     dispatch({
       type: ActionTypes.GET_QUIZ,
       payload: response.data?.data,
@@ -96,7 +94,6 @@ export const getQuiz = (courseId) => async (dispatch) => {
 
 export const checkResult = (data) => async (dispatch) => {
   const response = await checkAnswer(data);
-  // console.log("action response from course", response?.data?.data?.score);
   dispatch({
     type: ActionTypes.GET_QUIZ_RESULT,
     payload: response.data,
@@ -104,7 +101,6 @@ export const checkResult = (data) => async (dispatch) => {
 };
 
 export const checkScore = (data) => async (dispatch) => {
-  // console.log("action scores", data);
   try {
     dispatch({
       type: ActionTypes.CHECK_SCORE,
@@ -119,7 +115,6 @@ export const getChapterClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-    // console.log("response", response?.data);
     dispatch({
       type: ActionTypes.CHAPTER_CLIENT_LIST,
       payload: response.data,
@@ -134,7 +129,6 @@ export const courseClientList = (data) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
-    // console.log("response from course Client list", response?.data?.course_status);
     dispatch({
       type: ActionTypes.COURSE_CLIENT_LIST,
       payload: response?.data?.course_status,
@@ -152,7 +146,6 @@ export const courseClientList = (data) => async (dispatch) => {
 export const setCertificate = (data) => async (dispatch) =>{
   try {
     const response = await addCertificate(data);
-    console.log("this is test alert for certificate", response)
     dispatch({type:ActionTypes.ADDCERTIFICATE, payload:response})
   } catch (error) {
     console.log(error)

@@ -10,9 +10,8 @@ function Navbar() {
             "linear-gradient(90deg, #000000 0.06%, #2f1e1e 48.99%, #990B4F 100%)",
         }}
       >
-        <p className="md:inline ml-80 w-96 text-white hidden font-thin">
-          <Link to="/dashboard">Home</Link> /{" "}
-          <Link to="/dashboard">Dashboard</Link>
+        <p className="md:inline ml-80 w-96 text-white hidden font-bold text-xl">
+          <Link to="/dashboard">Home</Link>
         </p>
         <div className="text-white text-right w-full">
           <Link to="/admin">

@@ -58,11 +58,6 @@ function Admin() {
       <div className="bg-gray-200 pt-5 ">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block shadow-lg">
           <span className="font-bold text-2xl mx-8">Profile</span>
-          <span className="float-right ">
-            <Link to="/admin">Home</Link> /{" "}
-            <Link to="/dashboard">Dashboard</Link> /{" "}
-            <Link to="/admin">Profile</Link>
-          </span>
         </div>
         <div
           className={` ${
@@ -159,20 +154,17 @@ function Admin() {
   <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
 </svg>
           <span className="md:ml-5 text-xl">{userName}</span>
-          <span className="float-right text-red-500">
-            <Link to="/" onClick={handleLogOut}>
-              Sign Out
-            </Link>
-          </span>
-          <div className="border-2 p-5 mt-10">
-            <div>
-              <p className="text-gray-500 text-sm pt-10">Account Name</p>
-              <span
+          <span
                 onClick={handleEditForm}
-                className="text-blue-500 float-right cursor-pointer hover:text-blue-800"
+                className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer hover:text-blue-800"
               >
                 Edit
               </span>
+          
+          <div className="border-2 p-5 mt-10">
+            <div>
+              <p className="text-gray-500 text-sm pt-10">Account Name</p>
+              
               <p className="border-b-2 py-5 w-full">{userName} </p>
             </div>
             <div>
@@ -188,6 +180,12 @@ function Admin() {
               <p className="border-b-1 py-5 w-full">{userNumber}</p>
             </div>
           </div>
+          <span className="float-right text-white bg-red-500 my-5 p-3 rounded-lg">
+          
+            <Link to="/" onClick={handleLogOut}>
+              Sign Out
+            </Link>
+          </span>
         </div>
       </div>
     </>
