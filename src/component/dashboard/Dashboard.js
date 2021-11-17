@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { allotedPackageDetaile } from "../../redux/actions/courseAction";
 
 const Dashboard = () => {
+  const [packageInfo, setPackageInfo] = useState([]);
   const dispatch = useDispatch();
   const storedData = useSelector((state) => state);
   const { user, course } = storedData;
@@ -24,7 +25,6 @@ const Dashboard = () => {
   const currentUser = user?.currentUser;
   const courseInfo = course?.allotedPackageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const [packageInfo, setPackageInfo] = useState([]);
   const [event, setEvent] = useState([]);
   const [services, setServices] = useState([]);
   const [bannerDetails, setBannerDetails] = useState([]);
@@ -45,7 +45,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(allotedPackageDetaile(currentUser?.user_id));
-  }, [packageInfo]);
+  }, []);
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -76,6 +76,7 @@ const Dashboard = () => {
             interval="5000"
             infiniteLoop
             stopOnHover
+            showIndicators={false}
             showStatus={false}
             showThumbs={false}
           >

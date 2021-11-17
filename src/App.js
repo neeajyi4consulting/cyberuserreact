@@ -16,6 +16,7 @@ import { fetchUserAction } from "./redux/actions/authActions";
 import Certificate from "./component/certificate/export-pdf.component.jsx";
 import ChapterQuiz from "./component/courses/component/ChapterQuiz";
 import Landingpage from "./layout/LandingPage";
+import ChangePassword from "./layout/ChangePassword";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -39,6 +40,7 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/admin" component={Admin} />
+          <Route exact path="/changepassword" component={ChangePassword}/>
             <Route exact path="/profile/myaddress" component={MyAddress} />
             <Route exact path="/courses" component={Courses} />
             <Route exact path="/courses/aboutcourse" component={AboutCourse} />

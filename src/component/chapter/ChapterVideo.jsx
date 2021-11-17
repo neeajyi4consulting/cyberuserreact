@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getChapterClientList, setCertificate } from "../../redux/actions/courseAction";
 import { changeStatusOfChapter } from "../../redux/actions/chapterAction";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function ChapterVideo() {
   const { id } = useParams();
@@ -17,15 +18,16 @@ function ChapterVideo() {
   const currentUser = user?.currentUser;
   const statuses = course?.chapterClientList;
   const courseList = course?.chapterClientList?.chapter_data;
+  const quizPassed = course?.quizPassed;
   const [chapter, setChapter] = useState();
-
+  
   const handleFetchCourse = () => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
     data.append("course_id", id);
     dispatch(getChapterClientList(data));
   };
-
+  
   const handleOnChangeVideo = (val) => {
     setChapter(val);
   };
@@ -117,20 +119,21 @@ function ChapterVideo() {
                 )}
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
-                  <button
-                    onClick={() => {
-                      history.push(`/certificate/${id}`) ;
-                    const data = new FormData();
-                    data.append("user_id", currentUser?.user_id)
-                    data.append("course_id", id)
-                    dispatch(setCertificate(data))}
-                  }
-                    className={
-                      "text-gray-700 mx-3 py-4 px-8 text-center relative"
+                  quizPassed ? (<button
+                      onClick={() => {
+                        history.push(`/certificate/${id}`) ;
+                      const data = new FormData();
+                      data.append("user_id", currentUser?.user_id)
+                      data.append("course_id", id)
+                      dispatch(setCertificate(data))}
                     }
-                  >
-                    Certificate
-                  </button>
+                      className={
+                        "text-gray-700 mx-3 py-4 px-8 text-center relative"
+                      }
+                    >
+                      Certificate
+                    </button>) : (<button className="text-gray-400 text-center cursor-not-allowed">Certificate(Sorry, You failed test)</button>)
+                  
                 ) : (
                   <button className="text-gray-400 text-center cursor-not-allowed">
                     Certificate
@@ -169,8 +172,8 @@ function ChapterVideo() {
                                 &nbsp; {val?.chapter_name}
                               </p>
                               <p className="text-sm text-gray-600 pl-7">
-                                Video
-                                
+                                 
+                                {val?.chapter_file ? (<Link to="/">Attatched File</Link>) : "Video"}
                               </p>
                             </div>
                           </div>

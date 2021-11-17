@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserDetails } from "../api";
 import Sidebar from "../component/sidebar/Sidebar";
-import { logout, editDetails } from "../redux/actions/authActions";
+import { logout, editDetails, changeUserPassword } from "../redux/actions/authActions";
 
 function Admin() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -16,6 +16,10 @@ function Admin() {
   const [editUserEmail, setEditUserEmail] = useState("");
   const [editUserNumber, setEditUserNumber] = useState("");
   const [toogleEditForm, setToogleEditForm] = useState(true);
+  const [toggleChangePassword, setToggleChangePassword] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const fetchUserDetails = async () => {
     await getUserDetails(currentUser.user_id)
@@ -38,6 +42,10 @@ function Admin() {
     setToogleEditForm(toogleEditForm ? false : true);
   };
 
+  const handleChangePassword = () => {
+    setToggleChangePassword(toggleChangePassword ? false : true);
+  };
+
   const handleSubmitNewDetails = () => {
     const data = new FormData();
     data.append("first_name", editUserFirstName);
@@ -46,6 +54,17 @@ function Admin() {
     data.append("phone", editUserNumber);
     data.append("user_id", currentUser.user_id);
     dispatch(editDetails(data));
+  };
+
+  const handleNewPassword = async () => {
+    const data = new FormData();
+    data.append("user_id", currentUser?.user_id);
+    data.append("old_password", oldPassword);
+    data.append("new_password", newPassword);
+    data.append("confirm_password", confirmPassword);
+    dispatch(changeUserPassword(data))
+    setToggleChangePassword(false)
+
   };
 
   useEffect(() => {
@@ -149,22 +168,122 @@ function Admin() {
             </div>
           </div>
         </div>
+        <div className="">
+          {/**change password */}
+          <div className={`h-full w-full shadow-lg fixed top-0 bg-gray-600 bg-opacity-50  ${
+                toggleChangePassword ? "" : "hidden"
+              }`}>
+            <div
+              className={`flex justify-center h-screen w-full items-center antialiased `}
+            >
+              <form className="bg-white shadow-md w-96 rounded px-8 pt-6 pb-8 mb-4">
+                <div className="mb-6">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="password"
+                  >
+                    Old Password
+                  </label>
+                  <input
+                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    
+                    type="password"
+                    placeholder="Old Password"
+                    value={oldPassword}
+                    onChange={(e) => {
+                      setOldPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="mb-6">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="password"
+                  >
+                    New Password
+                  </label>
+                  <input
+                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    
+                    type="password"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="mb-6">
+                  <label
+                    className="block text-gray-700 text-sm font-bold mb-2"
+                    htmlFor="password"
+                  >
+                    Confirm Password
+                  </label>
+                  <input
+                    className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    
+                    type="password"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <button
+                  onClick={handleNewPassword}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
+                    Change Password
+                  </button>
+                  <button
+                  onClick={handleChangePassword}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
         <div className="mt-5 md:mx-16 rounded-lg bg-white p-10 pb-20 shadow-lg">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-</svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-8 w-8 rounded-full ml-2 inline-block"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+              clipRule="evenodd"
+            />
+          </svg>
           <span className="md:ml-5 text-xl">{userName}</span>
           <span
-                onClick={handleEditForm}
-                className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer hover:text-blue-800"
-              >
-                Edit
-              </span>
-          
+            onClick={handleEditForm}
+            className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer"
+          >
+            Edit User Details
+          </span>
+          <span>
+            <button
+              onClick={handleChangePassword}
+              className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer mx-5"
+            >
+              Change Password
+            </button>
+          </span>
+
           <div className="border-2 p-5 mt-10">
             <div>
               <p className="text-gray-500 text-sm pt-10">Account Name</p>
-              
+
               <p className="border-b-2 py-5 w-full">{userName} </p>
             </div>
             <div>
@@ -181,7 +300,6 @@ function Admin() {
             </div>
           </div>
           <span className="float-right text-white bg-red-500 my-5 p-3 rounded-lg">
-          
             <Link to="/" onClick={handleLogOut}>
               Sign Out
             </Link>

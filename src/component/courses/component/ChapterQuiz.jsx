@@ -7,6 +7,7 @@ import {
   checkResult,
   checkScore,
   getQuiz,
+  quizPassed,
 } from "../../../redux/actions/courseAction";
 import Sidebar from "../../sidebar/Sidebar";
 import { Link } from "react-router-dom";
@@ -19,14 +20,15 @@ export default function ChapterQuiz() {
   const [score, setScore] = useState(0);
   const currentUser = user.currentUser
   const dispatch = useDispatch();
-  const quizResult = course.quizResult
+  const quizResult = course.quizResult?.data?.data
+  const totalScore = course.quizResult?.data?.total_marks
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const quizData = course.courseQuiz
   const testOption = quizData[currentQuestion]?.options.split(",");
 
   const [showScore, setShowScore] = useState(false);
-  // const [isPassed, setIsPassed] = useState(false);
+  const [isPassed, setIsPassed] = useState(false);
   const [finalSubmit, setFinalSubmit] = useState(true);
 
   const handleAnswerOptionClick = async (val) => {
@@ -63,6 +65,7 @@ export default function ChapterQuiz() {
     //   setIsPassed(false);
     // }
     setFinalSubmit(false);
+    dispatch(quizPassed(quizResult?.score===totalScore))
   };
 
 

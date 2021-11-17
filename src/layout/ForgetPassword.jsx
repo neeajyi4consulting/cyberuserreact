@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
 import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import { forgetPass } from "../api";
 
 function ForgetPassword() {
   const [email, setEmail] = useState("test@gmail.com");
 
-  const { forgetPasscode } = useAuth();
-
   const handleForgetPassword = async () => {
     const data = new FormData();
     data.append("email", email);
-    forgetPasscode(data)
+    // forgetPasscode(data)
+    await forgetPass(data)
       .then((response) => {
         console.log("response from forget password screen", response);
       })

@@ -34,6 +34,9 @@ export const ActionTypes = {
   //editDetails
   EDIT_DETAILS: "EDIT_DETAILS",
 
+  //edit password
+  EDIT_PASSWORD:"EDIT_PASSWORD",
+
   //getPackage
   GET_PACKAGE: "GET_PACKAGE",
 
@@ -66,6 +69,9 @@ export const ActionTypes = {
 
   //quiz status is completed
   QUIZCOMPLETED:"QUIZCOMPLETED",
+
+  //quizPassed
+  QUIZ_PASSED:"QUIZ_PASSED",
 
   //add Certificate
   ADDCERTIFICATE:"ADDCERTIFICATE",

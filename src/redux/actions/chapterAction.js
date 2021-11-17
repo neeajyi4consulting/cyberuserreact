@@ -47,7 +47,7 @@ export const chapterStatus = (data) => async (dispatch) => {
 
 export const changeStatusOfChapter = (data) => async (dispatch) => {
   const response = await changeChapterStatus(data);
-  console.log("status chapter change", response?.data);
+  // console.log("status chapter change", response?.data);
   dispatch({
     type: ActionTypes.CHANGE_CHAPTER_STATUS,
     payload: response.data,

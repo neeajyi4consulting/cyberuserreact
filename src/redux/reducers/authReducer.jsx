@@ -14,6 +14,8 @@ export const authReducer = (state = initialState, { type, payload }) => {
       return { ...state, currentUser: payload };
     case ActionTypes.EDIT_DETAILS:
       return { ...state, currentUser: payload };
+    case ActionTypes.EDIT_PASSWORD:
+      return { ...state, currentUser: payload };
     case ActionTypes.GET_USER_DETAILS:
       return { ...state, userDetails: payload };
 

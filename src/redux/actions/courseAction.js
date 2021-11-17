@@ -9,6 +9,7 @@ import {
   getUserDetails,
   addCertificate
 } from "../../api";
+import { toast } from "react-toastify";
 
 export const getCourse = () => async (dispatch) => {
   try {
@@ -96,7 +97,7 @@ export const checkResult = (data) => async (dispatch) => {
   const response = await checkAnswer(data);
   dispatch({
     type: ActionTypes.GET_QUIZ_RESULT,
-    payload: response.data,
+    payload: response,
   });
 };
 
@@ -149,5 +150,13 @@ export const setCertificate = (data) => async (dispatch) =>{
     dispatch({type:ActionTypes.ADDCERTIFICATE, payload:response})
   } catch (error) {
     console.log(error)
+  }
+}
+
+export const quizPassed = (data) => async (dispatch) => {
+  try {
+    dispatch({type:ActionTypes.QUIZ_PASSED, payload:data})
+  } catch (error) {
+    toast.error(error)
   }
 }

@@ -41,9 +41,9 @@ function EnrolledCourses(props) {
                 
                   {val.course_name.course_title}
               </p>
-              <span className="absolute bottom-2 right-2">
+              <span className="absolute bottom-2 left-2 text-xs">
                 by&nbsp;
-                <span className="text-md text-blue-500">
+                <span className="">
                   {val.course_name.author}
                 </span>
               </span>
