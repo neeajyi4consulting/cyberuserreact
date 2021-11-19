@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../sidebar/Sidebar";
 import MyCourses from "./component/MyCourses";
 import Events from "./component/Events";
 import Services from "./component/Services";
@@ -67,7 +66,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Sidebar selectedValue="dashboard" />
+      {/* <Sidebar selectedValue="dashboard" /> */}
       <div className="px-5 pt-5 bg-gray-200">
         <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
         <div className="relative w-full hidden md:block">

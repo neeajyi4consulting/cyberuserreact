@@ -7,6 +7,9 @@ export const ActionTypes = {
   FETCH_CURRENTUSER: "FETCH_CURRENTUSER",
   LOGOUT: "LOGOUT",
 
+  //addUser
+  ADD_USER:"ADD_USER",
+
   // userDetails
   GET_USER_DETAILS: "GET_USER_DETAILS",
 
@@ -75,4 +78,7 @@ export const ActionTypes = {
 
   //add Certificate
   ADDCERTIFICATE:"ADDCERTIFICATE",
+
+  //addQuery
+  ADD_QUERY:"ADD_QUERY",
 };

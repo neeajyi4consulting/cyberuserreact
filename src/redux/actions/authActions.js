@@ -3,7 +3,7 @@ import {
   cleanLocalStorage,
   getUserInfoFromJWT,
 } from "../../utils/storage";
-import { loginUser, editUserDetails, getUserDetails, changePassword } from "../../api";
+import { loginUser, editUserDetails, getUserDetails, changePassword, addUser } from "../../api";
 import { ActionTypes } from "../constants/actionTypes";
 import { toast } from "react-toastify";
 
@@ -90,4 +90,17 @@ export const changeUserPassword = (data) => async (dispatch) =>{
     console.log(error)
   }
   dispatch({ type: ActionTypes.LOADING, payload: false });
+}
+
+export const addNewUser = (data) => async (dispatch) => {
+  try {
+    const response = await addUser(data);
+    dispatch({
+      type:ActionTypes.ADD_USER,
+      payload:response.data
+    })
+    toast.info(response.data?.message)
+  } catch (error) {
+    console.log(error)
+  }
 }

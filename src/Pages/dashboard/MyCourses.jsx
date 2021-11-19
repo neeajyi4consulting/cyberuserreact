@@ -7,7 +7,7 @@ function MyCourses({ imgsrc, id, courseName, author }) {
       <div className="w-auto shadow-lg bg-white rounded-md">
         <Link to={"/courses/chaptervideo/" + id}>
           <div
-            className="sm:w-full w-40 h-40 rounded-lg shadow-lg mx-auto"
+            className="sm:w-full w-40 h-40 rounded-t-lg mx-auto"
             style={{
               backgroundImage: `url(${imgsrc})`,
               backgroundSize: "cover",

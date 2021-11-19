@@ -9,7 +9,6 @@ import {
   getQuiz,
   quizPassed,
 } from "../../../redux/actions/courseAction";
-import Sidebar from "../../sidebar/Sidebar";
 import { Link } from "react-router-dom";
 
 export default function ChapterQuiz() {
@@ -54,7 +53,9 @@ export default function ChapterQuiz() {
   const handleSubmit = () => {
     const data = new FormData();
     const newArray = scores.replace(/,\s*$/, "");
+    console.log("this is new Array", newArray);
     const answers = newArray.replace(/[\[\]']+/g, "");
+    console.log("this is answers", answers);
     data.append("user_id", currentUser.user_id);
     data.append("course_id", id);
     data.append("answers", answers);
@@ -65,7 +66,8 @@ export default function ChapterQuiz() {
     //   setIsPassed(false);
     // }
     setFinalSubmit(false);
-    dispatch(quizPassed(quizResult?.score===totalScore))
+    // console.log("this is quiz score", quizResult?.score, "this is total score", totalScore, "this is result for passing", quizResult?.score==totalScore);
+    dispatch(quizPassed(quizResult?.score==totalScore))
   };
 
 
@@ -75,7 +77,6 @@ export default function ChapterQuiz() {
 
   return (
     <div className="app">
-      <Sidebar />
       {showScore ? (
         <div className="bg-gray-200 pt-5  z-50">
           <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
@@ -98,11 +99,11 @@ export default function ChapterQuiz() {
                   You scored{" "}
                   <span className="text-blue-500">
                     {" "}
-                    {quizResult?.data?.score}
+                    {quizResult?.score}
                   </span>{" "}
                   out of{" "}
                   <span className="text-green-600">
-                    {quizResult?.total_marks}
+                    {totalScore}
                   </span>
                 </div>
                 <div className="text-center mb-10 mt-40">

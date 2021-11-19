@@ -22,5 +22,6 @@ const API_PATH = {
   apiBannerList: "/api/banner_list_client/",
   apiChapterClientList: "/api/chapter_client_list/",
   apiAddCertificate:"api/add_certificate/",
+  apiAddQuery:"api/query_form/",
 };
 export default API_PATH;

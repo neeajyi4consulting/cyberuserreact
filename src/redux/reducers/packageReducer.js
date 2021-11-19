@@ -3,6 +3,7 @@ import { ActionTypes } from "../constants/actionTypes";
 const intialState = {
   packageDetails: [],
   allotedPackage: [],
+  addQuaries: null,
 };
 
 export const packageReducer = (state = intialState, { type, payload }) => {
@@ -11,6 +12,8 @@ export const packageReducer = (state = intialState, { type, payload }) => {
       return { ...state, packageDetails: payload };
     case ActionTypes.GET_ALLOTED_PACKAGE:
       return { ...state, allotedPackage: payload };
+    case ActionTypes.ADD_QUERY:
+      return { ...state, addQuaries: payload };
 
     default:
       return { state };

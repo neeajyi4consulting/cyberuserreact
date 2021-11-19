@@ -5,7 +5,6 @@ import Sidebar from "../sidebar/Sidebar";
 function Courses() {
   return (
     <>
-      <Sidebar />
       <div className="z-20  p-5 bg-gray-200">
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
         <div className="text-xl font-bold text-gray-700 bg-white pb-3">

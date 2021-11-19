@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Vimeo from "@u-wave/react-vimeo";
-import Sidebar from "../sidebar/Sidebar";
 import { useHistory, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { getChapterClientList, setCertificate } from "../../redux/actions/courseAction";
@@ -70,7 +69,6 @@ function ChapterVideo() {
 
   return (
     <>
-      <Sidebar />
       <div className="bg-gray-200 pt-8">
         <div className="bg-gray-100 sm:px-5 sm:py-3 sm:mx-16 sm:p-6 rounded-lg shadow-lg">
           <div className="mb-3 p-1">
@@ -112,11 +110,11 @@ function ChapterVideo() {
                   >
                     Quiz
                   </button>
-                ) : (
+                 ) : (
                   <button className="text-gray-400 text-center cursor-not-allowed">
                     Quiz
                   </button>
-                )}
+                )} 
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
                   quizPassed ? (<button
@@ -149,17 +147,17 @@ function ChapterVideo() {
                 </p>
               </div>
             </div>
-            <div>
-              <div className="bg-white shadow-xl w-full">
+            <div className="shadow-lg" style={{overflow:"auto", maxHeight:"620px"}}>
+              <div className="bg-white shadow-xl w-full" >
                 <div className="p-5">
                   <p className="text-lg font-bold">Chapters In This Course</p>
                 </div>
-                <div>
+                <div >
                   {!courseList || courseList === undefined
                     ? null
                     : courseList.map((val) => {
                         return (
-                          <div key={val?.id}>
+                          <div className="sam" key={val?.id}>
                             <div
                               className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
                                 val?.chapter_status?.is_completed

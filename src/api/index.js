@@ -194,14 +194,25 @@ export async function addCertificate(data) {
   });
 }
 
-// export async function addUser(data) {
-//   return await http.post(API_PATH.apiAddUser, data, {
-//     headers: {
-//       "Content-Type": "multipart/form-data",
-//       Accept: "*/*",
-//     },
-//   });
-// }
+export async function addQuery(data) {
+  return http.post(API_PATH.apiAddQuery, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  })
+}
+
+export async function addUser(data) {
+  return await http.post(API_PATH.apiAddUser, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  });
+}
 
 // export async function updateProfile(data) {
 //   await getAndSetJwt();

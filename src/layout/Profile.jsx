@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { getUserDetails } from "../api";
-import Sidebar from "../component/sidebar/Sidebar";
 import { logout, editDetails, changeUserPassword } from "../redux/actions/authActions";
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function Admin() {
+function Profile() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const [userName, setUserName] = useState("");
@@ -73,7 +74,7 @@ function Admin() {
 
   return (
     <>
-      <Sidebar selectedValue="profile" />
+      {/* <Sidebar selectedValue="profile" /> */}
       <div className="bg-gray-200 pt-5 ">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block shadow-lg">
           <span className="font-bold text-2xl mx-8">Profile</span>
@@ -299,15 +300,16 @@ function Admin() {
               <p className="border-b-1 py-5 w-full">{userNumber}</p>
             </div>
           </div>
+          <Link to="/" onClick={handleLogOut}>
           <span className="float-right text-white bg-red-500 my-5 p-3 rounded-lg">
-            <Link to="/" onClick={handleLogOut}>
+            
               Sign Out
-            </Link>
           </span>
+            </Link>
         </div>
       </div>
     </>
   );
 }
 
-export default Admin;
+export default Profile;

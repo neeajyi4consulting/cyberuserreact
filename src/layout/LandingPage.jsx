@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../component/header/Header";
 import backgroundImg from "../assets/img/background.png";
 import Landingfooter from "../component/footer/LandingFooter";
 import { useDispatch } from "react-redux";
-import { getPackage } from "../redux/actions/packageAction";
+import { addQueries, getPackage } from "../redux/actions/packageAction";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Landingpage = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,25 @@ const Landingpage = () => {
   const { course } = useSelector((state)=>state);
   const packageList =useSelector((state=>state.package?.packageDetails)) 
   const loading = course?.loading;
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleQuaries = () =>{
+    const data = new FormData();
+    data.append("email", email)
+    data.append("subject", subject)
+    data.append("content", message)
+    if (email==="" || subject==="" || message==="") {
+      toast.warning("Please Fill all details")
+    } else {
+      dispatch(addQueries(data))
+      setEmail("")
+    setSubject("")
+    setMessage("")
+    }
+  }
+
   useEffect(() => {
     dispatch(getPackage());
   }, []);
@@ -175,7 +195,7 @@ const Landingpage = () => {
                 </h2>
                 <div className="text-gray-700 mt-8">
                   Hate forms? Send us an{" "}
-                  <span className="underline cursor-pointer">email</span>{" "}
+                  <a href="mailto:test@gmail.com?subject=My custom mail subject" className="underline cursor-pointer">email</a>{" "}
                   instead.
                 </div>
               </div>
@@ -191,32 +211,41 @@ const Landingpage = () => {
             <div className="">
               <div>
                 <span className="uppercase text-sm text-gray-600 font-bold">
-                  Full Name
-                </span>
-                <input
-                  className="w-full bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                  type="text"
-                  placeholder=""
-                />
-              </div>
-              <div className="mt-8">
-                <span className="uppercase text-sm text-gray-600 font-bold">
                   Email
                 </span>
                 <input
                   className="w-full bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                  type="email"
+                  placeholder=""
+                  required
+                  value={email}
+                  onChange={(e)=>{setEmail(e.target.value)}}
+                />
+              </div>
+              <div className="mt-8">
+                <span className="uppercase text-sm text-gray-600 font-bold">
+                  Subject
+                </span>
+                <input
+                  className="w-full bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                   type="text"
+                  required
+                  value={subject}
+                  onChange={(e)=>{setSubject(e.target.value)}}
                 />
               </div>
               <div className="mt-8">
                 <span className="uppercase text-sm text-gray-600 font-bold">
                   Message
                 </span>
-                <textarea className="w-full h-32 bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
+                <textarea
+                  value={message}
+                  required
+                  onChange={(e)=>{setMessage(e.target.value)}} className="w-full h-32 bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
               </div>
               <div className="mt-8">
-                <button className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
-                  Send Message
+                <button onClick={handleQuaries} type="submit" className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
+                  Send Query or Feedback
                 </button>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { ActionTypes } from "../constants/actionTypes";
-import { fetchPackageDetails, getAllotedPackage } from "../../api";
+import { addQuery, fetchPackageDetails, getAllotedPackage } from "../../api";
+import { toast } from "react-toastify";
 
 export const getPackage = () => async (dispatch) => {
   const response = await fetchPackageDetails();
@@ -24,6 +25,19 @@ export const fetchAllotedPackage = (userId) => async (dispatch) => {
   }
   dispatch({ type: ActionTypes.LOADING, payload: false });
 };
+
+export const addQueries = (data) => async (dispatch) => {
+  try {
+    const response = await addQuery(data);
+    toast.info(response.data?.message)
+    dispatch({
+      type:ActionTypes.ADD_QUERY,
+      payload:response,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 // export const getPackageDetails = ()=> async (dispatch) =>{

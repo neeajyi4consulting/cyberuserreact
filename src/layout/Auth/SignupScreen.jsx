@@ -1,5 +1,6 @@
 import React from "react";
 import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
+import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";

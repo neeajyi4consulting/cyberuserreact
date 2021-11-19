@@ -65,6 +65,7 @@ const LoginScreen = () => {
           >
             Login to your Account
           </h1>
+          <p className="mt-5">Don't have Account <Link to="/signup" className="text-blue-500 hover:text-blue-700 hover:underline">SignUp</Link></p>
           <div
             className="text-md"
             style={{
@@ -122,6 +123,7 @@ const LoginScreen = () => {
                 </Link>
               </span>
               <button
+              type="submit"
                 className="py-2 px-8 rounded-md block my-8"
                 style={{
                   backgroundColor: "#ED3237",
