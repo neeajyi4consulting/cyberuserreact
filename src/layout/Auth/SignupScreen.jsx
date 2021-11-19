@@ -1,12 +1,13 @@
 import React from "react";
-import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
-import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
+import AccountLoginImg from '../../assets/img/Account-Login-img.jpg'
+import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addNewUser } from "../redux/actions/authActions";
+import { addNewUser } from "../../redux/actions/authActions";
+import { toast } from "react-toastify";
 
 function SignupScreen() {
   const dispatch = useDispatch();
@@ -14,16 +15,28 @@ function SignupScreen() {
   const [lastName, setLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [value, setValue] = useState();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     const data = new FormData();
     data.append("email", userEmail);
     data.append("password", password);
     data.append("phone", value);
     data.append("first_name", firstName);
     data.append("last_name", lastName);
-    dispatch(addNewUser(data));
+    if (userEmail==="" || password==="" || value==="" || firstName==="" || lastName==="" || confirmPassword==="") {
+    e.preventDefault();
+      toast.warning("Please Fill All Details")
+    } else {
+      if (password===confirmPassword) {
+        dispatch(addNewUser(data));
+      } else {
+    e.preventDefault();
+    toast.warning("Password is not same")
+      }
+    }
+    
   };
 
   return (
@@ -32,10 +45,10 @@ function SignupScreen() {
         <div className="relative inline-block">
           <img src={AccountLoginImg} alt="...." />
           <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
-            <img src={CyberFratLogo} alt="...." />
+            <img src={CyberFratLogo} alt="" />
           </div>
         </div>
-        <div className="pt-5 mb-10 pl-10 md:py-16 lg:p-12">
+        <div className="pt-5 mb-10 pl-10 md:py-10 lg:px-12">
           <div
             className="inline-block mr-4 largeScreen"
             style={{
@@ -49,7 +62,6 @@ function SignupScreen() {
             style={{
               height: "59px",
               width: "491px",
-
               color: "#344685",
             }}
           >
@@ -87,9 +99,10 @@ function SignupScreen() {
                  Click Here
               </Link>
             </p>
-            <div className="my-5" style={{ width: "500px" }}>
+            <div className="" style={{ width: "500px" }}>
               <input
                 type="text"
+                required
                 className=" lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="First Name"
@@ -101,6 +114,7 @@ function SignupScreen() {
               <br />
               <input
                 type="text"
+                required
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Last Name"
@@ -112,6 +126,7 @@ function SignupScreen() {
               <br />
               <input
                 type="email"
+                required
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Email Address"
@@ -130,6 +145,7 @@ function SignupScreen() {
               <br />
               <input
                 type="password"
+                required
                 name=""
                 id=""
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
@@ -137,6 +153,18 @@ function SignupScreen() {
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
+                }}
+              />
+              <input
+                type="password"
+                required
+                name=""
+                id=""
+                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
                 }}
               />
               <br />

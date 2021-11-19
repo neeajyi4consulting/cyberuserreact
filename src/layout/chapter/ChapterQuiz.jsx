@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import checkIcon from "../../../assets/img/check-mark.svg";
+import checkIcon from '../../assets/img/check-mark.svg'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
@@ -8,7 +8,7 @@ import {
   checkScore,
   getQuiz,
   quizPassed,
-} from "../../../redux/actions/courseAction";
+} from "../../redux/actions/courseAction";
 import { Link } from "react-router-dom";
 
 export default function ChapterQuiz() {
@@ -21,13 +21,10 @@ export default function ChapterQuiz() {
   const dispatch = useDispatch();
   const quizResult = course.quizResult?.data?.data
   const totalScore = course.quizResult?.data?.total_marks
-
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const quizData = course.courseQuiz
   const testOption = quizData[currentQuestion]?.options.split(",");
-
   const [showScore, setShowScore] = useState(false);
-  const [isPassed, setIsPassed] = useState(false);
   const [finalSubmit, setFinalSubmit] = useState(true);
 
   const handleAnswerOptionClick = async (val) => {

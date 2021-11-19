@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import profile from "./layout/Profile";
-import Auth from "./layout/Auth";
-import SignupScreen from "./layout/SignupScreen";
-import MyAddress from "./component/MyAddress";
-import ForgetPassword from "./layout/ForgetPassword";
-import Navbar from "./component/navbar/Navbar";
-import Footer from "./component/footer/Footer";
-import Courses from "./component/courses/Courses";
-import AboutCourse from "./component/courses/component/AboutCourse";
-import ChapterVideo from "./component/chapter/ChapterVideo";
-import Dashboard from "./component/dashboard/Dashboard";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchUserAction } from "./redux/actions/authActions";
-import Certificate from "./component/certificate/export-pdf.component.jsx";
-import ChapterQuiz from "./component/courses/component/ChapterQuiz";
+import Profile from "../src/layout/Profile";
+import LoginScreen from "./layout/Auth/Login";
+import SignupScreen from "./layout/Auth/SignupScreen";
+import ForgetPassword from "./layout/Auth/ForgetPassword";
+import Navbar from "./component/header/Navbar";
+import Footer from "./component/footer/Footer";
+import Courses from "./layout/AllotedCourses";
+import AllCourses from "./layout/AllCourses";
+import ChapterVideo from "./layout/chapter/ChapterVideo";
+import ChapterQuiz from "./layout/chapter/ChapterQuiz";
+import Dashboard from "./layout/Dashboard";
+import Certificate from "./Pages/certificate/export-pdf.component";
 import Landingpage from "./layout/LandingPage";
 
 function App() {
@@ -29,7 +28,7 @@ function App() {
       {!currentUser ? (
         <Switch>
           <Route exact path="/" component={Landingpage} />
-          <Route exact path="/login" component={Auth} />
+          <Route exact path="/login" component={LoginScreen} />
           <Route exact path="/signup" component={SignupScreen} />
           <Route exact path="/forgetpassword" component={ForgetPassword} />
           <Redirect from="/dashboard" to="/" />
@@ -38,10 +37,9 @@ function App() {
         <>
           <Navbar />
           <Switch>
-            <Route exact path="/profile" component={profile} />
-            <Route exact path="/profile/myaddress" component={MyAddress} />
+            <Route exact path="/profile" component={Profile} />
             <Route exact path="/courses" component={Courses} />
-            <Route exact path="/courses/aboutcourse" component={AboutCourse} />
+            <Route exact path="/allcourses" component={AllCourses} />
             <Route
               exact
               path="/courses/chapterquiz/:id"

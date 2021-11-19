@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { allotedPackageDetaile } from "../redux/actions/courseAction";
-function EnrolledCourses(props) {
+function ShowAllCourses(props) {
   const dispatch = useDispatch();
   const storedData = useSelector((state) => state);
   const { user, course } = storedData;
@@ -19,11 +19,10 @@ function EnrolledCourses(props) {
       {courseInfo.map((val) => {
         return (
           <div
-            className="w-auto lg:mx-2 md:mx-2 sm:mx-2 shadow-lg bg-white rounded-md my-2 relative"
+            className="w-auto lg:mx-2 md:mx-2 sm:mx-2  shadow-lg  text-white text-center rounded-md my-2 relative"
             key={val.id}
             id={val.course_name.id}
           >
-            <Link to={"/courses/chaptervideo/" + val.course_name.id}>
             <div
               style={{
                 backgroundImage: `url(${
@@ -32,23 +31,26 @@ function EnrolledCourses(props) {
                 backgroundSize: "cover",
                 backgroundPosition: "center center",
               }}
-              className=" w-full h-40 rounded-t-md"
+              className=" w-full h-40 rounded-t-md "
             ></div>
 
-            <div className="p-2 ">
+            <div className="p-2 bg-white text-left h-32">
               <p className="text-gray-500 text-sm">Course</p>
-              <p className=" text-gray-800 mb-5 text-xl">
+              <p className=" text-gray-800 h-20 text-xl">
                 
                   {val.course_name.course_title}
               </p>
-              <span className="absolute bottom-2 left-2 text-xs">
+              <div className="text-black text-xs">
                 by&nbsp;
                 <span className="">
                   {val.course_name.author}
                 </span>
-              </span>
+              </div>
             </div>
-            </Link>
+            <div className="pt-2 bg-blue-700 hover:bg-blue-900 h-10 rounded-b-lg shadow-lg">
+            <Link >
+            Buy Course
+            </Link></div>
           </div>
         );
       })}
@@ -56,4 +58,4 @@ function EnrolledCourses(props) {
   );
 }
 
-export default EnrolledCourses;
+export default ShowAllCourses;

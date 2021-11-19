@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
-import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
+import AccountLoginImg from '../../assets/img/Account-Login-img.jpg'
+import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
 import { Link } from "react-router-dom";
-import { forgetPass } from "../api";
+import { forgetPass } from '../../api'
 
 function ForgetPassword() {
   const [email, setEmail] = useState("test@gmail.com");

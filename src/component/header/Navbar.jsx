@@ -1,60 +1,55 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
+import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
+import { logout } from "../../redux/actions/authActions";
+
 function Navbar() {
+  const dispatch = useDispatch();
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
   return (
     <>
-      <div className="w-full h-auto py-4 z-10 text-white grid grid-cols-2" style={{
-          background:
-            "linear-gradient(90deg, #000000 0.06%, #2f1e1e 48.99%, #990B4F 100%)",
-        }}>
-          <div>
-          <img
-                src={CyberFratLogo}
-                alt="...."
-                className="md:inline hidden  mx-10"
-                style={{ width: "220px", padding: "" }}
-              />
-          </div>
-          <div className="grid grid-cols-3 text-center my-auto">
-            <Link to="/courses">My Course</Link>
-            <Link to="/allcourses">All Course</Link>
-            <Link to="/profile">My Profile</Link>
-          </div>
-        </div>
-    </>
-  );
-}
-
-export default Navbar;
-
-{/**<div
-        className="flex items-center z-10 h-auto py-6 w-full"
+      <div
+        className="w-full h-auto py-4 z-10 text-white grid grid-cols-3"
         style={{
           background:
             "linear-gradient(90deg, #000000 0.06%, #2f1e1e 48.99%, #990B4F 100%)",
         }}
       >
-       
-        <p className="md:inline  w-96 text-white hidden font-bold text-xl">
-          <Link to="/dashboard">Home</Link>
-        </p>
-        <div className="text-white text-center w-full grid grid-cols-3">
-        <Link>My Courses</Link>
-          <Link>All Courses</Link>
-          <Link to="/admin">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-9 w-9 inline rounded-full"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clipRule="evenodd"
-              />
-            </svg> Profile
+        <div className="col-span-2 ">
+          <img
+            src={CyberFratLogo}
+            alt="...."
+            className="md:inline hidden  mx-10"
+            style={{ width: "220px", padding: "" }}
+          />
+        </div>
+        <div className="grid grid-cols-5 text-center my-auto">
+          <Link className="hover:text-blue-400 mx-auto" to="/dashboard">
+            Home
+          </Link>
+          <Link className="hover:text-blue-400 mx-auto" to="/courses">
+            My Course
+          </Link>
+          <Link className="hover:text-blue-400 mx-auto" to="/allcourses">
+            All Course
+          </Link>
+          <Link className="hover:text-blue-400 mx-auto" to="/profile">
+            My Profile
+          </Link>
+          <Link
+            className="hover:text-red-500 mx-auto"
+            to="/"
+            onClick={handleLogOut}
+          >
+            Log Out
           </Link>
         </div>
-      </div> */}
+      </div>
+    </>
+  );
+}
+
+export default Navbar;

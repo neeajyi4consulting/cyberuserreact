@@ -10,28 +10,28 @@ import { toast } from "react-toastify";
 
 const Landingpage = () => {
   const dispatch = useDispatch();
-  // const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const { course } = useSelector((state)=>state);
-  const packageList =useSelector((state=>state.package?.packageDetails)) 
+  const baseURL = "https://rupalibhargava.pythonanywhere.com";
+  const { course, packages } = useSelector((state) => state);
+  const packageList = packages?.packageDetails;
   const loading = course?.loading;
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleQuaries = () =>{
+  const handleQuaries = () => {
     const data = new FormData();
-    data.append("email", email)
-    data.append("subject", subject)
-    data.append("content", message)
-    if (email==="" || subject==="" || message==="") {
-      toast.warning("Please Fill all details")
+    data.append("email", email);
+    data.append("subject", subject);
+    data.append("content", message);
+    if (email === "" || subject === "" || message === "") {
+      toast.warning("Please Fill all details");
     } else {
-      dispatch(addQueries(data))
-      setEmail("")
-    setSubject("")
-    setMessage("")
+      dispatch(addQueries(data));
+      setEmail("");
+      setSubject("");
+      setMessage("");
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(getPackage());
@@ -49,7 +49,7 @@ const Landingpage = () => {
           </div>
         </div>
         <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
-          &nbsp;&nbsp;&nbsp;please wait <br/> this may take a few seconds
+          &nbsp;&nbsp;&nbsp;please wait <br /> this may take a few seconds
         </div>
       </div>
     );
@@ -77,111 +77,174 @@ const Landingpage = () => {
         </div>
       </div>
       <div className="md:mx-20 lg:40 ">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-5 -mt-28 ">
+        <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
           {packageList !== undefined
             ? packageList.map((val) => {
                 return (
-                  <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
-                    <div className="bg-green-500  rounded-t-lg p-8 h-56">
-                      <div className=" text-white text-center p-4">
-                        <div className="text-xl py-2">{val?.name}</div>
-                        <div className=" text-5xl">${val?.price}</div>
+                  <div
+                    key={val.id}
+                    className="flex justify-center items-center h-screen bg-blue-lightest"
+                  >
+                    <div
+                      style={{}}
+                      className="bg-white w-full h-60 rounded-lg shadow-md flex card text-grey-darkest"
+                    >
+                      <img
+                        className="w-1/2 h-full rounded-l-lg"
+                        src={baseURL + val.image}
+                        alt="PackageImage"
+                      />
+                      <div className="w-full flex flex-col">
+                        <div className="p-4 pb-0 flex-1">
+                          <h3 className="font-light mb-1 text-grey-darkest">
+                            {val.name}
+                          </h3>
+                          <span className="text-5xl text-grey-darkest">
+                            {" "}
+                            &#8377; {val.price}
+                            <span className="text-lg">/M</span>
+                          </span>
+                          <div className="flex items-center mt-4">
+                            <div className="pr-2 text-xs">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-5 w-5 inline"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={1}
+                                  d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                                />
+                              </svg>{" "}
+                              Free Test
+                            </div>
+                          </div>
+                        </div>
+                        <Link to="/">
+                          <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
+                            Purchase Now
+                            <i className="fas fa-chevron-right"></i>
+                          </div>
+                        </Link>
                       </div>
                     </div>
-                    <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
-                      <div className="py-4 text-green-500">
-                        Unlimited <span className="text-gray-700">Access</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-green-500 inline-block float-right"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
-                      <div className="py-4 text-green-500">
-                        Montly <span className="text-gray-700">Documents</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 inline-block text-red-500 float-right"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                      <div className="py-4 text-green-500">
-                        Unlimited <span className="text-gray-700">Domains</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-green-500 inline-block float-right"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
-                      <div className="py-4 text-green-500">
-                        Custom <span className="text-gray-700">Hoisting</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 inline-block text-red-500 float-right"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </div>
-                      <div className="py-4 text-green-500">
-                        24/7 <span className="text-gray-700">support</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 text-green-500 inline-block float-right"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </div>
+                    {/* <div style={{
+                          backgroundImage: `url(${baseURL + val.image})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center center",
+                        }} className="col-span-2  rounded-l-lg h-40">
                     </div>
-                    <a href={val?.payment_link}
-                      target="_blank" rel="noopener noreferrer">
-                    <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-                     SUBSCRIBE TODAY
-                    </div>
-                    </a>
+                    <div className="col-span-3 p-5 my-auto rounded-r-lg bg-blue-300 text-white h-40">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Mollitia qui dolorem quia? Veritatis, minima illum.
+                      Doloribus accusamus ad hic ratione!
+                    </div> */}
                   </div>
+                  // <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
+                  //   <div className="bg-green-500  rounded-t-lg p-8 h-56">
+                  //     <div className=" text-white text-center p-4">
+                  //       <div className="text-xl py-2">{val?.name}</div>
+                  //       <div className=" text-5xl">${val?.price}</div>
+                  //     </div>
+                  //   </div>
+                  //   <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
+                  //     <div className="py-4 text-green-500">
+                  //       Unlimited <span className="text-gray-700">Access</span>
+                  //       <svg
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         className="h-6 w-6 text-green-500 inline-block float-right"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //         stroke="currentColor"
+                  //       >
+                  //         <path
+                  //           strokeLinecap="round"
+                  //           strokeLinejoin="round"
+                  //           strokeWidth={2}
+                  //           d="M5 13l4 4L19 7"
+                  //         />
+                  //       </svg>
+                  //     </div>
+                  //     <div className="py-4 text-green-500">
+                  //       Montly <span className="text-gray-700">Documents</span>
+                  //       <svg
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         className="h-6 w-6 inline-block text-red-500 float-right"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //         stroke="currentColor"
+                  //       >
+                  //         <path
+                  //           strokeLinecap="round"
+                  //           strokeLinejoin="round"
+                  //           strokeWidth={2}
+                  //           d="M6 18L18 6M6 6l12 12"
+                  //         />
+                  //       </svg>
+                  //     </div>
+                  //     <div className="py-4 text-green-500">
+                  //       Unlimited <span className="text-gray-700">Domains</span>
+                  //       <svg
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         className="h-6 w-6 text-green-500 inline-block float-right"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //         stroke="currentColor"
+                  //       >
+                  //         <path
+                  //           strokeLinecap="round"
+                  //           strokeLinejoin="round"
+                  //           strokeWidth={2}
+                  //           d="M5 13l4 4L19 7"
+                  //         />
+                  //       </svg>
+                  //     </div>
+                  //     <div className="py-4 text-green-500">
+                  //       Custom <span className="text-gray-700">Hoisting</span>
+                  //       <svg
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         className="h-6 w-6 inline-block text-red-500 float-right"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //         stroke="currentColor"
+                  //       >
+                  //         <path
+                  //           strokeLinecap="round"
+                  //           strokeLinejoin="round"
+                  //           strokeWidth={2}
+                  //           d="M6 18L18 6M6 6l12 12"
+                  //         />
+                  //       </svg>
+                  //     </div>
+                  //     <div className="py-4 text-green-500">
+                  //       24/7 <span className="text-gray-700">support</span>
+                  //       <svg
+                  //         xmlns="http://www.w3.org/2000/svg"
+                  //         className="h-6 w-6 text-green-500 inline-block float-right"
+                  //         fill="none"
+                  //         viewBox="0 0 24 24"
+                  //         stroke="currentColor"
+                  //       >
+                  //         <path
+                  //           strokeLinecap="round"
+                  //           strokeLinejoin="round"
+                  //           strokeWidth={2}
+                  //           d="M5 13l4 4L19 7"
+                  //         />
+                  //       </svg>
+                  //     </div>
+                  //   </div>
+                  //   <a href={val?.payment_link}
+                  //     target="_blank" rel="noopener noreferrer">
+                  //   <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
+                  //    SUBSCRIBE TODAY
+                  //   </div>
+                  //   </a>
+                  // </div>
                 );
               })
             : null}
@@ -195,7 +258,12 @@ const Landingpage = () => {
                 </h2>
                 <div className="text-gray-700 mt-8">
                   Hate forms? Send us an{" "}
-                  <a href="mailto:test@gmail.com?subject=My custom mail subject" className="underline cursor-pointer">email</a>{" "}
+                  <a
+                    href="mailto:test@gmail.com?subject=My custom mail subject"
+                    className="underline cursor-pointer"
+                  >
+                    email
+                  </a>{" "}
                   instead.
                 </div>
               </div>
@@ -219,7 +287,9 @@ const Landingpage = () => {
                   placeholder=""
                   required
                   value={email}
-                  onChange={(e)=>{setEmail(e.target.value)}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 />
               </div>
               <div className="mt-8">
@@ -231,7 +301,9 @@ const Landingpage = () => {
                   type="text"
                   required
                   value={subject}
-                  onChange={(e)=>{setSubject(e.target.value)}}
+                  onChange={(e) => {
+                    setSubject(e.target.value);
+                  }}
                 />
               </div>
               <div className="mt-8">
@@ -241,10 +313,18 @@ const Landingpage = () => {
                 <textarea
                   value={message}
                   required
-                  onChange={(e)=>{setMessage(e.target.value)}} className="w-full h-32 bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"></textarea>
+                  onChange={(e) => {
+                    setMessage(e.target.value);
+                  }}
+                  className="w-full h-32 bg-white text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+                ></textarea>
               </div>
               <div className="mt-8">
-                <button onClick={handleQuaries} type="submit" className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline">
+                <button
+                  onClick={handleQuaries}
+                  type="submit"
+                  className="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline"
+                >
                   Send Query or Feedback
                 </button>
               </div>

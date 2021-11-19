@@ -28,7 +28,7 @@ function Profile() {
         const userDetails = response.data.data;
         setUserName(userDetails.first_name + " " + userDetails.last_name);
         setUserEmail(userDetails.email);
-        setUserNumber("+91 " + userDetails.phone);
+        setUserNumber(userDetails.phone);
       })
       .catch((err) => {
         console.log(err);

@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
-import AccountLoginImg from "../assets/img/Account-Login-img.jpg";
-import CyberFratLogo from "../assets/img/Cyber-Frat-Logo.png";
-import { cleanLocalStorage } from "../utils/storage";
-import { loginAction } from "../redux/actions/authActions";
+import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
+import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
+import { cleanLocalStorage } from "../../utils/storage";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { allotedPackageDetaile } from "../redux/actions/courseAction";
+import { loginAction } from "../../redux/actions/authActions";
+import { allotedPackageDetaile } from "../../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neeraj@gmail.com");
   const [passcode, setPasscode] = useState("password");
   const storedData = useSelector((state) => state);
-  const { user } =storedData;
+  const { user } = storedData;
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -59,13 +59,29 @@ const LoginScreen = () => {
             style={{
               height: "59px",
               width: "491px",
-
               color: "#344685",
             }}
           >
             Login to your Account
           </h1>
-          <p className="mt-5">Don't have Account <Link to="/signup" className="text-blue-500 hover:text-blue-700 hover:underline">SignUp</Link></p>
+          <p
+            className="mt-5"
+            style={{
+              fontFamily: "Roboto",
+              fontStyle: "normal",
+              fontWeight: "normal",
+              lineHeight: "23px",
+              color: "#464646",
+            }}
+          >
+            Don't have Account{" "}
+            <Link
+              to="/signup"
+              className="text-blue-500 hover:text-blue-700 hover:underline"
+            >
+              SignUp
+            </Link>
+          </p>
           <div
             className="text-md"
             style={{
@@ -123,7 +139,7 @@ const LoginScreen = () => {
                 </Link>
               </span>
               <button
-              type="submit"
+                type="submit"
                 className="py-2 px-8 rounded-md block my-8"
                 style={{
                   backgroundColor: "#ED3237",

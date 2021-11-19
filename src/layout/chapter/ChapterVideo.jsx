@@ -147,7 +147,7 @@ function ChapterVideo() {
                 </p>
               </div>
             </div>
-            <div className="shadow-lg" style={{overflow:"auto", maxHeight:"620px"}}>
+            <div className="shadow-lg" style={{overflow:"auto", height:"auto", maxHeight:"620px"}}>
               <div className="bg-white shadow-xl w-full" >
                 <div className="p-5">
                   <p className="text-lg font-bold">Chapters In This Course</p>

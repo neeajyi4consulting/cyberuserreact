@@ -12,9 +12,15 @@ const Header = () => {
         <div className="text-white text-right w-full my-5">
           <Link
             to="/login"
-            className="bg-red-700 py-1 lg:py-2 px-2 lg:px-5 lg:mr-40 rounded-lg mr-5"
+            className="bg-red-700 py-1 lg:py-2 px-2 lg:px-5  rounded-lg mr-5"
           >
             Login
+          </Link>
+          <Link
+            to="/signup"
+            className="bg-red-700 py-1 lg:py-2 px-2 lg:px-5 lg:mr-20 rounded-lg mr-5"
+          >
+            Sign Up
           </Link>
         </div>
       </div>
