@@ -132,17 +132,7 @@ const Landingpage = () => {
                         </Link>
                       </div>
                     </div>
-                    {/* <div style={{
-                          backgroundImage: `url(${baseURL + val.image})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center center",
-                        }} className="col-span-2  rounded-l-lg h-40">
-                    </div>
-                    <div className="col-span-3 p-5 my-auto rounded-r-lg bg-blue-300 text-white h-40">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Mollitia qui dolorem quia? Veritatis, minima illum.
-                      Doloribus accusamus ad hic ratione!
-                    </div> */}
+                    
                   </div>
                   // <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
                   //   <div className="bg-green-500  rounded-t-lg p-8 h-56">

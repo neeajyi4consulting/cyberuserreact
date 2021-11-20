@@ -19,6 +19,8 @@ function ChapterVideo() {
   const courseList = course?.chapterClientList?.chapter_data;
   const quizPassed = course?.quizPassed;
   const [chapter, setChapter] = useState();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [videoLink, setVideoLink] = useState();
   
   const handleFetchCourse = () => {
     const data = new FormData();
@@ -28,9 +30,9 @@ function ChapterVideo() {
   };
   
   const handleOnChangeVideo = (val) => {
-    setChapter(val);
+    handleFetchCourse();
+    setVideoLink(val?.link)
   };
-
   const handleOnFinishVideo = (res) => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
@@ -40,13 +42,25 @@ function ChapterVideo() {
     data.append("completedVideoLenght", res.seconds);
     data.append("totalVideoLength", res.duration);
     dispatch(changeStatusOfChapter(data));
-    handleFetchCourse();
-    // window.location.reload();
+    if (courseList.length-1>currentIndex) {
+      setCurrentIndex(currentIndex+1)
+      handleFetchCourse();
+    }
   };
+
+  const autoPlayNextVideo = () => {
+    // console.log("this is course Details", courseList? courseList[currentIndex].link : "not available");
+    // console.log("this is ",courseList);
+    setVideoLink(courseList? courseList[currentIndex].link : "not available")
+  }
 
   useEffect(() => {
     handleFetchCourse();
   }, []);
+  
+  useEffect(() => {
+    autoPlayNextVideo();
+  }, [courseList]);
 
   if (loading) {
     return (
@@ -79,9 +93,9 @@ function ChapterVideo() {
               <div>
                 <Vimeo
                   video={
-                    !chapter
-                      ? "https://vimeo.com/636273863/eb39c99700"
-                      : chapter?.link
+                    courseList===undefined
+                      ? "595444416"
+                      : videoLink
                   }
                   // height="600px"
                   // width="900px"
@@ -89,7 +103,7 @@ function ChapterVideo() {
                   showByline={false}
                   showPortrait={false}
                   showTitle={false}
-                  onError={()=>{toast.error("There's some error playing video")}}
+                  onError={(error)=>{toast.error("There's some error playing video"); console.log("this is error", error);}}
                   onEnd={(res) => handleOnFinishVideo(res)}
                 />
               </div>
@@ -147,7 +161,7 @@ function ChapterVideo() {
                 </p>
               </div>
             </div>
-            <div className="shadow-lg" style={{overflow:"auto", height:"auto", maxHeight:"620px"}}>
+            <div style={{overflow:"auto", height:"auto", maxHeight:"620px"}}>
               <div className="bg-white shadow-xl w-full" >
                 <div className="p-5">
                   <p className="text-lg font-bold">Chapters In This Course</p>
@@ -157,7 +171,7 @@ function ChapterVideo() {
                     ? null
                     : courseList.map((val) => {
                         return (
-                          <div className="sam" key={val?.id}>
+                          <div key={val?.id}>
                             <div
                               className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
                                 val?.chapter_status?.is_completed

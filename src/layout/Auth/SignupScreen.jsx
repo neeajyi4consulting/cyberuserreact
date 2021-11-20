@@ -1,6 +1,6 @@
 import React from "react";
-import AccountLoginImg from '../../assets/img/Account-Login-img.jpg'
-import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
+import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
+import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
@@ -16,27 +16,33 @@ function SignupScreen() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [value, setValue] = useState();
+  const [number, setNumber] = useState("");
 
   const handleSubmit = (e) => {
     const data = new FormData();
     data.append("email", userEmail);
     data.append("password", password);
-    data.append("phone", value);
+    data.append("phone", number);
     data.append("first_name", firstName);
     data.append("last_name", lastName);
-    if (userEmail==="" || password==="" || value==="" || firstName==="" || lastName==="" || confirmPassword==="") {
-    e.preventDefault();
-      toast.warning("Please Fill All Details")
+    if (
+      userEmail === "" ||
+      password === "" ||
+      number == undefined ||
+      firstName === "" ||
+      lastName === "" ||
+      confirmPassword === ""
+    ) {
+      e.preventDefault();
+      toast.warning("Please Fill All Details");
     } else {
-      if (password===confirmPassword) {
+      if (password === confirmPassword) {
         dispatch(addNewUser(data));
       } else {
-    e.preventDefault();
-    toast.warning("Password is not same")
+        e.preventDefault();
+        toast.warning("Password is not same");
       }
     }
-    
   };
 
   return (
@@ -96,7 +102,7 @@ function SignupScreen() {
                   lineHeight: "23px",
                 }}
               >
-                 Click Here
+                Click Here
               </Link>
             </p>
             <div className="" style={{ width: "500px" }}>
@@ -136,18 +142,30 @@ function SignupScreen() {
                 }}
               />
               <br />
-              <PhoneInput
+              <input
+                type="tel"
+                required
+                maxLength="10"
+                minLength="10"
+                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                style={{ fontFamily: "Roboto", fontWeight: "400" }}
+                placeholder="Your Phone Number"
+                value={number}
+                onChange={(e) => {
+                  setNumber(e.target.value);
+                }}
+              />
+              {/* <PhoneInput
+              required
                 placeholder="00 11111 00000"
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 value={value}
                 onChange={setValue}
-              />
+              /> */}
               <br />
               <input
                 type="password"
                 required
-                name=""
-                id=""
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 placeholder="Your Password"
                 value={password}
@@ -158,8 +176,6 @@ function SignupScreen() {
               <input
                 type="password"
                 required
-                name=""
-                id=""
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 placeholder="Confirm Password"
                 value={confirmPassword}

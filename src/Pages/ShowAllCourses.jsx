@@ -47,7 +47,7 @@ function ShowAllCourses(props) {
                 </span>
               </div>
             </div>
-            <div className="pt-2 bg-blue-700 hover:bg-blue-900 h-10 rounded-b-lg shadow-lg">
+            <div className="pt-2 bg-blue-700 hover:bg-blue-900 hover:shadow-inner h-10 rounded-b-lg shadow-lg">
             <Link >
             Buy Course
             </Link></div>

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import MyCourses from "../Pages/dashboard/MyCourses";
-import Events from "../Pages/dashboard/Events";
-import Services from "../Pages/dashboard/Events";
+// import Events from "../Pages/dashboard/Events";
+// import Services from "../Pages/dashboard/Events";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getPackage } from "../redux/actions/packageAction";
 import {
-  fetchPackageDetails,
   getBannerList,
-  getEventList,
-  getServiceList,
+  // getEventList,
+  // getServiceList,
 } from "../api";
 import { Link } from "react-router-dom";
 import { allotedPackageDetaile } from "../redux/actions/courseAction";
@@ -23,128 +22,88 @@ const Dashboard = () => {
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const courseInfo = course?.allotedPackageDetails;
-  const packageList = packages?.packageDetails
-  // console.log("this is test package", packageList);
+  const packageList = packages?.packageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const [event, setEvent] = useState([]);
-  const [services, setServices] = useState([]);
   const [bannerDetails, setBannerDetails] = useState([]);
 
   const fetchExtraDetails = async () => {
-    setEvent(await (await getEventList()).data?.data);
-    setServices(await (await getServiceList()).data?.data);
+    // setEvent(await (await getEventList()).data?.data);
+    // setServices(await (await getServiceList()).data?.data);
     setBannerDetails(await (await getBannerList()).data?.data);
-    await fetchPackageDetails().then((response) => {
-      setPackageInfo(response.data?.data);
-    });
   };
 
-  // const test =
-  //   packageList === undefined ? null : packageList.map((val) => {
-  //     return (
-  //       <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
-  //         <div className="bg-green-500  rounded-t-lg p-8 h-56">
-  //           <div className=" text-white text-center p-4">
-  //             <div className="text-xl py-2">{val?.name}</div>
-  //             <div className=" text-5xl">${val?.price}</div>
-  //           </div>
-  //         </div>
-  //         <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
-  //           <div className="py-4 text-green-500">
-  //             Unlimited <span className="text-gray-700">Access</span>
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               className="h-6 w-6 text-green-500 inline-block float-right"
-  //               fill="none"
-  //               viewBox="0 0 24 24"
-  //               stroke="currentColor"
-  //             >
-  //               <path
-  //                 strokeLinecap="round"
-  //                 strokeLinejoin="round"
-  //                 strokeWidth={2}
-  //                 d="M5 13l4 4L19 7"
-  //               />
-  //             </svg>
-  //           </div>
-  //           <div className="py-4 text-green-500">
-  //             Montly <span className="text-gray-700">Documents</span>
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               className="h-6 w-6 inline-block text-red-500 float-right"
-  //               fill="none"
-  //               viewBox="0 0 24 24"
-  //               stroke="currentColor"
-  //             >
-  //               <path
-  //                 strokeLinecap="round"
-  //                 strokeLinejoin="round"
-  //                 strokeWidth={2}
-  //                 d="M6 18L18 6M6 6l12 12"
-  //               />
-  //             </svg>
-  //           </div>
-  //           <div className="py-4 text-green-500">
-  //             Unlimited <span className="text-gray-700">Domains</span>
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               className="h-6 w-6 text-green-500 inline-block float-right"
-  //               fill="none"
-  //               viewBox="0 0 24 24"
-  //               stroke="currentColor"
-  //             >
-  //               <path
-  //                 strokeLinecap="round"
-  //                 strokeLinejoin="round"
-  //                 strokeWidth={2}
-  //                 d="M5 13l4 4L19 7"
-  //               />
-  //             </svg>
-  //           </div>
-  //           <div className="py-4 text-green-500">
-  //             Custom <span className="text-gray-700">Hoisting</span>
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               className="h-6 w-6 inline-block text-red-500 float-right"
-  //               fill="none"
-  //               viewBox="0 0 24 24"
-  //               stroke="currentColor"
-  //             >
-  //               <path
-  //                 strokeLinecap="round"
-  //                 strokeLinejoin="round"
-  //                 strokeWidth={2}
-  //                 d="M6 18L18 6M6 6l12 12"
-  //               />
-  //             </svg>
-  //           </div>
-  //           <div className="py-4 text-green-500">
-  //             24/7 <span className="text-gray-700">support</span>
-  //             <svg
-  //               xmlns="http://www.w3.org/2000/svg"
-  //               className="h-6 w-6 text-green-500 inline-block float-right"
-  //               fill="none"
-  //               viewBox="0 0 24 24"
-  //               stroke="currentColor"
-  //             >
-  //               <path
-  //                 strokeLinecap="round"
-  //                 strokeLinejoin="round"
-  //                 strokeWidth={2}
-  //                 d="M5 13l4 4L19 7"
-  //               />
-  //             </svg>
-  //           </div>
-  //         </div>
-  //         <a href={val?.payment_link}
-  //           target="_blank" rel="noopener noreferrer">
-  //         <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-  //          SUBSCRIBE TODAY
-  //         </div>
-  //         </a>
-  //       </div>
-  //     );
-  //   })
+  const test = !packageList
+    ? null
+    : packageList.map((val) => {
+        // console.log("mapped packages", packageList);
+        return (
+          <div
+            key={val.id}
+            className="flex justify-center items-center h-screen bg-blue-lightest"
+          >
+            <div
+              style={{}}
+              className="bg-white w-full h-60 rounded-lg shadow-md flex card text-grey-darkest"
+            >
+              <img
+                className="w-1/2 h-full rounded-l-lg"
+                src={baseURL + val.image}
+                alt="PackageImage"
+              />
+              <div className="w-full flex flex-col">
+                <div className="p-4 pb-0 flex-1">
+                  <h3 className="font-light mb-1 text-grey-darkest">
+                    {val.name}
+                  </h3>
+                  <span className="text-5xl text-grey-darkest">
+                    {" "}
+                    &#8377; {val.price}
+                    <span className="text-lg">/M</span>
+                  </span>
+                  <div className="flex items-center mt-4">
+                    <div className="pr-2 text-xs">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5 inline"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1}
+                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+                        />
+                      </svg>{" "}
+                      Free Test
+                    </div>
+                  </div>
+                </div>
+                <Link to="/">
+                  <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
+                    Purchase Now
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        );
+      });
 
   useEffect(() => {
     dispatch(getPackage());
@@ -154,6 +113,10 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(allotedPackageDetaile(currentUser?.user_id));
   }, []);
+
+  // useEffect(() => {
+  //   console.log("this is package details", packageList);
+  // }, [courseInfo]);
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -206,8 +169,7 @@ const Dashboard = () => {
           </Carousel>
         </div>
         {false ? (
-          <div className="grid-cols-2 grid">
-          {test}</div>
+          <div className="grid md:grid-cols-2  grid-cols-1 gap-16">{test}</div>
         ) : (
           <div className="grid grid-rows-2 mt-6">
             <div className="">
@@ -230,24 +192,26 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
-              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
-                <Link to="/allcourses">All Courses</Link>
+            {true ? (
+              <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
+                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+                  <Link to="/allcourses">Gold Package</Link>
+                </div>
+                <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
+                  {courseInfo?.map((val) => {
+                    return (
+                      <MyCourses
+                        key={val?.course_name?.id}
+                        imgsrc={baseURL + val?.course_name?.course_file}
+                        courseName={val?.course_name?.course_title}
+                        author={val?.course_name?.author}
+                        id={val?.course_name?.id}
+                      />
+                    );
+                  })}
+                </div>
               </div>
-              <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
-                {courseInfo?.map((val) => {
-                  return (
-                    <MyCourses
-                      key={val?.course_name?.id}
-                      imgsrc={baseURL + val?.course_name?.course_file}
-                      courseName={val?.course_name?.course_title}
-                      author={val?.course_name?.author}
-                      id={val?.course_name?.id}
-                    />
-                  );
-                })}
-              </div>
-            </div>
+            ) : null}
           </div>
         )}
       </div>
