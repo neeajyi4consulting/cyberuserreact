@@ -22,7 +22,7 @@ const Dashboard = () => {
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const courseInfo = course?.allotedPackageDetails;
-  const packageList = packages?.packageDetails;
+  // const packageList = ;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const [bannerDetails, setBannerDetails] = useState([]);
 
@@ -32,9 +32,9 @@ const Dashboard = () => {
     setBannerDetails(await (await getBannerList()).data?.data);
   };
 
-  const test = !packageList
+  const test = !packageInfo
     ? null
-    : packageList.map((val) => {
+    : packageInfo.map((val) => {
         // console.log("mapped packages", packageList);
         return (
           <div
@@ -114,9 +114,10 @@ const Dashboard = () => {
     dispatch(allotedPackageDetaile(currentUser?.user_id));
   }, []);
 
-  // useEffect(() => {
-  //   console.log("this is package details", packageList);
-  // }, [courseInfo]);
+  useEffect(() => {
+    setPackageInfo(packages?.packageDetails)
+    // console.log("this is package details", packageInfo);
+  }, [courseInfo]);
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">

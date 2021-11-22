@@ -265,23 +265,25 @@ function Profile() {
               clipRule="evenodd"
             />
           </svg>
-          <span className="md:ml-5 text-xl">{userName}</span>
-          <span
+          <span className="sm:ml-5 text-xl my-2">{userName}</span>
+          <span>
+          <button
             onClick={handleEditForm}
-            className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer"
+            className="bg-blue-500 text-white py-3 px-5 my-2 rounded-lg float-right block sm:inline w-full sm:w-auto cursor-pointer"
           >
             Edit User Details
+            </button>
           </span>
           <span>
             <button
               onClick={handleChangePassword}
-              className="bg-blue-500 text-white py-3 px-5 rounded-lg float-right cursor-pointer mx-5"
+              className="bg-blue-500 text-white py-3 px-5 my-2 rounded-lg float-right block sm:inline w-full sm:w-auto cursor-pointer mx-0 sm:mx-5"
             >
               Change Password
             </button>
           </span>
 
-          <div className="border-2 p-5 mt-10">
+          <div className="border-2 p-5 mt-36 sm:mt-10">
             <div>
               <p className="text-gray-500 text-sm pt-10">Account Name</p>
 

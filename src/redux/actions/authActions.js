@@ -13,7 +13,7 @@ export const loginAction = (data) => async (dispatch) => {
 
   if (response.data?.status === true) {
     setJWT(response?.data?.data?.token);
-    toast.success("Login Successfull");
+    toast.success("Logged in Successfully");
   } else {
     toast.error("Invalid Email or Password");
   }
@@ -40,7 +40,7 @@ export const fetchUserAction = () => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch({ type: ActionTypes.LOGOUT, payload: { loading: true } });
   cleanLocalStorage();
-  toast.success("Logout successful");
+  toast.success("Logged Out Successfully");
 
   dispatch({
     type: ActionTypes.LOGOUT,

@@ -83,14 +83,14 @@ const Landingpage = () => {
                 return (
                   <div
                     key={val.id}
-                    className="flex justify-center items-center h-screen bg-blue-lightest"
+                    className="flex justify-center items-center my-10 h-auto bg-blue-lightest"
                   >
                     <div
                       style={{}}
                       className="bg-white w-full h-60 rounded-lg shadow-md flex card text-grey-darkest"
                     >
                       <img
-                        className="w-1/2 h-full rounded-l-lg"
+                        className="w-1/2 h-full rounded-l-lg bg-auto object-cover"
                         src={baseURL + val.image}
                         alt="PackageImage"
                       />
@@ -134,113 +134,12 @@ const Landingpage = () => {
                     </div>
                     
                   </div>
-                  // <div className="shadow-xl rounded-b-lg mx-5" key={val.id}>
-                  //   <div className="bg-green-500  rounded-t-lg p-8 h-56">
-                  //     <div className=" text-white text-center p-4">
-                  //       <div className="text-xl py-2">{val?.name}</div>
-                  //       <div className=" text-5xl">${val?.price}</div>
-                  //     </div>
-                  //   </div>
-                  //   <div className="divide-y-2 divide-yellow-200 divide-solid  bg-white m-3 p-5">
-                  //     <div className="py-4 text-green-500">
-                  //       Unlimited <span className="text-gray-700">Access</span>
-                  //       <svg
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         className="h-6 w-6 text-green-500 inline-block float-right"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //         stroke="currentColor"
-                  //       >
-                  //         <path
-                  //           strokeLinecap="round"
-                  //           strokeLinejoin="round"
-                  //           strokeWidth={2}
-                  //           d="M5 13l4 4L19 7"
-                  //         />
-                  //       </svg>
-                  //     </div>
-                  //     <div className="py-4 text-green-500">
-                  //       Montly <span className="text-gray-700">Documents</span>
-                  //       <svg
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         className="h-6 w-6 inline-block text-red-500 float-right"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //         stroke="currentColor"
-                  //       >
-                  //         <path
-                  //           strokeLinecap="round"
-                  //           strokeLinejoin="round"
-                  //           strokeWidth={2}
-                  //           d="M6 18L18 6M6 6l12 12"
-                  //         />
-                  //       </svg>
-                  //     </div>
-                  //     <div className="py-4 text-green-500">
-                  //       Unlimited <span className="text-gray-700">Domains</span>
-                  //       <svg
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         className="h-6 w-6 text-green-500 inline-block float-right"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //         stroke="currentColor"
-                  //       >
-                  //         <path
-                  //           strokeLinecap="round"
-                  //           strokeLinejoin="round"
-                  //           strokeWidth={2}
-                  //           d="M5 13l4 4L19 7"
-                  //         />
-                  //       </svg>
-                  //     </div>
-                  //     <div className="py-4 text-green-500">
-                  //       Custom <span className="text-gray-700">Hoisting</span>
-                  //       <svg
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         className="h-6 w-6 inline-block text-red-500 float-right"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //         stroke="currentColor"
-                  //       >
-                  //         <path
-                  //           strokeLinecap="round"
-                  //           strokeLinejoin="round"
-                  //           strokeWidth={2}
-                  //           d="M6 18L18 6M6 6l12 12"
-                  //         />
-                  //       </svg>
-                  //     </div>
-                  //     <div className="py-4 text-green-500">
-                  //       24/7 <span className="text-gray-700">support</span>
-                  //       <svg
-                  //         xmlns="http://www.w3.org/2000/svg"
-                  //         className="h-6 w-6 text-green-500 inline-block float-right"
-                  //         fill="none"
-                  //         viewBox="0 0 24 24"
-                  //         stroke="currentColor"
-                  //       >
-                  //         <path
-                  //           strokeLinecap="round"
-                  //           strokeLinejoin="round"
-                  //           strokeWidth={2}
-                  //           d="M5 13l4 4L19 7"
-                  //         />
-                  //       </svg>
-                  //     </div>
-                  //   </div>
-                  //   <a href={val?.payment_link}
-                  //     target="_blank" rel="noopener noreferrer">
-                  //   <div className=" cursor-pointer text-center bg-green-500 text-white rounded-md mx-6 my-5  p-3">
-                  //    SUBSCRIBE TODAY
-                  //   </div>
-                  //   </a>
-                  // </div>
                 );
               })
             : null}
         </div>
         <div>
-          <div className="max-w-screen-xl mt-24 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+          <div className="max-w-screen-xl mt-12 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
             <div className="flex flex-col ">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-bold leading-tight">

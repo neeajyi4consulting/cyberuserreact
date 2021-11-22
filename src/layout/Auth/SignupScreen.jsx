@@ -3,6 +3,7 @@ import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
 import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -17,6 +18,10 @@ function SignupScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [number, setNumber] = useState("");
+  const [value, setValue] = useState()
+
+  const validEmail =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleSubmit = (e) => {
     const data = new FormData();
@@ -28,7 +33,7 @@ function SignupScreen() {
     if (
       userEmail === "" ||
       password === "" ||
-      number == undefined ||
+      number == "" ||
       firstName === "" ||
       lastName === "" ||
       confirmPassword === ""
@@ -36,11 +41,24 @@ function SignupScreen() {
       e.preventDefault();
       toast.warning("Please Fill All Details");
     } else {
-      if (password === confirmPassword) {
-        dispatch(addNewUser(data));
-      } else {
+      if (password !== confirmPassword && password.length<8) {
         e.preventDefault();
         toast.warning("Password is not same");
+      } else {
+        if (password.length<8) {
+          toast.warning("Password must be 8 Character Long")
+        } else {
+          if (!validEmail.test(userEmail)) {
+            toast.warning("Please Enter Valid Email")
+          } else {
+            if (number.length===10) {
+              // alert("hello")
+          dispatch(addNewUser(data));
+            } else {
+              toast.warning("Please Enter Valid Phone Number")
+            }
+          }
+        }
       }
     }
   };
@@ -144,9 +162,10 @@ function SignupScreen() {
               <br />
               <input
                 type="tel"
-                required
-                maxLength="10"
-                minLength="10"
+                required="required"
+                maxLength={11}
+                minLength={10}
+                pattern="^-?[0-9]\d*\.?\d*$"
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Phone Number"
@@ -157,6 +176,9 @@ function SignupScreen() {
               />
               {/* <PhoneInput
               required
+              country="in"
+              international={false}
+              
                 placeholder="00 11111 00000"
                 className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 value={value}
@@ -185,7 +207,8 @@ function SignupScreen() {
               />
               <br />
               <Link
-                to="/login"
+              type="submit"
+                to="/signup"
                 onClick={handleSubmit}
                 className="py-2 px-5 w-24 rounded-md block my-8"
                 style={{

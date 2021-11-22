@@ -14,8 +14,8 @@ const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neeraj@gmail.com");
   const [passcode, setPasscode] = useState("password");
-  const storedData = useSelector((state) => state);
-  const { user } = storedData;
+  // const storedData = useSelector((state) => state);
+  // const { user } = storedData;
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -24,7 +24,7 @@ const LoginScreen = () => {
     data.append("password", passcode);
     dispatch(loginAction(data));
     history.push("/dashboard");
-    dispatch(allotedPackageDetaile(user?.currentUser?.user_id));
+    // dispatch(allotedPackageDetaile(user?.currentUser?.user_id));
   };
 
   const clearLocalStorageOnLoad = () => {
