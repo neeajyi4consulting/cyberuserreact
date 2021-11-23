@@ -5,6 +5,7 @@ import { logout, editDetails, changeUserPassword } from "../redux/actions/authAc
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 function Profile() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -47,14 +48,23 @@ function Profile() {
     setToggleChangePassword(toggleChangePassword ? false : true);
   };
 
-  const handleSubmitNewDetails = () => {
+  const handleSubmitNewDetails = (e) => {
+    if (editUserFirstName==="" || editUserLastName==="" || editUserEmail==="" || editUserNumber==="") {
+      e.preventDefault();
+      toast.warning("Please Fill All details") 
+    }else if (editUserNumber.length!==10) {
+      e.preventDefault();
+      toast.warning("Please Enter a Valid Number")
+    }else{
     const data = new FormData();
     data.append("first_name", editUserFirstName);
     data.append("last_name", editUserLastName);
     data.append("email", editUserEmail);
     data.append("phone", editUserNumber);
     data.append("user_id", currentUser.user_id);
-    dispatch(editDetails(data));
+      dispatch(editDetails(data));
+    }
+    
   };
 
   const handleNewPassword = async () => {
@@ -82,7 +92,7 @@ function Profile() {
         <div
           className={` ${
             toogleEditForm ? "hidden" : ""
-          } h-full w-full text-center shadow-lg fixed top-10 bg-gray-600 bg-opacity-50  `}
+          } h-full w-full text-center shadow-lg fixed top-0 bg-gray-600 bg-opacity-50  `}
         >
           <div className="flex justify-center h-screen items-center antialiased">
             <div className="flex flex-col w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl mx-auto rounded-lg border border-gray-300 shadow-xl">

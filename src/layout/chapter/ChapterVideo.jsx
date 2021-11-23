@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReactTooltip from 'react-tooltip';
 import Vimeo from "@u-wave/react-vimeo";
 import { useHistory, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -24,6 +25,7 @@ function ChapterVideo() {
   const [chapter, setChapter] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoLink, setVideoLink] = useState();
+  console.log("is quiz passed", course?.quizPassed);
 
   const handleFetchCourse = () => {
     const data = new FormData();
@@ -33,13 +35,13 @@ function ChapterVideo() {
   };
 
   const handleOnChangeVideo = (val) => {
-    handleFetchCourse();
+    setChapter(val?.id)
     setVideoLink(val?.link);
   };
   const handleOnFinishVideo = (res) => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
-    data.append("chapter_id", chapter?.id);
+    data.append("chapter_id", chapter);
     data.append("course_id", id);
     data.append("status", res.percent);
     data.append("completedVideoLenght", res.seconds);
@@ -48,12 +50,12 @@ function ChapterVideo() {
     if (courseList.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
       handleFetchCourse();
+    }else{
+      console.log("something went wrong");
     }
   };
 
   const autoPlayNextVideo = () => {
-    // console.log("this is course Details", courseList? courseList[currentIndex].link : "not available");
-    // console.log("this is ",courseList);
     setVideoLink(courseList ? courseList[currentIndex].link : "not available");
   };
 
@@ -94,38 +96,11 @@ function ChapterVideo() {
           <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 w-full my-3">
             <div className="bg-white relative col-span-2 shadow-lg">
               <div>
-                {/* <div style={{padding:"56.25% 0 0 0",position:"relative"}}><iframe src="https://player.vimeo.com/video/636272173?h=ab7fc425e5&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}} title="Defense in Depth P1.mov"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> */}
-                <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-                  <iframe
-                    src="https://player.vimeo.com/video/636273863?h=eb39c99700&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                    frameBorder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowFullScreen
-                    style={{
-                      position: "absolute",
-                      top: "0",
-                      left: "0",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    title="Defence in Dept P2.mov"
-                  ></iframe>
-                </div>
-                <script src="https://player.vimeo.com/api/player.js"></script>
-                {/* <div style={{padding:"56.25% 0 0 0",position:"relative"}}>
-                  <iframe
-                    src="https://player.vimeo.com/video/136822728?h=b1ba3afed3&color=ffffff&title=0&byline=0&portrait=0&control=0"
-                    style={{position:"absolute",top:"0",left:"0",width:"100%",height:"100%"}}
-                    frameborder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                </div> */}
-                {/* <script src="https://player.vimeo.com/api/player.js"></script> */}
-                {/* <Vimeo
+                <Vimeo
                   video={
                     courseList===undefined
-                      ? "595444416"
+                      ? 
+                      "https://vimeo.com/636273863/eb39c99700"
                       : videoLink
                   }
                   // height="600px"
@@ -136,7 +111,7 @@ function ChapterVideo() {
                   showTitle={false}
                   onError={(error)=>{toast.error("There's some error playing video"); console.log("this is error", error);}}
                   onEnd={(res) => handleOnFinishVideo(res)}
-                /> */}
+                />
               </div>
               <div className="h-auto border-b-1 border-gray-700 shadow-lg bg-white grid grid-cols-1 md:grid-cols-5">
                 <div
@@ -147,14 +122,15 @@ function ChapterVideo() {
                 </div>
                 {!statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
-                  <button
-                    onClick={() => history.push(`/courses/chapterquiz/${id}`)}
+                  <a
+                    href={`/courses/chapterquiz/${id}`}
+                    target="_blank"
                     className={
                       "text-gray-700 mx-3 py-4 px-8 text-center relative"
                     }
                   >
                     Quiz
-                  </button>
+                  </a>
                 ) : (
                   <button className="text-gray-400 text-center cursor-not-allowed">
                     Quiz
@@ -179,7 +155,8 @@ function ChapterVideo() {
                     </button>
                   ) : (
                     <button className="text-gray-400 text-center cursor-not-allowed">
-                      Certificate(Sorry, You failed test)
+                      <div data-tip="Sorry, You failed test" type="success" >
+                      Certificate</div><ReactTooltip /> 
                     </button>
                   )
                 ) : (
@@ -225,7 +202,7 @@ function ChapterVideo() {
                                 {val?.chapter_file ? (
                                   <Link to="/">Attatched File</Link>
                                 ) : (
-                                  "Video"
+                                  "Video" 
                                 )}
                               </p>
                             </div>

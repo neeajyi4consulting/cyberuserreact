@@ -81,4 +81,7 @@ export const ActionTypes = {
 
   //addQuery
   ADD_QUERY:"ADD_QUERY",
+
+  //getpackage course
+  GET_PACKAGE_COURSE:"GET_PACKAGE_COURSE",
 };

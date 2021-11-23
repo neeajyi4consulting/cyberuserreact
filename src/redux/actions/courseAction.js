@@ -7,7 +7,9 @@ import {
   getCourseDetails,
   getCourseList,
   getUserDetails,
-  addCertificate
+  addCertificate,
+  showPackageCourse,
+  fetchPackageDetails
 } from "../../api";
 import { toast } from "react-toastify";
 
@@ -29,6 +31,7 @@ export const fetchUserDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await getUserDetails(id);
+    console.log("this is response from fetch user", response)
     dispatch({
       type: ActionTypes.GET_USER_DETAILS,
       payload: response.data?.data?.alloted_courses,
@@ -160,3 +163,26 @@ export const quizPassed = (data) => async (dispatch) => {
     toast.error(error)
   }
 }
+
+export const showPackagesInCourse =(data) =>async(dispatch) =>{
+  try {
+    const response = await showPackageCourse(data);
+    // console.log("this is respose from action", response?.data)
+    dispatch({
+      type:ActionTypes.GET_PACKAGE_COURSE,
+      payload:response?.data?.data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getPackage = () => async (dispatch) => {
+  const response = await fetchPackageDetails();
+  const res = await response.data?.data;
+
+  dispatch({
+    type: ActionTypes.GET_PACKAGE,
+    payload: res,
+  });
+};

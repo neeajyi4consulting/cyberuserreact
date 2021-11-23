@@ -4,9 +4,10 @@ import Header from "../component/header/Header";
 import backgroundImg from "../assets/img/background.png";
 import Landingfooter from "../component/footer/LandingFooter";
 import { useDispatch } from "react-redux";
-import { addQueries, getPackage } from "../redux/actions/packageAction";
+import { addQueries } from "../redux/actions/packageAction";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { getPackage } from "../redux/actions/courseAction";
 
 const Landingpage = () => {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const Landingpage = () => {
             adipisicing elit.
           </div>
           <div className="text-white text-xl text-center w-full my-5">
-            <Link to="/login" className=" py-3 px-5  bg-red-700 rounded-lg">
+            <Link to="/signup" className=" py-3 px-5  bg-red-700 rounded-lg">
               Become a Member
             </Link>
           </div>
@@ -78,8 +79,8 @@ const Landingpage = () => {
       </div>
       <div className="md:mx-20 lg:40 ">
         <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
-          {packageList !== undefined
-            ? packageList.map((val) => {
+          {course?.packageDetails !== undefined
+            ? course?.packageDetails.map((val) => {
                 return (
                   <div
                     key={val.id}
@@ -87,24 +88,23 @@ const Landingpage = () => {
                   >
                     <div
                       style={{}}
-                      className="bg-white w-full h-60 rounded-lg shadow-md flex card text-grey-darkest"
+                      className="bg-gray-200 w-full h-60 rounded-lg shadow-md flex card text-grey-darkest"
                     >
                       <img
                         className="w-1/2 h-full rounded-l-lg bg-auto object-cover"
                         src={baseURL + val.image}
                         alt="PackageImage"
                       />
-                      <div className="w-full flex flex-col">
+                      <div className="w-full flex flex-col bg-gray-200 rounded-r-lg">
                         <div className="p-4 pb-0 flex-1">
-                          <h3 className="font-light mb-1 text-grey-darkest">
+                          <h3 className="font-light mb-1 text-xl text-grey-darkest">
                             {val.name}
                           </h3>
                           <span className="text-5xl text-grey-darkest">
                             {" "}
                             &#8377; {val.price}
-                            <span className="text-lg">/M</span>
                           </span>
-                          <div className="flex items-center mt-4">
+                          <div className="flex items-center mt-5">
                             <div className="pr-2 text-xs">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ const Landingpage = () => {
             : null}
         </div>
         <div>
-          <div className="max-w-screen-xl mt-12 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
+          <div className="max-w-screen-xl mt-12 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-200 text-gray-900 rounded-lg shadow-lg">
             <div className="flex flex-col ">
               <div>
                 <h2 className="text-4xl lg:text-5xl font-bold leading-tight">

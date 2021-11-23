@@ -69,6 +69,7 @@ export default function ChapterQuiz() {
 
 
   useEffect(() => {
+    window.history.forward();
     dispatch(getQuiz(id))
   }, []);
 
@@ -104,12 +105,13 @@ export default function ChapterQuiz() {
                   </span>
                 </div>
                 <div className="text-center mb-10 mt-40">
-                  <Link
-                    to={`/courses/chaptervideo/${id}`}
+                  <a
+                    href={`/courses/chaptervideo/${id}`}
+                    target="_blank"
                     className="bg-red-600 p-3 rounded-lg text-white hover:bg-red-500"
                   >
                     Go Back
-                  </Link>
+                  </a>
                 </div>
               </div>
             )}

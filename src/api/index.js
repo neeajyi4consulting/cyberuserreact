@@ -214,6 +214,16 @@ export async function addUser(data) {
   });
 }
 
+export async function showPackageCourse(data) {
+  return await http.post(API_PATH.apiShowPackageCourse, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  });
+}
+
 // export async function updateProfile(data) {
 //   await getAndSetJwt();
 //   return http.post(API_PATH.apiUpdateProfile, data, {

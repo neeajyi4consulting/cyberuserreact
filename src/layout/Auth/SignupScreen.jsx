@@ -1,9 +1,8 @@
 import React from "react";
 import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
 import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
-import PhoneInput from "react-phone-number-input";
+// import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import { formatPhoneNumberIntl } from 'react-phone-number-input'
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -18,7 +17,6 @@ function SignupScreen() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [number, setNumber] = useState("");
-  const [value, setValue] = useState()
 
   const validEmail =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -33,7 +31,7 @@ function SignupScreen() {
     if (
       userEmail === "" ||
       password === "" ||
-      number == "" ||
+      number === "" ||
       firstName === "" ||
       lastName === "" ||
       confirmPassword === ""
@@ -46,7 +44,7 @@ function SignupScreen() {
         toast.warning("Password is not same");
       } else {
         if (password.length<8) {
-          toast.warning("Password must be 8 Character Long")
+          toast.warning("Password must be 8 characters Long")
         } else {
           if (!validEmail.test(userEmail)) {
             toast.warning("Please Enter Valid Email")
@@ -207,8 +205,7 @@ function SignupScreen() {
               />
               <br />
               <Link
-              type="submit"
-                to="/signup"
+                to="/login"
                 onClick={handleSubmit}
                 className="py-2 px-5 w-24 rounded-md block my-8"
                 style={{

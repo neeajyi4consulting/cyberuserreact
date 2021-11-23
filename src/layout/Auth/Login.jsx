@@ -6,9 +6,7 @@ import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 import { cleanLocalStorage } from "../../utils/storage";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { loginAction } from "../../redux/actions/authActions";
-import { allotedPackageDetaile } from "../../redux/actions/courseAction";
 
 const LoginScreen = () => {
   const history = useHistory();

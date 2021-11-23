@@ -23,5 +23,6 @@ const API_PATH = {
   apiChapterClientList: "/api/chapter_client_list/",
   apiAddCertificate:"api/add_certificate/",
   apiAddQuery:"api/query_form/",
+  apiShowPackageCourse:"/api/show_package_course/"
 };
 export default API_PATH;

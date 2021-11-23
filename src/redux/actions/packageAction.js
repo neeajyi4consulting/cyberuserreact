@@ -1,16 +1,8 @@
 import { ActionTypes } from "../constants/actionTypes";
-import { addQuery, fetchPackageDetails, getAllotedPackage } from "../../api";
+import { addQuery, fetchPackageDetails, getAllotedPackage, showPackageCourse } from "../../api";
 import { toast } from "react-toastify";
 
-export const getPackage = () => async (dispatch) => {
-  const response = await fetchPackageDetails();
-  const res = await response.data?.data;
 
-  dispatch({
-    type: ActionTypes.GET_PACKAGE,
-    payload: res,
-  });
-};
 
 export const fetchAllotedPackage = (userId) => async (dispatch) => {
   dispatch({ type: ActionTypes.LOADING, payload: true });
@@ -38,6 +30,8 @@ export const addQueries = (data) => async (dispatch) => {
     console.log(error)
   }
 }
+
+
 
 
 // export const getPackageDetails = ()=> async (dispatch) =>{

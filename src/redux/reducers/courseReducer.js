@@ -16,6 +16,8 @@ const initialState = {
   quizCompleted: false,
   addCertificate: null,
   quizPassed:false,
+  packageCourse: [],
+  packageDetails: [],
 };
 
 export const courseReducer = (state = initialState, { type, payload }) => {
@@ -50,6 +52,10 @@ export const courseReducer = (state = initialState, { type, payload }) => {
       return { ...state, addCertificate: payload };
     case ActionTypes.QUIZ_PASSED:
       return{...state, quizPassed:payload};
+    case ActionTypes.GET_PACKAGE_COURSE:
+      return { ...state, packageCourse: payload };
+    case ActionTypes.GET_PACKAGE:
+      return { ...state, packageDetails: payload };
 
     default:
       return state;
