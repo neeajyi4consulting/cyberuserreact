@@ -34,22 +34,22 @@ const Landingfooter = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     First Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Second Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Third Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Fourth Link
                   </Link>
                 </li>
@@ -61,22 +61,22 @@ const Landingfooter = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     First Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Second Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Third Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Fourth Link
                   </Link>
                 </li>
@@ -88,22 +88,22 @@ const Landingfooter = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     First Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Second Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Third Link
                   </Link>
                 </li>
                 <li>
-                  <Link to="" className="text-gray-600 hover:text-gray-400">
+                  <Link to="" className="text-gray-500 hover:text-gray-100 hover:underline">
                     Fourth Link
                   </Link>
                 </li>
@@ -115,24 +115,24 @@ const Landingfooter = () => {
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-500 text-sm text-center sm:text-left">
               Copyright © 2021
-              <span className="text-gray-600 ml-1">CyberFrat</span>
+              <span className="text-gray-600 ml-1"> <a href="https://cyberfrat.com/" target="_blank">CyberFrat</a></span>
             </p>
             <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-              <Link to="" className="text-gray-500">
+              <a target="_blank" href="https://www.facebook.com/CyberFrat/" className="text-gray-500 border-2 border-gray-500 rounded-full px-1.5">
                 <i className="fab fa-facebook-f"></i>
-              </Link>
-              <Link to="" className="ml-3 text-gray-500">
+              </a>
+              <a target="_blank" href="https://www.twitter.com/cyberfrat" className="ml-3 text-gray-500 border-2 border-gray-500 rounded-full px-1">
                 <i className="fab fa-twitter"></i>
-              </Link>
-              <Link to="" className="ml-3 text-gray-500">
+              </a>
+              <a target="_blank" href="https://www.youtube.com/cyberfrat" className="ml-3 text-gray-500 border-2 border-gray-500 rounded-full px-1">
+              <i class="fab fa-youtube"></i>
+              </a>
+              <a target="_blank" href="https://www.linkedin.com/company/cyberfrat" className="ml-3 text-gray-500 border-2 border-gray-500 rounded-full px-1">
                 <i className="fab fa-linkedin-in"></i>
-              </Link>
-              <Link to="" className="ml-3 text-gray-500">
-                <i className="fab fa-youtube"></i>
-              </Link>
-              <Link to="" className="ml-3 text-gray-500">
+              </a>
+              <a target="_blank" href="https://www.instagram.com/cyberfrat" className="ml-3 text-gray-500 border-2 border-gray-500 rounded-full px-1">
                 <i className="fab fa-instagram"></i>
-              </Link>
+              </a>
             </span>
           </div>
         </div>

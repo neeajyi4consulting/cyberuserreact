@@ -84,4 +84,7 @@ export const ActionTypes = {
 
   //getpackage course
   GET_PACKAGE_COURSE:"GET_PACKAGE_COURSE",
+
+  //buyPackage
+  BUY_PACKAGE:"BUY_PACKAGE",
 };

@@ -224,6 +224,37 @@ export async function showPackageCourse(data) {
   });
 }
 
+export async function buyPackage(data){
+  return await http.post(API_PATH.apiBuyPackage, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  })
+}
+
+export async function allotCourse(data){
+  return await http.post(API_PATH.apiAllotCourse, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  })
+}
+
+export async function allotPackage(data){
+  return await http.post(API_PATH.apiAllotPackage, data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Accept: "*/*",
+      Authorization: apiToken,
+    },
+  })
+}
+
+
 // export async function updateProfile(data) {
 //   await getAndSetJwt();
 //   return http.post(API_PATH.apiUpdateProfile, data, {

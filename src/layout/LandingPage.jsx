@@ -77,7 +77,7 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
-      <div className="md:mx-20 lg:40 ">
+      <div className="md:mx-20 lg:mx-32 ">
         <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
           {course?.packageDetails !== undefined
             ? course?.packageDetails.map((val) => {
@@ -124,7 +124,7 @@ const Landingpage = () => {
                             </div>
                           </div>
                         </div>
-                        <Link to="/">
+                        <Link to="/login">
                           <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
                             Purchase Now
                             <i className="fas fa-chevron-right"></i>

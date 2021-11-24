@@ -12,8 +12,6 @@ const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neeraj@gmail.com");
   const [passcode, setPasscode] = useState("password");
-  // const storedData = useSelector((state) => state);
-  // const { user } = storedData;
   const dispatch = useDispatch();
 
   const handleClick = () => {

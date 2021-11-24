@@ -15,8 +15,7 @@ function ChapterVideo() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const storedData = useSelector((state) => state);
-  const { user, course } = storedData;
+  const { user, course } = useSelector((state) => state);;
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const statuses = course?.chapterClientList;
@@ -25,7 +24,6 @@ function ChapterVideo() {
   const [chapter, setChapter] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoLink, setVideoLink] = useState();
-  console.log("is quiz passed", course?.quizPassed);
 
   const handleFetchCourse = () => {
     const data = new FormData();
@@ -120,8 +118,10 @@ function ChapterVideo() {
                 >
                   About
                 </div>
-                {!statuses.Quiz_Completed &&
-                statuses?.course_status === "completed" ? (
+                {
+                !statuses.Quiz_Completed &&
+                statuses?.course_status === "completed" 
+                ? (
                   <a
                     href={`/courses/chapterquiz/${id}`}
                     target="_blank"

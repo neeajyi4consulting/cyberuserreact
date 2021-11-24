@@ -3,10 +3,9 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { allotedPackageDetaile } from "../redux/actions/courseAction";
-function EnrolledCourses(props) {
+function EnrolledCourses() {
   const dispatch = useDispatch();
-  const storedData = useSelector((state) => state);
-  const { user, course } = storedData;
+  const { user, course } = useSelector((state) => state);
   const currentUser = user?.currentUser;
   const courseInfo = course?.allotedPackageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";

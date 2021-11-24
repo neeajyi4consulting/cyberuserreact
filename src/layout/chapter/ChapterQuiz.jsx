@@ -9,12 +9,10 @@ import {
   getQuiz,
   quizPassed,
 } from "../../redux/actions/courseAction";
-import { Link } from "react-router-dom";
 
 export default function ChapterQuiz() {
   const { id } = useParams();
-  const storedData = useSelector((state)=>state)
-  const { course, user } = storedData;
+  const { course, user } = useSelector((state)=>state);
   const scores = course?.score
   const [score, setScore] = useState(0);
   const currentUser = user.currentUser
@@ -108,9 +106,16 @@ export default function ChapterQuiz() {
                   <a
                     href={`/courses/chaptervideo/${id}`}
                     target="_blank"
-                    className="bg-red-600 p-3 rounded-lg text-white hover:bg-red-500"
+                    className="bg-red-600 p-3 rounded-lg mr-2 text-white hover:bg-red-500"
                   >
                     Go Back
+                  </a>
+                  <a
+                    href={`/certificate/${id}`}
+                    target="_blank"
+                    className="bg-red-600 p-3 ml-2 rounded-lg text-white hover:bg-red-500"
+                  >
+                    Get Certificate
                   </a>
                 </div>
               </div>

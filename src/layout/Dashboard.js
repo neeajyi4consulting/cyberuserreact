@@ -3,7 +3,7 @@ import MyCourses from "../Pages/dashboard/MyCourses";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPackageDetails, getBannerList } from "../api";
+import { getBannerList } from "../api";
 import { Link } from "react-router-dom";
 import {
   allotedPackageDetaile,
@@ -15,15 +15,12 @@ import { userDetails } from "../redux/actions/authActions";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const storedData = useSelector((state) => state);
-  const { user, course } = storedData;
+  const { user, course } = useSelector((state) => state);
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const courseInfo = course?.allotedPackageDetails;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const [bannerDetails, setBannerDetails] = useState([]);
-  const [packageName, setPackageName] = useState("");
-  // console.log("this is user details", user?.userDetails?.package_alloted)
 
   const fetchPackageCourse = () => {
     const data = new FormData();
@@ -62,7 +59,8 @@ const Dashboard = () => {
             {course?.packageCourse !== undefined ? (
               <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
                 <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
-                  <Link to="/allcourses">Gold Package</Link>
+                  <span>Gold Package</span>
+                  <Link to="/allcourses" className="float-right bg-blue-500 text-white font-thin px-3 py-2 text-lg rounded-lg">Buy Package</Link>
                 </div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
                   {course?.packageCourse?.map((val) => {
@@ -123,7 +121,7 @@ const Dashboard = () => {
         return (
           <div
             key={val.id}
-            className="flex justify-center items-center h-screen bg-blue-lightest"
+            className="flex justify-center items-center h-full bg-blue-lightest"
           >
             <div className="bg-gray-300 w-full h-60 rounded-lg shadow-md flex card text-grey-darkest">
               <img
@@ -133,12 +131,11 @@ const Dashboard = () => {
               />
               <div className="w-full flex flex-col">
                 <div className="p-4 pb-0 flex-1">
-                  <h3 className="font-light mb-1 text-grey-darkest">
+                  <h3 className="font-light mb-1 text-xl text-grey-darkest">
                     {val.name}
                   </h3>
                   <span className="text-5xl text-grey-darkest">
                     &#8377; {val.price}
-                    <span className="text-lg">/M</span>
                   </span>
                   <div className="flex items-center mt-4">
                     <div className="pr-2 text-xs">
@@ -160,7 +157,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <Link to="/">
+                <Link to="/allcourses">
                   <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
                     Purchase Now
                     <svg
@@ -223,6 +220,7 @@ const Dashboard = () => {
             interval="5000"
             infiniteLoop
             stopOnHover
+            useKeyboardArrows={true}
             showIndicators={false}
             showStatus={false}
             showThumbs={false}

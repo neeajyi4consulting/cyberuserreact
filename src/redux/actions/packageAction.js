@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constants/actionTypes";
-import { addQuery, fetchPackageDetails, getAllotedPackage, showPackageCourse } from "../../api";
+import { addQuery, getAllotedPackage, } from "../../api";
 import { toast } from "react-toastify";
 
 
