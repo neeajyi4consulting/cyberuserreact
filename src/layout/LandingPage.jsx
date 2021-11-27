@@ -68,7 +68,7 @@ const Landingpage = () => {
           <div className=" text-white text-xl font-bold text-center w-full">
             CyberFrat - A Tech Fraternity
           </div>
-          <div className=" text-white text-sm md:text-5xl font-bold text-center w-full my-5 leading-relaxed">
+          <div className=" text-white text-sm md:text-5xl font-bold text-center w-full my-5" style={{lineHeight:"70px"}}>
           Expand your Career Prospects with us by taking <br/>Advanced IT CyberSecurity Trainings
           </div>
           <div className="text-white text-xl text-center w-full my-5">
@@ -155,7 +155,7 @@ const Landingpage = () => {
                   return (
                     <>
                       <a href={val?.link} key={val?.id}>
-                        <div className="md:hover:shadow-3xl shadow-xl h-full relative md:group">
+                        <div className="hover:shadow-3xl shadow-xl h-full relative group">
                           <div
                             style={{
                               backgroundImage: `url(${baseURL + val?.image})`,
@@ -172,7 +172,7 @@ const Landingpage = () => {
                                 {val?.title}
                               </span>{" "}
                               <br />
-                              <span className="p-5 text-center flex justify-center">
+                              <span className="px-5 text-center flex justify-center">
                                 {" "}
                                 {val?.about}
                               </span>

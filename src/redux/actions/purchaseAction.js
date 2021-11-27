@@ -1,5 +1,5 @@
 import { ActionTypes } from "../constants/actionTypes";
-
+import logo from '../../assets/img/favicon.png'
 import { toast } from "react-toastify";
 import { allotCourse, allotPackage, buyPackage } from "../../api";
 
@@ -14,7 +14,7 @@ export const paymentAction =
       currency: "INR",
       name: "CyberFrat",
       description: "Test Transaction",
-      image: "https://secureservercdn.net/160.153.137.170/259.f92.myftpupload.com/wp-content/uploads/2021/04/Cyber-Frat-Logo-1-1.png",
+      image: logo,
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
@@ -72,7 +72,7 @@ export const coursePurchase =
       currency: "INR",
       name: "CyberFrat",
       description: "Test Transaction",
-      image: "https://secureservercdn.net/160.153.137.170/259.f92.myftpupload.com/wp-content/uploads/2021/04/Cyber-Frat-Logo-1-1.png",
+      image: logo,
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
