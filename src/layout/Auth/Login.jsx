@@ -12,6 +12,7 @@ const LoginScreen = () => {
   const history = useHistory();
   const [id, setId] = useState("neeraj@gmail.com");
   const [passcode, setPasscode] = useState("password");
+  const [togglePassword, setTogglePassword] = useState("password");
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -88,21 +89,49 @@ const LoginScreen = () => {
             <div className="my-5" style={{ width: "500px" }}>
               <input
                 type="text"
-                className=" lg:w-full p-2 border-b-2 mt-16"
+                className="w-1/2 md:w-full p-2 border-b-2 mt-16"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Name"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
               />
               <br />
+              <div className="relative w-1/2 md:w-full">
               <input
-                type="password"
-                className="lg:w-full p-2 border-b-2 my-10"
+                type={togglePassword}
+                className="w-full p-2 border-b-2 my-10"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
+                
               />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                onClick={() => {
+                  setTogglePassword(
+                    togglePassword === "password" ? "text" : "password"
+                  );
+                }}
+                className="h-6 w-6 inline-block text-gray-400 absolute top-14 right-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+              </div>
               <br />
               <input
                 type="checkbox"

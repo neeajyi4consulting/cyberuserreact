@@ -19,8 +19,8 @@ function ChapterVideo() {
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const statuses = course?.chapterClientList;
+  const isPassed = course?.chapterClientList?.ispass;
   const courseList = course?.chapterClientList?.chapter_data;
-  const quizPassed = course?.quizPassed;
   const [chapter, setChapter] = useState();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoLink, setVideoLink] = useState();
@@ -32,7 +32,10 @@ function ChapterVideo() {
     dispatch(getChapterClientList(data));
   };
 
+  
+
   const handleOnChangeVideo = (val) => {
+    console.log("this is chapter id", chapter);
     setChapter(val?.id)
     setVideoLink(val?.link);
   };
@@ -46,20 +49,26 @@ function ChapterVideo() {
     data.append("totalVideoLength", res.duration);
     dispatch(changeStatusOfChapter(data));
     if (courseList.length - 1 > currentIndex) {
-      setCurrentIndex(currentIndex + 1);
       handleFetchCourse();
+      setCurrentIndex(currentIndex + 1);
     }else{
       console.log("something went wrong");
+      handleFetchCourse();
     }
   };
 
   const autoPlayNextVideo = () => {
     setVideoLink(courseList ? courseList[currentIndex].link : "not available");
+    setChapter(!courseList ?null:courseList[currentIndex]?.id)
   };
+
+
+
 
   useEffect(() => {
     handleFetchCourse();
   }, []);
+;
 
   useEffect(() => {
     autoPlayNextVideo();
@@ -121,8 +130,10 @@ function ChapterVideo() {
                 {
                 !statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" 
+                // true
                 ? (
                   <a
+                  rel="noreferrer"
                     href={`/courses/chapterquiz/${id}`}
                     target="_blank"
                     className={
@@ -138,7 +149,7 @@ function ChapterVideo() {
                 )}
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
-                  quizPassed ? (
+                   isPassed ? (
                     <button
                       onClick={() => {
                         history.push(`/certificate/${id}`);

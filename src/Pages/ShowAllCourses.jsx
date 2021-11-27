@@ -19,7 +19,7 @@ function ShowAllCourses({ packageId }) {
     dispatch(showPackagesInCourse(data));
   };
 
-  const tryPayment =(val) =>{
+  const coursePayment =(val) =>{
     const detailsOfUser = user.userDetails
     const amount = +val?.selling_price;
     const data = new FormData();
@@ -87,7 +87,7 @@ function ShowAllCourses({ packageId }) {
                 </div>
               </div>
               <div className="pt-2 bg-blue-700 hover:bg-blue-900 hover:shadow-inner h-10 rounded-b-lg shadow-lg">
-                <button onClick={()=>{tryPayment(val)}}>Buy Course</button>
+                <button onClick={()=>{coursePayment(val)}}>Buy Course</button>
               </div>
             </div>
           );

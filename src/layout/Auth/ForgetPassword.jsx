@@ -46,7 +46,7 @@ function ForgetPassword() {
               color: "#344685",
             }}
           >
-            Forget Passoword
+            Forget Password
           </h1>
           <div
             className="text-md"

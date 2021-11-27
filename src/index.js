@@ -11,7 +11,7 @@ import { store } from "./redux/store";
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <ToastContainer />
+      <ToastContainer position="top-left" draggable />
 
       <App />
     </BrowserRouter>

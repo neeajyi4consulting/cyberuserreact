@@ -7,7 +7,6 @@ import {
   checkResult,
   checkScore,
   getQuiz,
-  quizPassed,
 } from "../../redux/actions/courseAction";
 
 export default function ChapterQuiz() {
@@ -55,14 +54,11 @@ export default function ChapterQuiz() {
     data.append("course_id", id);
     data.append("answers", answers);
     dispatch(checkResult(data));
-    // if (quizResult?.data?.score === quizResult?.total_marks) {
-    //   setIsPassed(true);
-    // } else {
-    //   setIsPassed(false);
-    // }
     setFinalSubmit(false);
     // console.log("this is quiz score", quizResult?.score, "this is total score", totalScore, "this is result for passing", quizResult?.score==totalScore);
-    dispatch(quizPassed(quizResult?.score==totalScore))
+    // const isQuizPassed = quizResult?.score==totalScore
+    
+    
   };
 
 
@@ -91,7 +87,7 @@ export default function ChapterQuiz() {
               </button>
             ) : (
               <div>
-                <div className="text-4xl text-center my-12">
+                <div className="md:text-4xl text-2xl text-center my-12">
                   You scored{" "}
                   <span className="text-blue-500">
                     {" "}
@@ -104,19 +100,23 @@ export default function ChapterQuiz() {
                 </div>
                 <div className="text-center mb-10 mt-40">
                   <a
+                  rel="noreferrer"
                     href={`/courses/chaptervideo/${id}`}
                     target="_blank"
                     className="bg-red-600 p-3 rounded-lg mr-2 text-white hover:bg-red-500"
                   >
                     Go Back
                   </a>
-                  <a
+                  {course?.chapterClientList?.ispass ? <a
+                  rel="noreferrer"
                     href={`/certificate/${id}`}
                     target="_blank"
                     className="bg-red-600 p-3 ml-2 rounded-lg text-white hover:bg-red-500"
                   >
                     Get Certificate
                   </a>
+                  :null}
+                  
                 </div>
               </div>
             )}

@@ -11,7 +11,6 @@ import {
   showPackageCourse,
   fetchPackageDetails
 } from "../../api";
-import { toast } from "react-toastify";
 
 export const getCourse = () => async (dispatch) => {
   try {
@@ -156,14 +155,6 @@ export const setCertificate = (data) => async (dispatch) =>{
   }
 }
 
-export const quizPassed = (data) => async (dispatch) => {
-  try {
-    dispatch({type:ActionTypes.QUIZ_PASSED, payload:data})
-  } catch (error) {
-    toast.error(error)
-  }
-}
-
 export const showPackagesInCourse =(data) =>async(dispatch) =>{
   try {
     const response = await showPackageCourse(data);
@@ -184,5 +175,23 @@ export const getPackage = () => async (dispatch) => {
   dispatch({
     type: ActionTypes.GET_PACKAGE,
     payload: res,
+  });
+};
+
+export const goldPackage = (data) => async (dispatch) => {
+  const response = await showPackageCourse(data);
+  // console.log("this is response from aciton", response)
+  dispatch({
+    type: ActionTypes.GOLD_PACKAGE_COURSES,
+    payload: response?.data?.data,
+  });
+};
+
+export const plusPackage = (data) => async (dispatch) => {
+  const response = await showPackageCourse(data);
+  // console.log("this is response from aciton", response)
+  dispatch({
+    type: ActionTypes.PLUS_PACKAGE_COURSES,
+    payload: response?.data?.data,
   });
 };

@@ -73,9 +73,6 @@ export const ActionTypes = {
   //quiz status is completed
   QUIZCOMPLETED:"QUIZCOMPLETED",
 
-  //quizPassed
-  QUIZ_PASSED:"QUIZ_PASSED",
-
   //add Certificate
   ADDCERTIFICATE:"ADDCERTIFICATE",
 
@@ -87,4 +84,10 @@ export const ActionTypes = {
 
   //buyPackage
   BUY_PACKAGE:"BUY_PACKAGE",
+
+  //goldPackage
+  GOLD_PACKAGE_COURSES:"GOLD_PACKAGE_COURSES",
+
+  //PLUS PACKAGE
+  PLUS_PACKAGE_COURSES:"PLUS_PACKAGE_COURSES",
 };

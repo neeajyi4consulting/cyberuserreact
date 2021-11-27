@@ -44,15 +44,18 @@ function SignupScreen() {
         toast.warning("Password is not same");
       } else {
         if (password.length<8) {
+          e.preventDefault();
           toast.warning("Password must be 8 characters Long")
         } else {
           if (!validEmail.test(userEmail)) {
+            e.preventDefault();
             toast.warning("Please Enter Valid Email")
           } else {
             if (number.length===10) {
               // alert("hello")
           dispatch(addNewUser(data));
             } else {
+              e.preventDefault();
               toast.warning("Please Enter Valid Phone Number")
             }
           }
@@ -192,7 +195,7 @@ function SignupScreen() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-              />
+              /><br/>
               <input
                 type="password"
                 required

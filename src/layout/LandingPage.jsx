@@ -8,16 +8,17 @@ import { addQueries } from "../redux/actions/packageAction";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { getPackage } from "../redux/actions/courseAction";
+import { getEventList } from "../api";
 
 const Landingpage = () => {
   const dispatch = useDispatch();
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
-  const { course, packages } = useSelector((state) => state);
-  const packageList = packages?.packageDetails;
+  const { course } = useSelector((state) => state);
   const loading = course?.loading;
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [eventList, setEventList] = useState([])
 
   const handleQuaries = () => {
     const data = new FormData();
@@ -34,8 +35,9 @@ const Landingpage = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async() => {
     dispatch(getPackage());
+    setEventList((await getEventList()).data?.data);
   }, []);
   if (loading) {
     return (
@@ -66,9 +68,8 @@ const Landingpage = () => {
           <div className=" text-white text-xl font-bold text-center w-full">
             CyberFrat - A Tech Fraternity
           </div>
-          <div className=" text-white text-5xl font-bold text-center w-full my-5">
-            Lorem ipsum dolor sit, amet consectetur <br />
-            adipisicing elit.
+          <div className=" text-white text-sm md:text-5xl font-bold text-center w-full my-5 leading-relaxed">
+          Expand your Career Prospects with us by taking <br/>Advanced IT CyberSecurity Trainings
           </div>
           <div className="text-white text-xl text-center w-full my-5">
             <Link to="/signup" className=" py-3 px-5  bg-red-700 rounded-lg">
@@ -78,13 +79,17 @@ const Landingpage = () => {
         </div>
       </div>
       <div className="md:mx-20 lg:mx-32 ">
-        <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
+      <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
+        <div className="text-2xl  font-bold text-gray-700 bg-white">
+            Packages
+          </div>
+        <div className="grid md:grid-cols-2  grid-cols-1 gap-16">
           {course?.packageDetails !== undefined
             ? course?.packageDetails.map((val) => {
                 return (
                   <div
                     key={val.id}
-                    className="flex justify-center items-center my-10 h-auto bg-blue-lightest"
+                    className="flex justify-center items-center my-10 h-60 bg-blue-lightest"
                   >
                     <div
                       style={{}}
@@ -100,7 +105,7 @@ const Landingpage = () => {
                           <h3 className="font-light mb-1 text-xl text-grey-darkest">
                             {val.name}
                           </h3>
-                          <span className="text-5xl text-grey-darkest">
+                          <span className="md:text-5xl text-2xl text-grey-darkest">
                             {" "}
                             &#8377; {val.price}
                           </span>
@@ -137,6 +142,48 @@ const Landingpage = () => {
                 );
               })
             : null}
+        </div>
+        </div>
+        <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
+          <div className="text-2xl mb-3 font-bold text-gray-700 bg-white">
+            Events
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {eventList === []
+              ? null
+              : eventList.map((val) => {
+                  return (
+                    <>
+                      <a href={val?.link} key={val?.id}>
+                        <div className="md:hover:shadow-3xl shadow-xl h-full relative md:group">
+                          <div
+                            style={{
+                              backgroundImage: `url(${baseURL + val?.image})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center center",
+                            }}
+                            className="w-full h-64 rounded-lg"
+                            
+                          ></div>
+                          
+                          <div className="md:opacity-0 opacity-70 group-hover:opacity-70 duration-300 absolute w-full h-64 left-0 bottom-0  z-10 flex justify-center items-center text-lg bg-gray-100 text-black rounded-lg">
+                            <div>
+                              <span className="text-xl flex justify-center md:animate-bounce">
+                                {val?.title}
+                              </span>{" "}
+                              <br />
+                              <span className="p-5 text-center flex justify-center">
+                                {" "}
+                                {val?.about}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </>
+                  );
+                })}
+          </div>
         </div>
         <div>
           <div className="max-w-screen-xl mt-12 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-200 text-gray-900 rounded-lg shadow-lg">

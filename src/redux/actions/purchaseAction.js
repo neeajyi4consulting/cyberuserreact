@@ -12,9 +12,9 @@ export const paymentAction =
       key: "rzp_test_uyIMOvTtAIVnuN",
       amount: response.data?.response?.amount,
       currency: "INR",
-      name: "Acme Corp",
+      name: "CyberFrat",
       description: "Test Transaction",
-      image: "https://example.com/your_logo",
+      image: "https://secureservercdn.net/160.153.137.170/259.f92.myftpupload.com/wp-content/uploads/2021/04/Cyber-Frat-Logo-1-1.png",
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
@@ -38,7 +38,7 @@ export const paymentAction =
         contact: phone,
       },
       notes: {
-        address: "Razorpay Corporate Office",
+        address: "CyberFrat Office",
       },
       theme: {
         color: "#3399cc",
@@ -70,9 +70,9 @@ export const coursePurchase =
       key: "rzp_test_uyIMOvTtAIVnuN",
       amount: response.data?.response?.amount,
       currency: "INR",
-      name: "Acme Corp",
+      name: "CyberFrat",
       description: "Test Transaction",
-      image: "https://example.com/your_logo",
+      image: "https://secureservercdn.net/160.153.137.170/259.f92.myftpupload.com/wp-content/uploads/2021/04/Cyber-Frat-Logo-1-1.png",
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
@@ -92,7 +92,7 @@ export const coursePurchase =
         contact: phone,
       },
       notes: {
-        address: "Razorpay Corporate Office",
+        address: "CyberFrat Office",
       },
       theme: {
         color: "#3399cc",
