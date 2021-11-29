@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
 import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 // import PhoneInput from "react-phone-number-input";
@@ -66,14 +67,19 @@ function SignupScreen() {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-auto w-auto">
-        <div className="relative inline-block">
-          <img src={AccountLoginImg} alt="...." />
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>Sign Up | CyberFrat</title>
+        <meta name="description" content="This is signUp page" />
+      </Helmet>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-screen w-full">
+        <div className="relative inline-block w-full h-full">
+          <img src={AccountLoginImg} alt="...." className="w-full h-full" />
           <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
             <img src={CyberFratLogo} alt="" />
           </div>
         </div>
-        <div className="pt-5 mb-10 pl-10 md:py-10 lg:px-12">
+        <div className="pt-0 mb-10 pl-10 md:py-5 lg:px-12">
           <div
             className="inline-block mr-4 largeScreen"
             style={{
@@ -128,7 +134,7 @@ function SignupScreen() {
               <input
                 type="text"
                 required
-                className=" lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
+                className=" md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="First Name"
                 value={firstName}
@@ -140,7 +146,7 @@ function SignupScreen() {
               <input
                 type="text"
                 required
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 "
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Last Name"
                 value={lastName}
@@ -152,7 +158,7 @@ function SignupScreen() {
               <input
                 type="email"
                 required
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Email Address"
                 value={userEmail}
@@ -167,7 +173,7 @@ function SignupScreen() {
                 maxLength={11}
                 minLength={10}
                 pattern="^-?[0-9]\d*\.?\d*$"
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 style={{ fontFamily: "Roboto", fontWeight: "400" }}
                 placeholder="Your Phone Number"
                 value={number}
@@ -181,7 +187,7 @@ function SignupScreen() {
               international={false}
               
                 placeholder="00 11111 00000"
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 value={value}
                 onChange={setValue}
               /> */}
@@ -189,7 +195,7 @@ function SignupScreen() {
               <input
                 type="password"
                 required
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 placeholder="Your Password"
                 value={password}
                 onChange={(e) => {
@@ -199,7 +205,7 @@ function SignupScreen() {
               <input
                 type="password"
                 required
-                className="lg:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
+                className="md:w-full p-2 border-b-2 my-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
@@ -35,6 +36,11 @@ const LoginScreen = () => {
 
   return (
     <>
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>Login | CyberFrat</title>
+        <meta name="description" content="This is Login page" />
+      </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="relative inline-block">
           <img src={AccountLoginImg} alt="...." />

@@ -77,7 +77,7 @@ function ShowAllCourses({ packageId }) {
 
               <div className="p-2 bg-white text-left h-40">
                 <p className="text-gray-500 text-sm">Course</p>
-                <p className=" text-gray-800 h-16 text-xl">
+                <p className=" text-gray-800 h-16 text-xl font-dm">
                   {val.course_title}
                 </p>
                 <p className="text-gray-800 text-xl h-8">&#8377;{val.selling_price}</p>
@@ -86,7 +86,7 @@ function ShowAllCourses({ packageId }) {
                   <span className="">{val.author}</span>
                 </div>
               </div>
-              <div className="pt-2 bg-blue-700 hover:bg-blue-900 hover:shadow-inner h-10 rounded-b-lg shadow-lg">
+              <div className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme">
                 <button onClick={()=>{coursePayment(val)}}>Buy Course</button>
               </div>
             </div>

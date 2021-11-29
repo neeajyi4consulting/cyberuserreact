@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import ReactTooltip from 'react-tooltip';
 import Vimeo from "@u-wave/react-vimeo";
 import { useHistory, useParams } from "react-router";
@@ -95,6 +96,11 @@ function ChapterVideo() {
 
   return (
     <>
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>Chapter Video | CyberFrat</title>
+        <meta name="description" content="This is Chapter Video page" />
+      </Helmet>
       <div className="bg-gray-200 pt-8">
         <div className="bg-gray-100 sm:px-5 sm:py-3 sm:mx-16 sm:p-6 rounded-lg shadow-lg">
           <div className="mb-3 p-1">
@@ -199,10 +205,10 @@ function ChapterVideo() {
                         return (
                           <div key={val?.id}>
                             <div
-                              className={`border-t-2 border-fuchsia-600 p-5  cursor-pointer ${
+                              className={`border-t-2 border-fuchsia-600 p-5 duration-300 hover:bg-gray-200 cursor-pointer ${
                                 val?.chapter_status?.is_completed
-                                  ? "bg-green-200 text-gray-700 shadow-lg"
-                                  : "bg-white"
+                                  ? "bg-green-200 text-gray-700 shadow-lg hover:bg-green-300"
+                                  : "bg-white hover:bg-gray-200"
                               } `}
                               onClick={() => handleOnChangeVideo(val)}
                             >

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Header from "../component/header/Header";
 import backgroundImg from "../assets/img/background.png";
@@ -34,10 +35,13 @@ const Landingpage = () => {
       setMessage("");
     }
   };
-
-  useEffect(async() => {
-    dispatch(getPackage());
+  const fetchEventList = async() => {
     setEventList((await getEventList()).data?.data);
+  }
+
+  useEffect(() => {
+    dispatch(getPackage());
+    fetchEventList()
   }, []);
   if (loading) {
     return (
@@ -59,17 +63,22 @@ const Landingpage = () => {
   }
   return (
     <>
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>CyberFrat</title>
+        <meta name="description" content="This is Landing page" />
+      </Helmet>
       <Header />
       <div>
         <div
           className="w-full flex flex-wrap content-center"
           style={{ height: "600px", backgroundImage: `url(${backgroundImg})` }}
         >
-          <div className=" text-white text-xl font-bold text-center w-full">
+          <div className=" text-white text-xl font-bold font-serif text-center w-full">
             CyberFrat - A Tech Fraternity
           </div>
-          <div className=" text-white text-sm md:text-5xl font-bold text-center w-full my-5" style={{lineHeight:"70px"}}>
-          Expand your Career Prospects with us by taking <br/>Advanced IT CyberSecurity Trainings
+          <div className=" text-white text-md md:text-4xl lg:text-5xl font-bold  text-center w-full my-5 responsiveClass mx-5 md:mx-16 lg:mx-40" style={{lineHeight:"70px"}}>
+          Expand your Career Prospects with us by taking Advanced IT CyberSecurity Trainings
           </div>
           <div className="text-white text-xl text-center w-full my-5">
             <Link to="/signup" className=" py-3 px-5  bg-red-700 rounded-lg">
@@ -80,10 +89,10 @@ const Landingpage = () => {
       </div>
       <div className="md:mx-20 lg:mx-32 ">
       <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-        <div className="text-2xl  font-bold text-gray-700 bg-white">
+        <div className="text-2xl font-serif font-bold text-gray-700 bg-white">
             Packages
           </div>
-        <div className="grid md:grid-cols-2  grid-cols-1 gap-16">
+        <div className="grid lg:grid-cols-2  grid-cols-1 gap-16">
           {course?.packageDetails !== undefined
             ? course?.packageDetails.map((val) => {
                 return (
@@ -145,10 +154,10 @@ const Landingpage = () => {
         </div>
         </div>
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-2xl mb-3 font-bold text-gray-700 bg-white">
+          <div className="text-2xl mb-5 mt-2 font-bold font-serif text-center text-gray-700 bg-white">
             Events
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {eventList === []
               ? null
               : eventList.map((val) => {
@@ -166,9 +175,9 @@ const Landingpage = () => {
                             
                           ></div>
                           
-                          <div className="md:opacity-0 opacity-70 group-hover:opacity-70 duration-300 absolute w-full h-64 left-0 bottom-0  z-10 flex justify-center items-center text-lg bg-gray-100 text-black rounded-lg">
+                          <div className="lg:opacity-0 opacity-70 group-hover:opacity-70 duration-300 absolute w-full h-64 left-0 bottom-0  z-10 flex justify-center items-center text-lg bg-gray-100 text-black rounded-lg">
                             <div>
-                              <span className="text-xl flex justify-center md:animate-bounce">
+                              <span className="text-xl flex justify-center lg:animate-bounce">
                                 {val?.title}
                               </span>{" "}
                               <br />

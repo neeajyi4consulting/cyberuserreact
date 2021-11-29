@@ -15,11 +15,11 @@ function MyCourses({ imgsrc, id, courseName, author }) {
             }}
           ></div>
           <div className="p-2">
-            <p className="font-bold text-gray-900 mb-2 text-sm">
+            <p className="font-bold text-gray-900 mb-2 text-md font-dm">
               {" "}
               {courseName}
             </p>
-            <p className="mb-0 text-xs">by {author}</p>
+            <p className="mb-0 text-sm font-satisfy">by {author}</p>
           </div>
         </Link>
       </div>

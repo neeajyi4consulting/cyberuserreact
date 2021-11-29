@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import AccountLoginImg from '../../assets/img/Account-Login-img.jpg'
 import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
 import { Link } from "react-router-dom";
@@ -21,6 +22,11 @@ function ForgetPassword() {
   };
   return (
     <>
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>Forget Password | CyberFrat</title>
+        <meta name="description" content="This is Forget password page" />
+      </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="relative inline-block">
           <img src={AccountLoginImg} alt="...." />

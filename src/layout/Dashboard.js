@@ -4,6 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getBannerList, getEventList } from "../api";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import {
   allotedPackageDetaile,
@@ -31,9 +32,7 @@ const Dashboard = () => {
   };
 
   const packageTest = () => {
-    if (
-      course?.userDetails?.package_alloted?.length > 0
-      ) {
+    if (course?.userDetails?.package_alloted?.length > 0) {
       if (
         course?.userDetails?.package_alloted[0]?.package_name?.name ==
         "Plus Package"
@@ -42,7 +41,7 @@ const Dashboard = () => {
           <div className="mt-6">
             <div className="h-auto">
               <div className="bg-white p-4 w-full rounded-lg shadow-lg">
-                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla" >
                   <Link to="/courses">My Courses</Link>
                 </div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
@@ -62,11 +61,11 @@ const Dashboard = () => {
             </div>
             {course?.packageCourse !== undefined ? (
               <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
-                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla">
                   <span>Gold Package</span>
                   <Link
                     to="/allcourses"
-                    className="float-right bg-blue-500 text-white font-thin md:px-3 px-2 md:py-2 py-1 md:text-lg text-sm rounded-lg"
+                    className="float-right bg-blue-500 text-white font-thin md:px-3 px-2 md:py-2 py-1 md:text-lg text-sm rounded-md"
                   >
                     View Packages
                   </Link>
@@ -82,10 +81,10 @@ const Dashboard = () => {
         return (
           <div className="mt-5">
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
-              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
+              <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla">
                 <Link to="/courses">My Courses</Link>
               </div>
-              <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 grid-cols-1 gap-4">
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
@@ -105,7 +104,7 @@ const Dashboard = () => {
     } else {
       return (
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-xl font-bold text-gray-700 bg-white">
+          <div className="text-xl font-bold text-gray-700 bg-white font-zilla">
             All Packages
           </div>
           <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
@@ -127,7 +126,7 @@ const Dashboard = () => {
             key={val.id}
             className="flex justify-center items-center h-full bg-blue-lightest"
           >
-            <div className="bg-gray-200 w-full h-60 rounded-lg shadow-md flex card text-grey-darkest">
+            <div className="bg-gray-200 w-full h-60 rounded-lg shadow-sm hover:shadow-lg duration-300 flex card text-grey-darkest">
               <img
                 className="w-1/2 h-full rounded-l-lg"
                 src={baseURL + val.image}
@@ -221,9 +220,15 @@ const Dashboard = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charset="utf-8" />
+        <title>Home | CyberFrat</title>
+        <meta name="description" content="This is Dashboard" />
+      </Helmet>
+
       <div className="px-5 pt-5 bg-gray-200">
-        <div className="pb-5 text-xl font-bold text-gray-700">Dashboard</div>
-        <div className="relative w-full hidden md:block">
+        <div className="pb-5 text-3xl font-bold text-gray-700 font-abril">Dashboard</div>
+        <div className="relative w-full bg-gray-900 rounded-lg">
           <Carousel
             autoPlay
             interval="5000"
@@ -241,7 +246,7 @@ const Dashboard = () => {
                     <img
                       src={baseURL + val.image}
                       alt="...."
-                      className="w-full h-96 cursor-pointer rounded-lg"
+                      className="w-full h-40 md:h-72 lg:h-96 cursor-pointer rounded-lg opacity-40"
                     />
                   </a>
                 </div>
@@ -251,17 +256,17 @@ const Dashboard = () => {
         </div>
         {packageTest()}
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-2xl mb-3 font-bold text-gray-700 bg-white">
+          <div className="text-2xl mb-3 font-bold text-gray-700 bg-white font-display">
             Events
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {eventList === []
               ? null
               : eventList.map((val) => {
                   return (
-                    <>
-                      <a href={val?.link} key={val?.id}>
-                        <div className="hover:shadow-3xl shadow-xl h-full relative group">
+                    <div key={val?.id}>
+                      <a href={val?.link} >
+                        <div className="hover:shadow-3xl shadow-sm duration-300 h-full relative group">
                           <div
                             style={{
                               backgroundImage: `url(${baseURL + val?.image})`,
@@ -272,21 +277,20 @@ const Dashboard = () => {
                             // className="lg:ml-2 sm:w-full w-64 md:h-32 sm:h-40 h-64 rounded-lg shadow-lg col-span-4 sm:col-span-1 mx-auto"
                           ></div>
                           {/* <img src={baseURL + val?.image} alt="eventImage" className="w-full h-full rounded-lg"/> */}
-                          <div className="md:opacity-0 opacity-70 group-hover:opacity-70 duration-300 absolute w-full h-64 left-0 bottom-0  z-10 flex justify-center items-center text-lg bg-gray-100 text-black rounded-lg">
+                          <div className="lg:opacity-0 opacity-70 group-hover:opacity-70 duration-300 absolute w-full h-64 left-0 bottom-0  z-10 flex justify-center items-center text-lg bg-gray-100 text-black rounded-lg">
                             <div>
-                              <span className="md:text-2xl text-lg flex justify-center md:animate-bounce">
+                              <span className="md:text-2xl text-lg flex justify-center lg:animate-bounce font-shippori italic">
                                 {val?.title}
-                              </span>{" "}
+                              </span>
                               <br />
-                              <span className="p-5 text-sm md:text-lg text-center flex justify-center">
-                                {" "}
+                              <span className="p-5 text-sm md:text-lg text-center flex justify-center font-condensed ">
                                 {val?.about}
                               </span>
                             </div>
                           </div>
                         </div>
                       </a>
-                    </>
+                    </div>
                   );
                 })}
           </div>

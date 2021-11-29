@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import AccountLoginImg from "../../Assets/Account-Login-img.jpg";
 import CyberFratLogo from "../../Assets/Cyber-Frat-Logo.png";
 import OtpInput from "react-otp-input";
@@ -13,6 +14,11 @@ class Otp extends Component {
   render() {
     return (
       <>
+      <Helmet>
+        <meta charset="utf-8" />
+        <title>Otp | CyberFrat</title>
+        <meta name="description" content="This is Otp page" />
+      </Helmet>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="relative inline-block">
             <img src={AccountLoginImg} alt="...." />

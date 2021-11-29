@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { getUserDetails } from "../api";
 import { logout, editDetails, changeUserPassword } from "../redux/actions/authActions";
@@ -84,10 +85,14 @@ function Profile() {
 
   return (
     <>
-      {/* <Sidebar selectedValue="profile" /> */}
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>Profile | CyberFrat</title>
+        <meta name="description" content="This is Profile page" />
+      </Helmet>
       <div className="bg-gray-200 pt-5 ">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block shadow-lg">
-          <span className="font-bold text-2xl mx-8">Profile</span>
+          <span className="font-bold text-2xl mx-8 font-abril">Profile</span>
         </div>
         <div
           className={` ${
@@ -164,13 +169,13 @@ function Profile() {
                 <div className="flex flex-row items-center justify-between p-5 bg-white border-t border-gray-200 rounded-bl-lg rounded-br-lg">
                   <p
                     onClick={handleEditForm}
-                    className="font-semibold text-gray-600"
+                    className="font-semibold text-gray-100 rounded bg-red-500 hover:bg-red-600 duration-300 px-4 py-2 "
                   >
                     Cancel
                   </p>
                   <button
                     onClick={handleSubmitNewDetails}
-                    className="px-4 py-2 text-white font-semibold bg-blue-500 rounded"
+                    className="px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 duration-300 rounded"
                   >
                     Save
                   </button>
@@ -179,8 +184,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="">
-          {/**change password */}
+        <div >
           <div className={`h-full w-full shadow-lg fixed top-0 bg-gray-600 bg-opacity-50  ${
                 toggleChangePassword ? "" : "hidden"
               }`}>
@@ -245,14 +249,14 @@ function Profile() {
                 <div className="flex items-center justify-between">
                   <button
                   onClick={handleNewPassword}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
                     Change Password
                   </button>
                   <button
                   onClick={handleChangePassword}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-red-500 hover:bg-red-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
                     Cancel

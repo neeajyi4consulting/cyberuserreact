@@ -38,7 +38,7 @@ export const paymentAction =
         contact: phone,
       },
       notes: {
-        address: "CyberFrat Office",
+        address: "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
       },
       theme: {
         color: "#3399cc",
@@ -92,7 +92,7 @@ export const coursePurchase =
         contact: phone,
       },
       notes: {
-        address: "CyberFrat Office",
+        address: "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
       },
       theme: {
         color: "#3399cc",

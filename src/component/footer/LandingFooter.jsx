@@ -10,7 +10,7 @@ const Landingfooter = () => {
         href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
       />
       <footer className="text-white bg-black body-font ">
-        <div className="container py-24 flex md:px-20 lg:px-40 md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+        <div className="container py-16 lg:py-24 flex md:px-10 lg:px-40 md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <a
               href="https://cyberfrat.com/"
@@ -20,14 +20,14 @@ const Landingfooter = () => {
                 <img src={CyberFratLogo} alt="...." />
               </span>
             </a>
-            <p className="mt-2 text-sm text-gray-400">
+            <p className="mt-2 mb-5 text-sm text-gray-400">
               CyberFrat is an enterprise risk management services company with a
               special focus on Cyber Security, Risk Management, and Emerging
               Technologies
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:text-right text-center w-full px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:gap-4">
+            <div className="md:text-right text-center w-full pr-4">
               <h2 className="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">
                 Common Link
               </h2>
@@ -66,7 +66,7 @@ const Landingfooter = () => {
                 </li>
               </nav>
             </div>
-            <div className="md:text-left text-center w-full px-4">
+            <div className="md:text-left text-center w-full lg:px-4">
               <h2 className="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">
                 Services Links
               </h2>
@@ -113,7 +113,7 @@ const Landingfooter = () => {
                 </li>
               </nav>
             </div>
-            <div className="md:text-left text-center w-full px-4">
+            <div className="md:text-left text-center w-full pl-2">
               <h2 className="title-font font-medium text-gray-200 tracking-widest text-sm mb-3">
                 Contact Info
               </h2>

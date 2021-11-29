@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import ShowAllCourses from "../Pages/ShowAllCourses";
 import { userDetails } from "../redux/actions/authActions";
@@ -61,12 +62,17 @@ function AllCourses() {
 
   return (
     <>
+    <Helmet>
+        <meta charset="utf-8" />
+        <title>All Courses | CyberFrat</title>
+        <meta name="description" content="This is All Courses page" />
+      </Helmet>
       <div className="z-20  p-5 bg-gray-200">
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-xl font-bold text-gray-700 bg-white">
+          <div className="text-xl font-bold text-gray-700 bg-white font-zilla">
             All Packages
           </div>
-          <div className="grid md:grid-cols-2  grid-cols-1 md:gap-16 gap-1">
+          <div className="grid lg:grid-cols-2  grid-cols-1 md:gap-16 gap-1">
             {!course?.packageDetails
               ? console.log(
                   "no package purchased and info of package",
@@ -78,15 +84,23 @@ function AllCourses() {
                       key={val.id}
                       className="flex justify-center items-center h-full my-5 bg-blue-lightest"
                     >
-                      <div className="bg-gray-300 w-full md:h-60 h-48 rounded-lg shadow-md flex card text-grey-darkest">
-                        <img
+                      <div className="bg-gray-300 w-full md:h-60 h-48 rounded-lg shadow-sm hover:shadow-lg hover:bg-gray-200 duration-300 flex card text-grey-darkest">
+                        {/* <img
                           className="w-1/2 h-full rounded-l-lg"
                           src={baseURL + val.image}
                           alt="PackageImage"
-                        />
+                        /> */}
+                        <div
+                      style={{
+                        backgroundImage: `url(${baseURL + val.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center center",
+                      }}
+                      className=" w-3/4 h-full rounded-l-lg "
+                    ></div>
                         <div className="w-full flex flex-col">
                           <div className="p-4 pb-0 flex-1">
-                            <h3 className="font-light mb-1 md:text-xl text-lg text-grey-darkest">
+                            <h3 className="font-light mb-1 md:text-xl text-lg text-grey-darkest font-garamond">
                               {val.name}
                             </h3>
                             <span className="md:text-5xl text-lg text-grey-darkest">
@@ -117,7 +131,7 @@ function AllCourses() {
                               packagePayment(val);
                             }}
                           >
-                            <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
+                            <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light font-acme font-bold">
                               Purchase Now
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +157,7 @@ function AllCourses() {
           </div>
         </div>
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-xl font-bold text-gray-700 bg-white pb-3">
+          <div className="text-xl font-bold text-gray-700 bg-white pb-3 font-zilla">
             Courses in Gold Package
           </div>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
@@ -151,7 +165,7 @@ function AllCourses() {
           </div>
         </div>
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-xl font-bold text-gray-700 bg-white pb-3">
+          <div className="text-xl font-bold text-gray-700 bg-white pb-3 font-zilla">
             Courses in Plus Package
           </div>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
@@ -176,7 +190,7 @@ function AllCourses() {
 
                     <div className="p-2 bg-white text-left h-40">
                       <p className="text-gray-500 text-sm">Course</p>
-                      <p className=" text-gray-800 h-16 text-xl">
+                      <p className=" text-gray-800 h-16 text-xl font-dm">
                         {val.course_title}
                       </p>
                       <p className="text-gray-800 text-xl h-8">
@@ -187,7 +201,7 @@ function AllCourses() {
                         <span className="">{val.author}</span>
                       </div>
                     </div>
-                    <div className="pt-2 bg-blue-700 hover:bg-blue-900 hover:shadow-inner h-10 rounded-b-lg shadow-lg">
+                    <div className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme">
                       <button
                         onClick={() => {
                           coursePayment(val);

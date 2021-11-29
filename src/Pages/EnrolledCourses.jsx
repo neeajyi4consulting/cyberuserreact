@@ -36,11 +36,11 @@ function EnrolledCourses() {
 
             <div className="p-2 ">
               <p className="text-gray-500 text-sm">Course</p>
-              <p className=" text-gray-800 mb-5 text-xl">
+              <p className=" text-gray-800 mb-5 text-xl font-dm">
                 
                   {val.course_name.course_title}
               </p>
-              <span className="absolute bottom-2 left-2 text-xs">
+              <span className="absolute bottom-2 left-2 text-sm font-satisfy">
                 by&nbsp;
                 <span className="">
                   {val.course_name.author}

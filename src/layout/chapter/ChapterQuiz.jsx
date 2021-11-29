@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import checkIcon from '../../assets/img/check-mark.svg'
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -68,7 +69,12 @@ export default function ChapterQuiz() {
   }, []);
 
   return (
-    <div className="app">
+    <div>
+      <Helmet>
+        <meta charset="utf-8" />
+        <title>Course Quiz | CyberFrat</title>
+        <meta name="description" content="This is Course Quiz" />
+      </Helmet>
       {showScore ? (
         <div className="bg-gray-200 pt-5  z-50">
           <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block">
@@ -148,7 +154,7 @@ export default function ChapterQuiz() {
                       onClick={() => {
                         handleAnswerOptionClick(val);
                       }}
-                      className="mt-5 hover:bg-gray-200  p-5 rounded-full curser-pointer"
+                      className="mt-5 hover:bg-gray-200 duration-300 p-5 rounded-full curser-pointer"
                     >
                       <img
                         src={checkIcon}
