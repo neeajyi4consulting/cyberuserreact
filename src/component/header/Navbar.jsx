@@ -106,7 +106,7 @@ function Navbar() {
               onClick={() => {
                 setToggleSidebar("hidden");
               }}
-              className="hover:text-red-500 mx-auto"
+              className="hover:text-red-700 text-red-500 mx-auto"
               to="/"
               onClick={handleLogOut}
             >
@@ -144,7 +144,7 @@ function Navbar() {
             My Profile
           </NavLink>
           <NavLink
-            className="hover:text-red-500 mx-auto hidden sm:inline"
+            className="hover:text-red-700 text-red-500 mx-auto hidden sm:inline"
             to="/"
             onClick={handleLogOut}
           >

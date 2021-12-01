@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Helmet } from "react-helmet";
-import AccountLoginImg from "../../Assets/Account-Login-img.jpg";
-import CyberFratLogo from "../../Assets/Cyber-Frat-Logo.png";
+import AccountLoginImg from "../../assets/img/AccountLoginImage.png";
 import OtpInput from "react-otp-input";
 import { Link } from "react-router-dom";
 
@@ -20,12 +19,9 @@ class Otp extends Component {
         <meta name="description" content="This is Otp page" />
       </Helmet>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="relative inline-block">
-            <img src={AccountLoginImg} alt="...." />
-            <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
-              <img src={CyberFratLogo} alt="...." />
-            </div>
-          </div>
+        <div>
+          <div style={{backgroundImage:`url(${AccountLoginImg})`, backgroundPosition:"center center", backgroundSize:"cover"}} className="h-screen w-screen lg:w-full"></div>
+        </div>
           <div className="p-5 lg:p-24">
             <div
               className="inline-block mr-4 largeScreen"

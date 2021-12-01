@@ -41,7 +41,7 @@ const Dashboard = () => {
           <div className="mt-6">
             <div className="h-auto">
               <div className="bg-white p-4 w-full rounded-lg shadow-lg">
-                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla" >
+                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla">
                   <Link to="/courses">My Courses</Link>
                 </div>
                 <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
@@ -203,13 +203,18 @@ const Dashboard = () => {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
         <div className="my-auto mx-auto h-32 w-32 mt-64">
-          <div className="h-28 w-28 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-            <div className="h-24 w-24 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-              <div className="h-20 w-20 border-blue-400 rounded-full animate-spin border-t-2">
-                <div className="h-16 w-16 border-blue-400 rounded-full animate-spin border-t-2"></div>
-              </div>
-            </div>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-24 w-24 text-red-700 duration-300 animate-spin"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
         <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
           &nbsp;&nbsp;&nbsp;please wait <br /> this may take a few seconds
@@ -227,7 +232,9 @@ const Dashboard = () => {
       </Helmet>
 
       <div className="px-5 pt-5 bg-gray-200">
-        <div className="pb-5 text-3xl font-bold text-gray-700 font-abril">Dashboard</div>
+        <div className="pb-5 text-3xl font-bold text-gray-700 font-abril">
+          Dashboard
+        </div>
         <div className="relative w-full bg-gray-900 rounded-lg">
           <Carousel
             autoPlay
@@ -241,15 +248,19 @@ const Dashboard = () => {
           >
             {bannerDetails.map((val) => {
               return (
-                <div key={val.id}>
-                  <a href={val.link} target="_blank" rel="noopener noreferrer">
-                    <img
-                      src={baseURL + val.image}
-                      alt="...."
-                      className="w-full h-40 md:h-72 lg:h-96 cursor-pointer rounded-lg opacity-40"
-                    />
-                  </a>
-                </div>
+                <a
+                  href={val.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={val.id}
+                >
+                  <img
+                    src={baseURL + val.image}
+                    alt="...."
+                    className="w-full h-40 md:h-72 lg:h-96 cursor-pointer rounded-lg"
+                    onClick={() => window.location("https://cyberfrat.com/")}
+                  />
+                </a>
               );
             })}
           </Carousel>
@@ -265,7 +276,7 @@ const Dashboard = () => {
               : eventList.map((val) => {
                   return (
                     <div key={val?.id}>
-                      <a href={val?.link} >
+                      <a href={val?.link}>
                         <div className="hover:shadow-3xl shadow-sm duration-300 h-full relative group">
                           <div
                             style={{

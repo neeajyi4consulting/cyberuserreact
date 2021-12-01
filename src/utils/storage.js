@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-const access = "@token_access";
+const access = "cyberFratUser";
 
 export const getJWT = (tokenName = access) => localStorage.getItem(tokenName);
 

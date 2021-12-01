@@ -13,6 +13,9 @@ module.exports = {
       'playfair':'Playfair Display',
       'garamond':'EB Garamond',
       'acme':'Acme',
+    },
+    boxShadow:{
+      'topLeft':' -0px -10px 5px 0px rgba(0,0,0,0.75)'
     }
   },
   variants: {

@@ -1,7 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import AccountLoginImg from "../../assets/img/Account-Login-img.jpg";
-import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
+import AccountLoginImg from "../../assets/img/AccountLoginImage.png";
 // import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useState } from "react";
@@ -73,11 +72,8 @@ function SignupScreen() {
         <meta name="description" content="This is signUp page" />
       </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-screen w-full">
-        <div className="relative inline-block w-full h-full">
-          <img src={AccountLoginImg} alt="...." className="w-full h-full" />
-          <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
-            <img src={CyberFratLogo} alt="" />
-          </div>
+      <div>
+          <div style={{backgroundImage:`url(${AccountLoginImg})`, backgroundPosition:"center center", backgroundSize:"cover"}} className="h-screen w-screen lg:w-full"></div>
         </div>
         <div className="pt-0 mb-10 pl-10 md:py-5 lg:px-12">
           <div

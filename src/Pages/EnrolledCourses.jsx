@@ -15,10 +15,10 @@ function EnrolledCourses() {
   }, []);
   return (
     <>
-      {courseInfo.map((val) => {
+      {courseInfo?.length === 0 ? <div className="text-center text-2xl italic text-gray-400 w-auto col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-5 font-abril">"Please Purchase any Course or Package"</div> : courseInfo.map((val) => {
         return (
           <div
-            className="w-auto lg:mx-2 md:mx-2 sm:mx-2 shadow-lg bg-white rounded-md my-2 relative"
+            className="w-auto lg:mx-2 md:mx-2 sm:mx-2 shadow-lg bg-gray-200 hover:bg-gray-100 duration-300 rounded-md my-2 relative"
             key={val.id}
             id={val.course_name.id}
           >
@@ -34,7 +34,7 @@ function EnrolledCourses() {
               className=" w-full h-40 rounded-t-md"
             ></div>
 
-            <div className="p-2 ">
+            <div className="p-2">
               <p className="text-gray-500 text-sm">Course</p>
               <p className=" text-gray-800 mb-5 text-xl font-dm">
                 

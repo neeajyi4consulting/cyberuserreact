@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
 import ShowAllCourses from "../Pages/ShowAllCourses";
 import { userDetails } from "../redux/actions/authActions";
-import { getPackage, plusPackage } from "../redux/actions/courseAction";
+import { getCourse, getPackage, plusPackage } from "../redux/actions/courseAction";
 import { coursePurchase, paymentAction } from "../redux/actions/purchaseAction";
 
 function AllCourses() {
@@ -20,38 +20,44 @@ function AllCourses() {
     data.append("amount", amount);
     data.append("user_id", currentUser?.user_id);
     data.append("package_id", val?.id);
-    console.log(detailsOfUser)
+    console.log(detailsOfUser);
     dispatch(paymentAction(data, detailsOfUser, val));
   };
 
-  const coursePayment =(val) =>{
-    const detailsOfUser = user.userDetails
+  const coursePayment = (val) => {
+    const detailsOfUser = user.userDetails;
     const amount = +val?.selling_price;
     const data = new FormData();
-    data.append("amount", amount)
-    data.append("user_id", currentUser?.user_id)
-    data.append("course_id", val?.id)
-    dispatch(coursePurchase(data, detailsOfUser, val))
-  }
+    data.append("amount", amount);
+    data.append("user_id", currentUser?.user_id);
+    data.append("course_id", val?.id);
+    dispatch(coursePurchase(data, detailsOfUser, val));
+  };
 
   useEffect(() => {
     dispatch(getPackage());
     dispatch(userDetails(currentUser?.user_id));
-    const data = new FormData()
-    data.append("package_id", 24)
-    dispatch(plusPackage(data))
+    const data = new FormData();
+    data.append("package_id", 24);
+    dispatch(plusPackage(data));
+    dispatch(getCourse())
   }, []);
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
         <div className="my-auto mx-auto h-32 w-32 mt-64">
-          <div className="h-28 w-28 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-            <div className="h-24 w-24 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-              <div className="h-20 w-20 border-blue-400 rounded-full animate-spin border-t-2">
-                <div className="h-16 w-16 border-blue-400 rounded-full animate-spin border-t-2"></div>
-              </div>
-            </div>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-24 w-24 text-red-700 duration-1000 animate-spin"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
         <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
           &nbsp;&nbsp;&nbsp;please wait <br /> this may take a few seconds
@@ -62,7 +68,7 @@ function AllCourses() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charset="utf-8" />
         <title>All Courses | CyberFrat</title>
         <meta name="description" content="This is All Courses page" />
@@ -70,7 +76,7 @@ function AllCourses() {
       <div className="z-20  p-5 bg-gray-200">
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-xl font-bold text-gray-700 bg-white font-zilla">
-            All Packages
+            Membership
           </div>
           <div className="grid lg:grid-cols-2  grid-cols-1 md:gap-16 gap-1">
             {!course?.packageDetails
@@ -82,7 +88,7 @@ function AllCourses() {
                   return (
                     <div
                       key={val.id}
-                      className="flex justify-center items-center h-full my-5 bg-blue-lightest"
+                      className="flex justify-center items-center h-full my-5 bg-blue-lightest transform hover:translate-x-1 hover:translate-y-1 duration-500"
                     >
                       <div className="bg-gray-300 w-full md:h-60 h-48 rounded-lg shadow-sm hover:shadow-lg hover:bg-gray-200 duration-300 flex card text-grey-darkest">
                         {/* <img
@@ -91,13 +97,13 @@ function AllCourses() {
                           alt="PackageImage"
                         /> */}
                         <div
-                      style={{
-                        backgroundImage: `url(${baseURL + val.image})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center center",
-                      }}
-                      className=" w-3/4 h-full rounded-l-lg "
-                    ></div>
+                          style={{
+                            backgroundImage: `url(${baseURL + val.image})`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center center",
+                          }}
+                          className=" w-3/4 h-full rounded-l-lg shadow-sm hover:shadow-lg duration-300"
+                        ></div>
                         <div className="w-full flex flex-col">
                           <div className="p-4 pb-0 flex-1">
                             <h3 className="font-light mb-1 md:text-xl text-lg text-grey-darkest font-garamond">
@@ -158,21 +164,13 @@ function AllCourses() {
         </div>
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-xl font-bold text-gray-700 bg-white pb-3 font-zilla">
-            Courses in Gold Package
+            All Courses
           </div>
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-            <ShowAllCourses />
-          </div>
-        </div>
-        <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
-          <div className="text-xl font-bold text-gray-700 bg-white pb-3 font-zilla">
-            Courses in Plus Package
-          </div>
-          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
-            {!course?.plusPackageCourses ? (
-              <div>hello</div>
+            {!course?.courseList ? (
+              <div>All Courses</div>
             ) : (
-              course?.plusPackageCourses.map((val) => {
+              course?.courseList.map((val) => {
                 return (
                   <div
                     className="w-auto lg:mx-2 md:mx-2 sm:mx-2  shadow-lg  text-white text-center rounded-md my-2 relative"
@@ -188,7 +186,7 @@ function AllCourses() {
                       className=" w-full h-40 rounded-t-md "
                     ></div>
 
-                    <div className="p-2 bg-white text-left h-40">
+                    <div className="p-2 bg-gray-200 text-left h-40">
                       <p className="text-gray-500 text-sm">Course</p>
                       <p className=" text-gray-800 h-16 text-xl font-dm">
                         {val.course_title}
@@ -201,14 +199,13 @@ function AllCourses() {
                         <span className="">{val.author}</span>
                       </div>
                     </div>
-                    <div className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme">
-                      <button
-                        onClick={() => {
-                          coursePayment(val);
-                        }}
-                      >
-                        Buy Course
-                      </button>
+                    <div
+                      onClick={() => {
+                        coursePayment(val);
+                      }}
+                      className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme cursor-pointer"
+                    >
+                      Buy Course
                     </div>
                   </div>
                 );

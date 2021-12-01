@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import AccountLoginImg from '../../assets/img/Account-Login-img.jpg'
-import CyberFratLogo from '../../assets/img/Cyber-Frat-Logo.png'
+import AccountLoginImg from "../../assets/img/AccountLoginImage.png";
 import { Link } from "react-router-dom";
 import { forgetPass } from '../../api'
 
@@ -28,11 +27,8 @@ function ForgetPassword() {
         <meta name="description" content="This is Forget password page" />
       </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="relative inline-block">
-          <img src={AccountLoginImg} alt="...." />
-          <div className="absolute left-0 top-2/4 w-full grid justify-items-center bg-white">
-            <img src={CyberFratLogo} alt="...." />
-          </div>
+      <div>
+          <div style={{backgroundImage:`url(${AccountLoginImg})`, backgroundPosition:"center center", backgroundSize:"cover"}} className="h-screen w-screen lg:w-full"></div>
         </div>
         <div className="p-5 lg:p-24">
           <div

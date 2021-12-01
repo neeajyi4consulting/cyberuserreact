@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import ReactTooltip from 'react-tooltip';
+import ReactTooltip from "react-tooltip";
 import Vimeo from "@u-wave/react-vimeo";
 import { useHistory, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,7 +16,7 @@ function ChapterVideo() {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { user, course } = useSelector((state) => state);;
+  const { user, course } = useSelector((state) => state);
   const loading = course?.loading;
   const currentUser = user?.currentUser;
   const statuses = course?.chapterClientList;
@@ -33,11 +33,9 @@ function ChapterVideo() {
     dispatch(getChapterClientList(data));
   };
 
-  
-
   const handleOnChangeVideo = (val) => {
     console.log("this is chapter id", chapter);
-    setChapter(val?.id)
+    setChapter(val?.id);
     setVideoLink(val?.link);
   };
   const handleOnFinishVideo = (res) => {
@@ -50,9 +48,9 @@ function ChapterVideo() {
     data.append("totalVideoLength", res.duration);
     dispatch(changeStatusOfChapter(data));
     if (courseList.length - 1 > currentIndex) {
-      handleFetchCourse();
       setCurrentIndex(currentIndex + 1);
-    }else{
+      handleFetchCourse();
+    } else {
       console.log("something went wrong");
       handleFetchCourse();
     }
@@ -60,17 +58,12 @@ function ChapterVideo() {
 
   const autoPlayNextVideo = () => {
     setVideoLink(courseList ? courseList[currentIndex].link : "not available");
-    setChapter(!courseList ?null:courseList[currentIndex]?.id)
+    setChapter(!courseList ? null : courseList[currentIndex]?.id);
   };
-
-
-
 
   useEffect(() => {
     handleFetchCourse();
   }, []);
-;
-
   useEffect(() => {
     autoPlayNextVideo();
   }, [courseList]);
@@ -79,13 +72,18 @@ function ChapterVideo() {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
         <div className="my-auto mx-auto h-32 w-32 mt-64">
-          <div className="h-28 w-28 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-            <div className="h-24 w-24 border-blue-400 rounded-full animate-spin border-t-2 p-4">
-              <div className="h-20 w-20 border-blue-400 rounded-full animate-spin border-t-2">
-                <div className="h-16 w-16 border-blue-400 rounded-full animate-spin border-t-2"></div>
-              </div>
-            </div>
-          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-24 w-24 text-red-700 duration-1000 animate-spin"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
         </div>
         <div className="h-32 w-64 mx-auto text-gray-50 mt-4 text-center">
           &nbsp;&nbsp;&nbsp;please wait <br /> this may take a few seconds
@@ -96,7 +94,7 @@ function ChapterVideo() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charset="utf-8" />
         <title>Chapter Video | CyberFrat</title>
         <meta name="description" content="This is Chapter Video page" />
@@ -111,9 +109,8 @@ function ChapterVideo() {
               <div>
                 <Vimeo
                   video={
-                    courseList===undefined
-                      ? 
-                      "https://vimeo.com/636273863/eb39c99700"
+                    courseList === undefined
+                      ? "https://vimeo.com/636273863/eb39c99700"
                       : videoLink
                   }
                   // height="600px"
@@ -122,7 +119,9 @@ function ChapterVideo() {
                   showByline={false}
                   showPortrait={false}
                   showTitle={false}
-                  onError={(error)=>{toast.error("There's some error playing video"); console.log("this is error", error);}}
+                  onError={(error) => {
+                    console.log("this is error", error);
+                  }}
                   onEnd={(res) => handleOnFinishVideo(res)}
                 />
               </div>
@@ -133,29 +132,36 @@ function ChapterVideo() {
                 >
                   About
                 </div>
-                {
-                !statuses.Quiz_Completed &&
-                statuses?.course_status === "completed" 
-                // true
-                ? (
-                  <a
-                  rel="noreferrer"
-                    href={`/courses/chapterquiz/${id}`}
-                    target="_blank"
-                    className={
-                      "text-gray-700 mx-3 py-4 px-8 text-center relative"
-                    }
-                  >
-                    Quiz
-                  </a>
+                {statuses?.course_status === "completed" ? (
+                  !isPassed ? (
+                    <a
+                      rel="noreferrer"
+                      href={`/courses/chapterquiz/${id}`}
+                      target="_blank"
+                      className={
+                        "text-gray-700 mx-3 py-4 px-8 text-center relative"
+                      }
+                    >
+                      Quiz
+                    </a>
+                  ) : (
+                    <button
+                      data-tip="You have already Passed this test"
+                      className="text-gray-400 text-center cursor-not-allowed"
+                    >
+                      Quiz
+                      <ReactTooltip />
+                    </button>
+                  )
                 ) : (
-                  <button className="text-gray-400 text-center cursor-not-allowed">
+                  <button data-tip="Complete this Course First" className="text-gray-400 text-center cursor-not-allowed">
                     Quiz
+                      <ReactTooltip />
                   </button>
                 )}
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
-                   isPassed ? (
+                  isPassed ? (
                     <button
                       onClick={() => {
                         history.push(`/certificate/${id}`);
@@ -172,8 +178,10 @@ function ChapterVideo() {
                     </button>
                   ) : (
                     <button className="text-gray-400 text-center cursor-not-allowed">
-                      <div data-tip="Sorry, You failed test" type="success" >
-                      Certificate</div><ReactTooltip /> 
+                      <div data-tip="Sorry, You failed test" type="success">
+                        Certificate
+                      </div>
+                      <ReactTooltip />
                     </button>
                   )
                 ) : (
@@ -208,7 +216,7 @@ function ChapterVideo() {
                               className={`border-t-2 border-fuchsia-600 p-5 duration-300 hover:bg-gray-200 cursor-pointer ${
                                 val?.chapter_status?.is_completed
                                   ? "bg-green-200 text-gray-700 shadow-lg hover:bg-green-300"
-                                  : "bg-white hover:bg-gray-200"
+                                  : "bg-white hover:bg-blue-50"
                               } `}
                               onClick={() => handleOnChangeVideo(val)}
                             >
@@ -219,7 +227,7 @@ function ChapterVideo() {
                                 {val?.chapter_file ? (
                                   <Link to="/">Attatched File</Link>
                                 ) : (
-                                  "Video" 
+                                  "Video"
                                 )}
                               </p>
                             </div>
