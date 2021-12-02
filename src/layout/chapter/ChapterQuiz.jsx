@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import checkIcon from '../../assets/img/check-mark.svg'
 import { useSelector } from "react-redux";
@@ -20,7 +21,8 @@ export default function ChapterQuiz() {
   const quizResult = course.quizResult?.data?.data
   const totalScore = course.quizResult?.data?.total_marks
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const quizData = course.courseQuiz
+  const quizData = course?.courseQuiz
+  const loading = course?.loading
   const testOption = quizData[currentQuestion]?.options.split(",");
   const [showScore, setShowScore] = useState(false);
   const [finalSubmit, setFinalSubmit] = useState(true);
@@ -68,6 +70,30 @@ export default function ChapterQuiz() {
     dispatch(getQuiz(id))
   }, []);
 
+  if (loading) {
+    return (
+      <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
+        <div className="my-auto mx-auto h-24 w-24 mt-64">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-24 w-24 text-red-700 duration-300 animate-spin"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+        <div className="h-24 w-64 mx-auto text-gray-50 mt-4 text-center">
+          &nbsp;&nbsp;&nbsp;Please Wait... <br/>This may take a few seconds
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Helmet>
@@ -105,24 +131,13 @@ export default function ChapterQuiz() {
                   </span>
                 </div>
                 <div className="text-center mb-10 mt-40">
-                  <a
+                  <Link
                   rel="noreferrer"
-                    href={`/courses/chaptervideo/${id}`}
-                    target="_blank"
+                    to={`/courses/chaptervideo/${id}`}
                     className="bg-red-600 p-3 rounded-lg mr-2 text-white hover:bg-red-500"
                   >
                     Go Back
-                  </a>
-                  {course?.chapterClientList?.ispass ? <a
-                  rel="noreferrer"
-                    href={`/certificate/${id}`}
-                    target="_blank"
-                    className="bg-red-600 p-3 ml-2 rounded-lg text-white hover:bg-red-500"
-                  >
-                    Get Certificate
-                  </a>
-                  :null}
-                  
+                  </Link>
                 </div>
               </div>
             )}

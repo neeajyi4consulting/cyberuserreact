@@ -84,23 +84,25 @@ export const allotedPackageDetaile = (userId) => async (dispatch) => {
 };
 
 export const getQuiz = (courseId) => async (dispatch) => {
+  dispatch({ type: ActionTypes.LOADING, payload: true });
   try {
-    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchquiz(courseId);
     dispatch({
       type: ActionTypes.GET_QUIZ,
       payload: response.data?.data,
     });
-    dispatch({ type: ActionTypes.LOADING, payload: false });
-  } catch (error) {}
+  } catch (error) { console.log(error)}
+  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 export const checkResult = (data) => async (dispatch) => {
+  dispatch({ type: ActionTypes.LOADING, payload: true });
   const response = await checkAnswer(data);
   dispatch({
     type: ActionTypes.GET_QUIZ_RESULT,
     payload: response,
   });
+  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 export const checkScore = (data) => async (dispatch) => {
@@ -115,17 +117,17 @@ export const checkScore = (data) => async (dispatch) => {
 };
 
 export const getChapterClientList = (data) => async (dispatch) => {
+  dispatch({ type: ActionTypes.LOADING, payload: true });
   try {
-    dispatch({ type: ActionTypes.LOADING, payload: true });
     const response = await fetchChapterClientList(data);
     dispatch({
       type: ActionTypes.CHAPTER_CLIENT_LIST,
       payload: response.data,
     });
-    dispatch({ type: ActionTypes.LOADING, payload: false });
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: ActionTypes.LOADING, payload: false });
 };
 
 export const courseClientList = (data) => async (dispatch) => {

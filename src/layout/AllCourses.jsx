@@ -45,7 +45,7 @@ function AllCourses() {
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
-        <div className="my-auto mx-auto h-32 w-32 mt-64">
+        <div className="my-auto mx-auto h-24 w-24 mt-64">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-24 w-24 text-red-700 duration-1000 animate-spin"
