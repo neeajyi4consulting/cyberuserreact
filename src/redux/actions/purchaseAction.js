@@ -1,8 +1,9 @@
 import { ActionTypes } from "../constants/actionTypes";
-import logo from '../../assets/img/favicon.png'
+import logo from "../../assets/img/favicon.png";
 import { toast } from "react-toastify";
 import { allotCourse, allotPackage, buyPackage } from "../../api";
 
+//payment for purchasing membership/package
 export const paymentAction =
   (data, { first_name, last_name, email, phone, id }, val) =>
   async (dispatch) => {
@@ -18,6 +19,7 @@ export const paymentAction =
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
+        //for alloting membership/package
         const data = new FormData();
         data.append("package_id", val?.id);
         data.append("user_id", id);
@@ -27,9 +29,9 @@ export const paymentAction =
         await allotPackage(data).then((response) => {
           console.log(
             "this is response from allot course api after purchase",
-            response
+            response,
           );
-          toast.info(response.data?.message)
+          toast.info(response.data?.message);
         });
       },
       prefill: {
@@ -38,12 +40,14 @@ export const paymentAction =
         contact: phone,
       },
       notes: {
-        address: "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
+        address:
+          "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
       },
       theme: {
         color: "#3399cc",
       },
     };
+    //to open payment page
     const handlePayment = async () => {
       const rzp1 = new window.Razorpay(options);
       rzp1.open();
@@ -61,6 +65,7 @@ export const paymentAction =
     });
   };
 
+//payment for purchasing course
 export const coursePurchase =
   (data, { first_name, last_name, email, phone, id }, val) =>
   async (dispatch) => {
@@ -76,6 +81,7 @@ export const coursePurchase =
       order_id: response.data?.response?.id,
       handler: async function (response) {
         console.log(response);
+        //for alloting course purchased
         const data = new FormData();
         data.append("course_id", val?.id);
         data.append("user_id", id);
@@ -83,7 +89,7 @@ export const coursePurchase =
         data.append("razorpay_payment_id", response?.razorpay_payment_id);
         data.append("razorpay_signature", response.razorpay_signature);
         await allotCourse(data).then((response) => {
-          toast.info(response.data?.message)
+          toast.info(response.data?.message);
         });
       },
       prefill: {
@@ -92,12 +98,14 @@ export const coursePurchase =
         contact: phone,
       },
       notes: {
-        address: "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
+        address:
+          "CyberFrat, C315, Eastern Business District, LBS Road, Bhandup West, Mumbai - 400078",
       },
       theme: {
         color: "#3399cc",
       },
     };
+    //to open payment page
     const handlePayment = async () => {
       const rzp1 = new window.Razorpay(options);
       rzp1.open();

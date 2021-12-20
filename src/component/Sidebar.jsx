@@ -1,3 +1,4 @@
+//sidebar is not used in this design
 import React, { useEffect, useState } from "react";
 import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 import { useDispatch } from "react-redux";
@@ -13,6 +14,7 @@ function Sidebar({ selectedValue }) {
   const [profileClass, setProfileClass] = useState("");
   const [toggleSidebar, setToggleSidebar] = useState("hidden");
 
+  //check which tab is active through switch case
   const selectedClass = () => {
     switch (selectedValue) {
       case "dashboard":
@@ -35,6 +37,7 @@ function Sidebar({ selectedValue }) {
     }
   };
 
+  //function to logout user
   const handleLogOut = () => {
     dispatch(logout());
     history.push("/");
@@ -50,6 +53,7 @@ function Sidebar({ selectedValue }) {
         <div className="">
           <div className={`flex flex-wrap w-72 lg:inline-block`}>
             <div className="w-20 md:w-full h-auto py-6 ">
+              {/**button to hide or show sidebar */}
               <button
                 onClick={() => {
                   toggleSidebar === "hidden"
@@ -79,11 +83,14 @@ function Sidebar({ selectedValue }) {
                 style={{ width: "220px", padding: "" }}
               />
             </div>
+            {/** main sidebar start */}
             <div
               className={`${toggleSidebar} bg-white text-gray-500 h-screen shadow-lg absolute lg:top-24 md:top-24 md:mt-1 sm:mt-1 mt-3 top-20 left-0 z-10`}
             >
               <Link to="/dashboard">
-                <div className={`px-10 w-72 py-5 h-auto ${dashboardClass} text-gray-500`}>
+                <div
+                  className={`px-10 w-72 py-5 h-auto ${dashboardClass} text-gray-500`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 inline mx-2 "
@@ -102,7 +109,9 @@ function Sidebar({ selectedValue }) {
                 </div>
               </Link>
               <Link to="/courses">
-                <div className={`px-10 w-72 py-5 h-auto ${coursesClass} text-gray-500`}>
+                <div
+                  className={`px-10 w-72 py-5 h-auto ${coursesClass} text-gray-500`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 inline mx-2"
@@ -123,7 +132,9 @@ function Sidebar({ selectedValue }) {
                 </div>
               </Link>
               <Link to="/admin">
-                <div className={`px-10 w-72 py-5 h-auto ${profileClass} text-gray-500`}>
+                <div
+                  className={`px-10 w-72 py-5 h-auto ${profileClass} text-gray-500`}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6 inline mx-2"
@@ -164,6 +175,7 @@ function Sidebar({ selectedValue }) {
                 </button>
               </div>
             </div>
+            {/** main sidebar end */}
           </div>
         </div>
       </nav>

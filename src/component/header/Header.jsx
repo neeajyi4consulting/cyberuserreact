@@ -5,9 +5,15 @@ import CyberFratLogo from "../../assets/img/Cyber-Frat-Logo.png";
 const Header = () => {
   return (
     <div>
+      {/** landing page sidebar */}
       <div className=" flex items-center z-10 h-auto py-1 w-full fixed bg-gray-900 bg-opacity-50">
         <p className="md:inline md:ml-32 ml-5 md:w-96 text-white font-thin">
-          <img src={CyberFratLogo} alt="...." className="h-auto" style={{ width: "200px" }} />
+          <img
+            src={CyberFratLogo}
+            alt="...."
+            className="h-auto"
+            style={{ width: "200px" }}
+          />
         </p>
         <div className="text-white text-right w-full my-5 md:mx-32">
           <Link

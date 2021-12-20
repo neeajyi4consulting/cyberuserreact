@@ -9,9 +9,11 @@ function Navbar() {
   const [toggleSidebar, setToggleSidebar] = useState("hidden");
   const handleLogOut = () => {
     dispatch(logout());
+    setToggleSidebar("hidden");
   };
   return (
     <>
+      {/** main navbar start */}
       <div
         className="grid sm:grid-cols-2 lg:grid-cols-3 w-full h-auto py-4 z-10 text-white"
         style={{
@@ -50,6 +52,7 @@ function Navbar() {
             />
           </svg>
         </div>
+        {/** sidebar option for small screen device (hidden in large device) */}
         <div
           className={`${toggleSidebar} grid-row-5 sm:grid-cols-5 sm:col-span-2 mx-5 my-2 text-center font-playfair`}
         >
@@ -103,9 +106,6 @@ function Navbar() {
           </div>
           <div className="my-1.5">
             <NavLink
-              onClick={() => {
-                setToggleSidebar("hidden");
-              }}
               className="hover:text-red-700 text-red-500 mx-auto"
               to="/"
               onClick={handleLogOut}
@@ -114,6 +114,8 @@ function Navbar() {
             </NavLink>
           </div>
         </div>
+        {/** small screen sidebar end */}
+        {/** sidebar for large screen  */}
         <div className="lg:grid sm:grid-cols-2 md:grid-cols-5 text-center my-auto hidden font-playfair">
           <NavLink
             activeClassName="text-blue-500 hover:text-blue-300 duration-300 mx-auto"
@@ -151,6 +153,7 @@ function Navbar() {
             Log Out
           </NavLink>
         </div>
+        {/** large screen sidebar ended */}
       </div>
     </>
   );

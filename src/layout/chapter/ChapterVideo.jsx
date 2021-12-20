@@ -9,11 +9,11 @@ import {
   setCertificate,
 } from "../../redux/actions/courseAction";
 import { changeStatusOfChapter } from "../../redux/actions/chapterAction";
-import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 function ChapterVideo() {
   const { id } = useParams();
+  const baseURL = "https://rupalibhargava.pythonanywhere.com";
   const history = useHistory();
   const dispatch = useDispatch();
   const { user, course } = useSelector((state) => state);
@@ -26,6 +26,7 @@ function ChapterVideo() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [videoLink, setVideoLink] = useState();
 
+  //function to fetch course Chapters
   const handleFetchCourse = () => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
@@ -33,11 +34,14 @@ function ChapterVideo() {
     dispatch(getChapterClientList(data));
   };
 
+  //function for changing video on changing chapter onClick
   const handleOnChangeVideo = (val) => {
     console.log("this is chapter id", chapter);
     setChapter(val?.id);
     setVideoLink(val?.link);
   };
+
+  //function to change status of video after completing
   const handleOnFinishVideo = (res) => {
     const data = new FormData();
     data.append("user_id", currentUser.user_id);
@@ -56,6 +60,7 @@ function ChapterVideo() {
     }
   };
 
+  // funciton for auto play next video
   const autoPlayNextVideo = () => {
     setVideoLink(courseList ? courseList[currentIndex].link : "not available");
     setChapter(!courseList ? null : courseList[currentIndex]?.id);
@@ -64,6 +69,8 @@ function ChapterVideo() {
   useEffect(() => {
     handleFetchCourse();
   }, []);
+
+  //this function play first chapter video
   useEffect(() => {
     autoPlayNextVideo();
   }, [courseList]);
@@ -82,6 +89,7 @@ function ChapterVideo() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6 w-full my-3">
             <div className="bg-white relative col-span-2 shadow-lg">
+              {/** loading on video playing area */}
               {loading ? (
                 <div className="z-40 text-center bg-gray-900 opacity-90 h-auto w-full ">
                   <div className="my-auto mx-auto h-24 w-24">
@@ -105,6 +113,7 @@ function ChapterVideo() {
                 </div>
               ) : (
                 <div>
+                  {/**  Vimeo Player */}
                   <Vimeo
                     video={
                       courseList !== undefined
@@ -132,14 +141,13 @@ function ChapterVideo() {
                 >
                   About
                 </div>
+                {/** Quiz button it will be enabled if course is completed and student has not passed this test, if student passes this test then a tooltip will be shown stating You have passed this test */}
                 {statuses?.course_status === "completed" ? (
                   !isPassed ? (
                     <Link
                       rel="noreferrer"
                       to={`/courses/chapterquiz/${id}`}
-                      className={
-                        "text-gray-700 mx-3 py-4 px-8 text-center relative"
-                      }
+                      className="text-gray-700 mx-3 py-4 px-8 text-center relative"
                     >
                       Quiz
                     </Link>
@@ -161,6 +169,7 @@ function ChapterVideo() {
                     <ReactTooltip />
                   </button>
                 )}
+                {/** Certificate button it will be enabled if the user complete the course and passes test for this course */}
                 {statuses.Quiz_Completed &&
                 statuses?.course_status === "completed" ? (
                   isPassed ? (
@@ -180,7 +189,10 @@ function ChapterVideo() {
                     </button>
                   ) : (
                     <button className="text-gray-400 text-center cursor-not-allowed">
-                      <div data-tip="Sorry, You failed test" type="success">
+                      <div
+                        data-tip="Sorry, You haven't passed test"
+                        type="success"
+                      >
                         Certificate
                       </div>
                       <ReactTooltip />
@@ -192,15 +204,16 @@ function ChapterVideo() {
                   </button>
                 )}
               </div>
+              {/** About section of Course */}
               <div className="bg-white pt-5">
                 <p className="text-gray-500 px-5 py-2 h-auto ">
                   {!statuses?.chapter_data
                     ? "About this Course"
                     : statuses?.chapter_data[0]?.course?.about}
-                  {/* {!chapter ? "" : chapter.name?.about}  */}
                 </p>
               </div>
             </div>
+            {/**Chapter list section Start */}
             <div
               style={{ overflow: "auto", height: "auto", maxHeight: "620px" }}
             >
@@ -212,13 +225,14 @@ function ChapterVideo() {
                   {!courseList || courseList === undefined
                     ? null
                     : courseList.map((val) => {
+                        console.log("this is val from chapter", val);
                         return (
                           <div key={val?.id}>
                             <div
                               className={`border-t-2 border-fuchsia-600 p-5 duration-300 cursor-pointer ${
                                 val?.chapter_status?.is_completed
                                   ? "bg-green-200 text-gray-700 shadow-lg hover:bg-green-300"
-                                  : "bg-white hover:bg-blue-50"
+                                  : "bg-white hover:bg-blue-100"
                               } `}
                               onClick={() => handleOnChangeVideo(val)}
                             >
@@ -226,11 +240,23 @@ function ChapterVideo() {
                                 &nbsp; {val?.chapter_name}
                               </p>
                               <p className="text-sm text-gray-600 pl-7">
-                                {val?.chapter_file ? (
-                                  <Link to="/">Attatched File</Link>
-                                ) : (
-                                  "Video"
-                                )}
+                                Video
+                                <span>
+                                  {val?.chapter_file ? (
+                                    <>
+                                      <a href={baseURL + val?.chapter_file}>
+                                        &nbsp;/&nbsp;Attached Pdf
+                                      </a>
+                                    </>
+                                  ) : null}
+                                </span>
+                                <span>
+                                  {val?.extra_file ? (
+                                    <a href={baseURL + val?.extra_file}>
+                                      &nbsp;/&nbsp;Extra Files
+                                    </a>
+                                  ) : null}
+                                </span>
                               </p>
                             </div>
                           </div>
@@ -239,6 +265,7 @@ function ChapterVideo() {
                 </div>
               </div>
             </div>
+            {/**Chapter List Section End */}
           </div>
         </div>
       </div>

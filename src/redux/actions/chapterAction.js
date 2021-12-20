@@ -5,6 +5,7 @@ import {
 } from "../../api";
 import { ActionTypes } from "../constants/actionTypes";
 
+//fetch Chapter details based on chapter id
 export const fetchChapterDetails = (id) => async (dispatch) => {
   try {
     const response = await getChapterDetails(id);
@@ -18,16 +19,16 @@ export const fetchChapterDetails = (id) => async (dispatch) => {
   }
 };
 
-export const chapterIdStored = (id) => async (dispatch) => {
-  try {
-    await dispatch({
-      type: ActionTypes.CHAPTER_ID_STORED,
-      payload: id,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const chapterIdStored = (id) => async (dispatch) => {
+//   try {
+//     await dispatch({
+//       type: ActionTypes.CHAPTER_ID_STORED,
+//       payload: id,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const chapterDetails = (id) => async (dispatch) => {
   const response = await getChapterDetails(id);
@@ -37,6 +38,7 @@ export const chapterDetails = (id) => async (dispatch) => {
   });
 };
 
+// get chapter status
 export const chapterStatus = (data) => async (dispatch) => {
   const response = await getChapterStatus(data);
   dispatch({
@@ -45,6 +47,7 @@ export const chapterStatus = (data) => async (dispatch) => {
   });
 };
 
+//change chapter status on finishing chapter video
 export const changeStatusOfChapter = (data) => async (dispatch) => {
   const response = await changeChapterStatus(data);
   console.log("status chapter change", response);
@@ -53,5 +56,3 @@ export const changeStatusOfChapter = (data) => async (dispatch) => {
     payload: response.data,
   });
 };
-
-

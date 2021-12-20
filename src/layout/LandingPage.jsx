@@ -22,6 +22,7 @@ const Landingpage = () => {
   const [message, setMessage] = useState("");
   const [eventList, setEventList] = useState([]);
 
+  // funciton to handle submit quaries
   const handleQuaries = () => {
     const data = new FormData();
     data.append("email", email);
@@ -36,15 +37,20 @@ const Landingpage = () => {
       setMessage("");
     }
   };
+
+  //fetch event List
   const fetchEventList = async () => {
     setEventList((await getEventList()).data?.data);
   };
 
+  //fetch membership/package and courses
   useEffect(() => {
     dispatch(getPackage());
     dispatch(getCourse());
     fetchEventList();
   }, []);
+
+  //loading page
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -76,6 +82,7 @@ const Landingpage = () => {
         <meta name="description" content="This is Landing page" />
       </Helmet>
       <Header />
+      {/** hero Section start */}
       <div>
         <div
           className="w-full flex flex-wrap content-center"
@@ -98,7 +105,9 @@ const Landingpage = () => {
           </div>
         </div>
       </div>
+      {/** hero Section End */}
       <div className="md:mx-20 lg:mx-32 ">
+        {/** membership/package section start */}
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-2xl text-center md:text-left font-serif font-bold text-gray-700 bg-white">
             Membership
@@ -163,57 +172,60 @@ const Landingpage = () => {
               : null}
           </div>
         </div>
+        {/** membership/package section end */}
+        {/** All courses section start */}
         <div className="bg-gray-200 p-5 rounded-lg shadow-lg mt-6">
           <div className="text-2xl mb-5 mt-2 font-bold font-serif text-center text-gray-700 bg-white lineInBetween">
             All Courses
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
-            {!courseList ? (
-              null
-            ) : (
-              courseList.map((val) => {
-                return (
-                  <div
-                    className="w-auto lg:mx-2 md:mx-2 sm:mx-2  shadow-lg  text-white text-center rounded-md my-2 relative"
-                    key={val.id}
-                  >
+            {!courseList
+              ? null
+              : courseList.map((val) => {
+                  return (
                     <div
-                      style={{
-                        backgroundImage: `url(${baseURL + val.course_file})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center center",
-                      }}
-                      className=" w-full h-40 rounded-t-md "
-                    ></div>
-                    <div className="p-2 bg-gray-100 text-left h-40">
-                      <p className="text-gray-500 text-sm">Course</p>
-                      <p className=" text-gray-800 h-16 text-xl font-dm">
-                        {val.course_title}
-                      </p>
-                      <p className="text-gray-800 text-xl h-8">
-                        &#8377;{val.selling_price}
-                      </p>
-                      <div className="text-black text-xs">
-                        by&nbsp;
-                        <span className="">{val.author}</span>
-                      </div>
-                    </div>
-                    <Link
-                      to="/login"
-                      onClick={() => {
-                        toast.success("Please Login First");
-                      }}
+                      className="w-auto lg:mx-2 md:mx-2 sm:mx-2  shadow-lg  text-white text-center rounded-md my-2 relative"
+                      key={val.id}
                     >
-                      <div className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme">
-                        Buy Course
+                      <div
+                        style={{
+                          backgroundImage: `url(${baseURL + val.course_file})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center center",
+                        }}
+                        className=" w-full h-40 rounded-t-md "
+                      ></div>
+                      <div className="p-2 bg-gray-100 text-left h-40">
+                        <p className="text-gray-500 text-sm">Course</p>
+                        <p className=" text-gray-800 h-16 text-xl font-dm">
+                          {val.course_title}
+                        </p>
+                        <p className="text-gray-800 text-xl h-8">
+                          &#8377;{val.selling_price}
+                        </p>
+                        <div className="text-black text-xs">
+                          by&nbsp;
+                          <span className="">{val.author}</span>
+                        </div>
                       </div>
-                    </Link>
-                  </div>
-                );
-              })
-            )}
+                      <Link
+                        to="/login"
+                        onClick={() => {
+                          toast.success("Please Login First");
+                        }}
+                      >
+                        <div className="pt-2 bg-blue-700 hover:bg-blue-600 hover:shadow-lg duration-300 h-10 rounded-b-lg shadow-sm font-acme">
+                          Buy Course
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
           </div>
         </div>
+        {/** All courses section end */}
+
+        {/** Event Section Start */}
         <div className="bg-gray-200 p-5 rounded-lg shadow-lg mt-6">
           <div className="text-2xl mb-5 mt-2 font-bold font-serif text-center text-gray-700 bg-white lineInBetween">
             Events
@@ -254,7 +266,8 @@ const Landingpage = () => {
                 })}
           </div>
         </div>
-
+        {/** Event Section End */}
+        {/** Feedback/Quaries form start */}
         <div>
           <div className="max-w-screen-xl mt-12 mb-20 px-8 grid gap-8 grid-cols-1 md:grid-cols-2 md:px-12 lg:px-16 xl:px-32 py-16 mx-auto bg-gray-200 text-gray-900 rounded-lg shadow-lg">
             <div className="flex flex-col ">
@@ -337,7 +350,9 @@ const Landingpage = () => {
             </div>
           </div>
         </div>
+        {/** Feedback/Quaries form end */}
       </div>
+      {/** landing page footer */}
       <Landingfooter />
     </>
   );

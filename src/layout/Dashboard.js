@@ -32,13 +32,17 @@ const Dashboard = () => {
   };
 
   const packageTest = () => {
+    //check if any membership/package is alloted or not
     if (course?.userDetails?.package_alloted?.length > 0) {
+      //check if plus membership/package is alloted
       if (
-        course?.userDetails?.package_alloted[0]?.package_name?.name ==
-        "Plus Package"
+        course?.userDetails?.package_alloted[0]?.package_name?.name ===
+        "Plus Membership"
       ) {
+        //if plus membership/package is alloted
         return (
           <div className="mt-6">
+            {/** courses in plus membership/package */}
             <div className="h-auto">
               <div className="bg-white p-4 w-full rounded-lg shadow-lg">
                 <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla">
@@ -62,14 +66,15 @@ const Dashboard = () => {
             {course?.packageCourse !== undefined ? (
               <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
                 <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold font-zilla">
-                  <span>Gold Package</span>
+                  <span>Gold Membership</span>
                   <Link
                     to="/allcourses"
                     className="float-right bg-blue-500 text-white font-thin md:px-3 px-2 md:py-2 py-1 md:text-lg text-sm rounded-md"
                   >
-                    View Packages
+                    View Membership
                   </Link>
                 </div>
+                {/** courses in gold membership/package */}
                 <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
                   <ShowAllCourses />
                 </div>
@@ -78,6 +83,7 @@ const Dashboard = () => {
           </div>
         );
       } else {
+        //if gold membership/package is alloted
         return (
           <div className="mt-5">
             <div className="bg-white p-4 w-full rounded-lg shadow-lg">
@@ -85,6 +91,7 @@ const Dashboard = () => {
                 <Link to="/courses">My Courses</Link>
               </div>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 grid-cols-1 gap-4">
+                {/**courses in gold membership/package */}
                 {courseInfo?.map((val) => {
                   return (
                     <MyCourses
@@ -105,8 +112,9 @@ const Dashboard = () => {
       return (
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-xl font-bold text-gray-700 bg-white font-zilla">
-            All Packages
+            All Membership
           </div>
+          {/**all membership/packages */}
           <div className="grid md:grid-cols-2  grid-cols-1 gap-16 mt-5">
             {test}
           </div>
@@ -115,10 +123,11 @@ const Dashboard = () => {
     }
   };
 
+  // all membership/packages details stored in const
   const test = !course?.packageDetails
     ? console.log(
         "no package purchased and info of package",
-        course?.packageDetails
+        course?.packageDetails,
       )
     : course?.packageDetails.map((val) => {
         return (
@@ -162,7 +171,7 @@ const Dashboard = () => {
                 </div>
                 <Link to="/allcourses">
                   <div className="bg-grey-lighter p-3 flex items-center justify-between transition hover:bg-grey-light">
-                    Check All Packages and Courses
+                    Check All Membership and Courses
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
@@ -185,11 +194,13 @@ const Dashboard = () => {
         );
       });
 
+  //fetch banner and event list
   const fetchOtherDetails = async () => {
     setBannerDetails(await (await getBannerList()).data?.data);
     setEventList((await getEventList()).data?.data);
   };
 
+  //fetch user details and membership/package details
   useEffect(() => {
     fetchUserDetails(currentUser?.user_id);
     dispatch(getPackage());
@@ -199,6 +210,8 @@ const Dashboard = () => {
     fetchPackageCourse();
     dispatch(getPackage());
   }, []);
+
+  //loading page
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -217,7 +230,8 @@ const Dashboard = () => {
           </svg>
         </div>
         <div className="h-24 w-64 mx-auto text-gray-50 mt-4 text-center">
-          &nbsp;&nbsp;&nbsp;Please Wait... <br/>This may take a few seconds
+          &nbsp;&nbsp;&nbsp;Please Wait... <br />
+          This may take a few seconds
         </div>
       </div>
     );
@@ -235,6 +249,7 @@ const Dashboard = () => {
         <div className="pb-5 text-3xl font-bold text-gray-700 font-abril">
           Dashboard
         </div>
+        {/** Carousel/Banner/Slider start */}
         <div className="relative w-full bg-gray-900 rounded-lg">
           <Carousel
             autoPlay
@@ -265,7 +280,14 @@ const Dashboard = () => {
             })}
           </Carousel>
         </div>
+        {/** Carousel/banner/slider end */}
+        {/**Conditional rendering of membership/packages or courses depending on membership/packages purchased.
+         * For Example if student has no membership/packages purchased then all membershp/packages will be shown
+         * and if student has purchased plus membership/package then courses alloted to student and courses in gold membership/packages will be shown
+         * and in the case if student has purchased gold membership/packages then alloted courses will be Shown  */}
         {packageTest()}
+        {/** Conditional rendering of membership/package and courses end here */}
+        {/**Event section on dashboard start */}
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-2xl mb-3 font-bold text-gray-700 bg-white font-display">
             Events
@@ -306,67 +328,10 @@ const Dashboard = () => {
                 })}
           </div>
         </div>
+        {/** Event Sectino end */}
       </div>
     </>
   );
 };
 
 export default Dashboard;
-
-{
-  /**
-{false ? (
-          <>
-            <div className="text-2xl text-gray-700 mx-5 mt-10">
-              Purchase any package
-            </div>
-            <div className="grid md:grid-cols-2  grid-cols-1 gap-16">
-              {" "}
-              {test}
-            </div>
-          </>
-        ) : (
-          <div className="grid grid-rows-2 mt-6">
-            <div className="">
-              <div className="bg-white p-4 w-full rounded-lg shadow-lg">
-                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
-                  <Link to="/courses">My Courses</Link>
-                </div>
-                <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
-                  {courseInfo?.map((val) => {
-                    return (
-                      <MyCourses
-                        key={val?.course_name?.id}
-                        imgsrc={baseURL + val?.course_name?.course_file}
-                        courseName={val?.course_name?.course_title}
-                        author={val?.course_name?.author}
-                        id={val?.course_name?.id}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            {true ? (
-              <div className="bg-white p-4 w-full rounded-lg shadow-lg mt-6 h-auto">
-                <div className="mx-3 mb-4 text-2xl text-gray-700 font-bold">
-                  <Link to="/allcourses">Gold Package</Link>
-                </div>
-                <div className="grid sm:grid-cols-2 md:grid-cols-5 grid-cols-1 gap-4">
-                  {courseInfo?.map((val) => {
-                    return (
-                      <MyCourses
-                        key={val?.course_name?.id}
-                        imgsrc={baseURL + val?.course_name?.course_file}
-                        courseName={val?.course_name?.course_title}
-                        author={val?.course_name?.author}
-                        id={val?.course_name?.id}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            ) : null}
-          </div>
-        )} */
-}

@@ -10,7 +10,7 @@ const initialState = {
   quizResult: null,
   allotedPackageDetails: [],
   loading: false,
-  score: " ",
+  score: [],
   chapterClientList: {},
   courseClientList: "",
   quizCompleted: false,

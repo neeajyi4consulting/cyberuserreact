@@ -20,11 +20,13 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
 
+  //fetch user data
   useEffect(() => {
     dispatch(fetchUserAction());
   }, []);
   return (
     <>
+      {/** conditional rendering if user is not available */}
       {!currentUser ? (
         <Switch>
           <Route exact path="/" component={Landingpage} />
@@ -35,6 +37,7 @@ function App() {
         </Switch>
       ) : (
         <>
+          {/** conditional rendering if user ia available */}
           <Navbar />
           <Switch>
             <Route exact path="/profile" component={Profile} />

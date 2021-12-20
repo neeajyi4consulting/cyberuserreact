@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useDispatch, useSelector } from "react-redux";
-import ShowAllCourses from "../Pages/ShowAllCourses";
 import { userDetails } from "../redux/actions/authActions";
-import { getCourse, getPackage, plusPackage } from "../redux/actions/courseAction";
+import {
+  getCourse,
+  getPackage,
+  plusPackage,
+} from "../redux/actions/courseAction";
 import { coursePurchase, paymentAction } from "../redux/actions/purchaseAction";
 
 function AllCourses() {
@@ -13,6 +16,7 @@ function AllCourses() {
   const currentUser = user?.currentUser;
   const loading = course?.loading;
 
+  //payment function for package membership/purchage
   const packagePayment = (val) => {
     const detailsOfUser = user.userDetails;
     const amount = val?.price;
@@ -24,6 +28,7 @@ function AllCourses() {
     dispatch(paymentAction(data, detailsOfUser, val));
   };
 
+  // payment function for course purchage
   const coursePayment = (val) => {
     const detailsOfUser = user.userDetails;
     const amount = +val?.selling_price;
@@ -34,14 +39,17 @@ function AllCourses() {
     dispatch(coursePurchase(data, detailsOfUser, val));
   };
 
+  //load all membership/packages and courses
   useEffect(() => {
     dispatch(getPackage());
     dispatch(userDetails(currentUser?.user_id));
     const data = new FormData();
     data.append("package_id", 24);
     dispatch(plusPackage(data));
-    dispatch(getCourse())
+    dispatch(getCourse());
   }, []);
+
+  // loading Page
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -74,6 +82,7 @@ function AllCourses() {
         <meta name="description" content="This is All Courses page" />
       </Helmet>
       <div className="z-20  p-5 bg-gray-200">
+        {/** Membership section Start */}
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-xl font-bold text-gray-700 bg-white font-zilla">
             Membership
@@ -82,7 +91,7 @@ function AllCourses() {
             {!course?.packageDetails
               ? console.log(
                   "no package purchased and info of package",
-                  course?.packageDetails
+                  course?.packageDetails,
                 )
               : course?.packageDetails.map((val) => {
                   return (
@@ -162,6 +171,9 @@ function AllCourses() {
                 })}
           </div>
         </div>
+        {/** Membership sectoin end */}
+
+        {/** All Courses List start */}
         <div className="bg-white p-5 rounded-lg shadow-lg mt-6">
           <div className="text-xl font-bold text-gray-700 bg-white pb-3 font-zilla">
             All Courses
@@ -213,6 +225,7 @@ function AllCourses() {
             )}
           </div>
         </div>
+        {/** All Courses List End */}
       </div>
     </>
   );

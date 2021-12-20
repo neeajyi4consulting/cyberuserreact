@@ -11,12 +11,14 @@ function ShowAllCourses() {
   const courseInfo = course?.packageCourse;
   const baseURL = "https://rupalibhargava.pythonanywhere.com";
 
+  // funciton to get courses in gold membership/package
   const packageDetailsFunction = async () => {
     const data = new FormData();
     data.append("package_id", 25);
     dispatch(showPackagesInCourse(data));
   };
 
+  // purchage course in gold membership/package
   const coursePayment = (val) => {
     const detailsOfUser = user.userDetails;
     const amount = +val?.selling_price;
@@ -31,6 +33,7 @@ function ShowAllCourses() {
     packageDetailsFunction();
   }, []);
 
+  //loading page
   if (loading) {
     return (
       <div className="absolute bottom-0 left-0 z-40 text-center bg-gray-900 opacity-90 h-screen w-screen">
@@ -61,6 +64,7 @@ function ShowAllCourses() {
         <div>Courses in Gold Packages</div>
       ) : (
         courseInfo.map((val) => {
+          //mapped courses in gold membership/packages
           return (
             <div
               className="w-auto lg:mx-2 md:mx-2 sm:mx-2  shadow-lg  text-white text-center rounded-md my-2 relative"

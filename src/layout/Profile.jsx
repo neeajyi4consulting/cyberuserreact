@@ -2,8 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { getUserDetails } from "../api";
-import { logout, editDetails, changeUserPassword } from "../redux/actions/authActions";
-import { useState, useEffect } from "react"
+import {
+  logout,
+  editDetails,
+  changeUserPassword,
+} from "../redux/actions/authActions";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -24,6 +28,7 @@ function Profile() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  //fetch user Details on load
   const fetchUserDetails = async () => {
     await getUserDetails(currentUser.user_id)
       .then((response) => {
@@ -37,63 +42,74 @@ function Profile() {
       });
   };
 
+  //function to handle logout
   const handleLogOut = () => {
     dispatch(logout());
   };
 
+  //function to show or hide edit user details form
   const handleEditForm = () => {
     setToogleEditForm(toogleEditForm ? false : true);
   };
 
+  //function to show or hide change password form
   const handleChangePassword = () => {
     setToggleChangePassword(toggleChangePassword ? false : true);
   };
 
+  //funciton to handle sumbit new details of users
   const handleSubmitNewDetails = (e) => {
-    if (editUserFirstName==="" || editUserLastName==="" || editUserEmail==="" || editUserNumber==="") {
+    if (
+      editUserFirstName === "" ||
+      editUserLastName === "" ||
+      editUserEmail === "" ||
+      editUserNumber === ""
+    ) {
       e.preventDefault();
-      toast.warning("Please Fill All details") 
-    }else if (editUserNumber.length!==10) {
+      toast.warning("Please Fill All details");
+    } else if (editUserNumber.length !== 10) {
       e.preventDefault();
-      toast.warning("Please Enter a Valid Number")
-    }else{
-    const data = new FormData();
-    data.append("first_name", editUserFirstName);
-    data.append("last_name", editUserLastName);
-    data.append("email", editUserEmail);
-    data.append("phone", editUserNumber);
-    data.append("user_id", currentUser.user_id);
+      toast.warning("Please Enter a Valid Number");
+    } else {
+      const data = new FormData();
+      data.append("first_name", editUserFirstName);
+      data.append("last_name", editUserLastName);
+      data.append("email", editUserEmail);
+      data.append("phone", editUserNumber);
+      data.append("user_id", currentUser.user_id);
       dispatch(editDetails(data));
     }
-    
   };
 
+  //function to change password
   const handleNewPassword = async () => {
     const data = new FormData();
     data.append("user_id", currentUser?.user_id);
     data.append("old_password", oldPassword);
     data.append("new_password", newPassword);
     data.append("confirm_password", confirmPassword);
-    dispatch(changeUserPassword(data))
-    setToggleChangePassword(false)
-
+    dispatch(changeUserPassword(data));
+    setToggleChangePassword(false);
   };
 
+  //fetch user Details
   useEffect(() => {
     fetchUserDetails();
   });
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charset="utf-8" />
         <title>Profile | CyberFrat</title>
         <meta name="description" content="This is Profile page" />
       </Helmet>
+      {/** Student Profile */}
       <div className="bg-gray-200 pt-5 ">
         <div className="bg-white px-5 py-3 mx-16 rounded-lg hidden md:block shadow-lg">
           <span className="font-bold text-2xl mx-8 font-abril">Profile</span>
         </div>
+        {/** edit Student details section start */}
         <div
           className={` ${
             toogleEditForm ? "hidden" : ""
@@ -119,6 +135,7 @@ function Profile() {
                   ></path>
                 </svg>
               </div>
+              {/** edit user details form start */}
               <form onSubmit={handleSubmitNewDetails}>
                 <div className="flex flex-col px-6 py-5 bg-gray-50">
                   <input
@@ -181,16 +198,22 @@ function Profile() {
                   </button>
                 </div>
               </form>
+              {/**edit student details form end */}
             </div>
           </div>
         </div>
-        <div >
-          <div className={`h-full w-full shadow-lg fixed top-0 bg-gray-600 bg-opacity-50  ${
-                toggleChangePassword ? "" : "hidden"
-              }`}>
+        {/** edit student details secton end */}
+        {/** change password section start */}
+        <div>
+          <div
+            className={`h-full w-full shadow-lg fixed top-0 bg-gray-600 bg-opacity-50  ${
+              toggleChangePassword ? "" : "hidden"
+            }`}
+          >
             <div
               className={`flex justify-center h-screen w-full items-center antialiased `}
             >
+              {/** change Password form start */}
               <form className="bg-white shadow-md w-96 rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-6">
                   <label
@@ -201,7 +224,6 @@ function Profile() {
                   </label>
                   <input
                     className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    
                     type="password"
                     placeholder="Old Password"
                     value={oldPassword}
@@ -219,7 +241,6 @@ function Profile() {
                   </label>
                   <input
                     className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    
                     type="password"
                     placeholder="New Password"
                     value={newPassword}
@@ -237,7 +258,6 @@ function Profile() {
                   </label>
                   <input
                     className="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                    
                     type="password"
                     placeholder="Confirm Password"
                     value={confirmPassword}
@@ -248,14 +268,14 @@ function Profile() {
                 </div>
                 <div className="flex items-center justify-between">
                   <button
-                  onClick={handleNewPassword}
+                    onClick={handleNewPassword}
                     className="bg-blue-500 hover:bg-blue-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
                     Change Password
                   </button>
                   <button
-                  onClick={handleChangePassword}
+                    onClick={handleChangePassword}
                     className="bg-red-500 hover:bg-red-700 duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     type="button"
                   >
@@ -263,9 +283,12 @@ function Profile() {
                   </button>
                 </div>
               </form>
+              {/** change password form end */}
             </div>
           </div>
         </div>
+        {/** change password section end */}
+        {/** student Details section start */}
         <div className="mt-5 md:mx-16 rounded-lg bg-white p-10 pb-20 shadow-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -281,11 +304,11 @@ function Profile() {
           </svg>
           <span className="sm:ml-5 text-xl my-2">{userName}</span>
           <span>
-          <button
-            onClick={handleEditForm}
-            className="bg-blue-500 text-white py-3 px-5 my-2 rounded-lg float-right block sm:inline w-full sm:w-auto cursor-pointer"
-          >
-            Edit User Details
+            <button
+              onClick={handleEditForm}
+              className="bg-blue-500 text-white py-3 px-5 my-2 rounded-lg float-right block sm:inline w-full sm:w-auto cursor-pointer"
+            >
+              Edit User Details
             </button>
           </span>
           <span>
@@ -317,12 +340,12 @@ function Profile() {
             </div>
           </div>
           <Link to="/" onClick={handleLogOut}>
-          <span className="float-right text-white bg-red-500 my-5 p-3 rounded-lg">
-            
+            <span className="float-right text-white bg-red-500 my-5 p-3 rounded-lg">
               Sign Out
-          </span>
-            </Link>
+            </span>
+          </Link>
         </div>
+        {/** Students details section end */}
       </div>
     </>
   );

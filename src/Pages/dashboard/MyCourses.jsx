@@ -14,7 +14,7 @@ function MyCourses({ imgsrc, id, courseName, author }) {
               backgroundPosition: "center center",
             }}
           ></div>
-          <div className="p-2 border-b-2 border-r-2 border-l-2 hover:bg-gray-200 hover:border-0 rounded-b-lg">
+          <div className="p-2 border-b-2 border-r-2 border-l-2 hover:bg-gray-200 duration-300 hover:border-0 rounded-b-lg">
             <p className="font-bold text-gray-900 mb-2 text-md font-dm">
               {" "}
               {courseName}

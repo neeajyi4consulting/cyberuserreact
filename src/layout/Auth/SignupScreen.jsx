@@ -18,9 +18,11 @@ function SignupScreen() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [number, setNumber] = useState("");
 
+  //email validation
   const validEmail =
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  //function to handle sign up submit
   const handleSubmit = (e) => {
     const data = new FormData();
     data.append("email", userEmail);
@@ -39,24 +41,24 @@ function SignupScreen() {
       e.preventDefault();
       toast.warning("Please Fill All Details");
     } else {
-      if (password !== confirmPassword && password.length<8) {
+      if (password !== confirmPassword && password.length < 8) {
         e.preventDefault();
         toast.warning("Password is not same");
       } else {
-        if (password.length<8) {
+        if (password.length < 8) {
           e.preventDefault();
-          toast.warning("Password must be 8 characters Long")
+          toast.warning("Password must be 8 characters Long");
         } else {
           if (!validEmail.test(userEmail)) {
             e.preventDefault();
-            toast.warning("Please Enter Valid Email")
+            toast.warning("Please Enter Valid Email");
           } else {
-            if (number.length===10) {
+            if (number.length === 10) {
               // alert("hello")
-          dispatch(addNewUser(data));
+              dispatch(addNewUser(data));
             } else {
               e.preventDefault();
-              toast.warning("Please Enter Valid Phone Number")
+              toast.warning("Please Enter Valid Phone Number");
             }
           }
         }
@@ -66,14 +68,22 @@ function SignupScreen() {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <meta charset="utf-8" />
         <title>Sign Up | CyberFrat</title>
         <meta name="description" content="This is signUp page" />
       </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-screen w-full">
-      <div>
-          <div style={{backgroundImage:`url(${AccountLoginImg})`, backgroundPosition:"center center", backgroundSize:"cover"}} className="h-screen w-screen lg:w-full"></div>
+        {/** signup page background image */}
+        <div>
+          <div
+            style={{
+              backgroundImage: `url(${AccountLoginImg})`,
+              backgroundPosition: "center center",
+              backgroundSize: "cover",
+            }}
+            className="h-screen w-screen lg:w-full"
+          ></div>
         </div>
         <div className="pt-0 mb-10 pl-10 md:py-5 lg:px-12">
           <div
@@ -126,6 +136,7 @@ function SignupScreen() {
                 Click Here
               </Link>
             </p>
+            {/** signup form start */}
             <div className="" style={{ width: "500px" }}>
               <input
                 type="text"
@@ -197,7 +208,8 @@ function SignupScreen() {
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
-              /><br/>
+              />
+              <br />
               <input
                 type="password"
                 required
@@ -212,7 +224,7 @@ function SignupScreen() {
               <Link
                 to="/login"
                 onClick={handleSubmit}
-                className="py-2 px-5 w-24 rounded-md block my-8"
+                className="py-2 px-5 w-28 rounded-md block my-8"
                 style={{
                   backgroundColor: "#ED3237",
                   color: "#F2F3F6",
@@ -221,6 +233,7 @@ function SignupScreen() {
                 Sign Up
               </Link>
             </div>
+            {/**signup form end */}
           </div>
         </div>
       </div>

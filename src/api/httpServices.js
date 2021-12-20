@@ -1,6 +1,7 @@
 import axios from "axios";
 // import { baseURL } from "@env";
-const baseURL = "https://rupalibhargava.pythonanywhere.com";
+
+export const baseURL = "https://rupalibhargava.pythonanywhere.com";
 
 axios.defaults.baseURL = baseURL;
 
